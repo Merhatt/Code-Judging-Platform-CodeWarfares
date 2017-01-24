@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{121050A6-DC0E-43B2-9EE4-9039D7F67EC3}</ProjectGuid>
+    <ProjectGuid>{E3ACCE04-118C-4675-9FFE-B461B53AE25C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodeWarfares.Web.Tests</RootNamespace>
-    <AssemblyName>CodeWarfares.Web.Tests</AssemblyName>
+    <RootNamespace>CodeWarfares.Data.Services.Tests</RootNamespace>
+    <AssemblyName>CodeWarfares.Data.Services.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>

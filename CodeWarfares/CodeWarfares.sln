@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Web", "CodeWarfares.Web\CodeWarfares.Web.csproj", "{0B9587D8-FD24-4B05-8728-C6915E38AFEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Web.Tests", "CodeWarfares.Web.Tests\CodeWarfares.Web.Tests.csproj", "{18706483-8AD2-479F-A9D1-359C99FD2BB3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data", "CodeWarfares.Data\CodeWarfares.Data.csproj", "{C3CA7AA6-BB80-41FE-9D81-294C332BFCB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data.Models", "CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj", "{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}"
@@ -25,10 +23,6 @@ Global
 		{0B9587D8-FD24-4B05-8728-C6915E38AFEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B9587D8-FD24-4B05-8728-C6915E38AFEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B9587D8-FD24-4B05-8728-C6915E38AFEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18706483-8AD2-479F-A9D1-359C99FD2BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18706483-8AD2-479F-A9D1-359C99FD2BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18706483-8AD2-479F-A9D1-359C99FD2BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18706483-8AD2-479F-A9D1-359C99FD2BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3CA7AA6-BB80-41FE-9D81-294C332BFCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3CA7AA6-BB80-41FE-9D81-294C332BFCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3CA7AA6-BB80-41FE-9D81-294C332BFCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
