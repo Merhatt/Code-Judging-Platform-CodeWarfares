@@ -1,0 +1,14 @@
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\CodeWarfares.Data.Models.dll.config
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\CodeWarfares.Data.Models.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\CodeWarfares.Data.Models.pdb
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\EntityFramework.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\EntityFramework.xml
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\obj\Debug\CodeWarfares.Data.Models.csprojResolveAssemblyReference.cache
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\obj\Debug\CodeWarfares.Data.Models.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Models\obj\Debug\CodeWarfares.Data.Models.pdb

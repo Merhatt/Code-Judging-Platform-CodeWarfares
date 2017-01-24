@@ -1,0 +1,5 @@
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters\bin\Debug\CodeWarfares.Web.Presenters.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters\bin\Debug\CodeWarfares.Web.Presenters.pdb
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters\obj\Debug\CodeWarfares.Web.Presenters.csprojResolveAssemblyReference.cache
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters\obj\Debug\CodeWarfares.Web.Presenters.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters\obj\Debug\CodeWarfares.Web.Presenters.pdb
