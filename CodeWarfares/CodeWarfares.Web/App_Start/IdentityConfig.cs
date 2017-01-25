@@ -8,6 +8,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data;
+using CodeWarfares.Web.AppStart.Contracts;
 
 namespace CodeWarfares.Web
 {
@@ -81,7 +82,7 @@ namespace CodeWarfares.Web
         }
     }
 
-    public class ApplicationSignInManager : SignInManager<User, string>
+    public class ApplicationSignInManager : SignInManager<User, string>, IApplicationSignInManager
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
             base(userManager, authenticationManager) { }
@@ -94,6 +95,20 @@ namespace CodeWarfares.Web
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+
+        public bool SignIn(string userName, string password, bool isPersistent, bool shouldLockout)
+        {
+            var signedIn = this.PasswordSignIn<User, string>(userName, password, isPersistent, shouldLockout);
+
+            if (signedIn == SignInStatus.Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

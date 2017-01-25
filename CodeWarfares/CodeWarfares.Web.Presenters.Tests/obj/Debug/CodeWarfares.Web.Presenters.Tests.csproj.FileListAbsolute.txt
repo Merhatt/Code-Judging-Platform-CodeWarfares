@@ -1,0 +1,6 @@
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters.Tests\bin\Debug\CodeWarfares.Web.Presenters.Tests.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters.Tests\bin\Debug\CodeWarfares.Web.Presenters.Tests.pdb
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters.Tests\obj\Debug\CodeWarfares.Web.Presenters.Tests.csprojResolveAssemblyReference.cache
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters.Tests\obj\Debug\CodeWarfares.Web.Presenters.Tests.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Web.Presenters.Tests\obj\Debug\CodeWarfares.Web.Presenters.Tests.pdb

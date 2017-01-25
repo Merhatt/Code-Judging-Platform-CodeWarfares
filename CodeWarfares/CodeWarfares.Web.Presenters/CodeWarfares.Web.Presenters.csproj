@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Account\ILoginPresenter.cs" />
+    <Compile Include="Account\LoginPresenter.cs" />
+    <Compile Include="Contracts\IPresenter.cs" />
+    <Compile Include="Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
+      <Project>{71a135fd-afe0-41c9-b48d-f01a544b2eef}</Project>
+      <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj">
+      <Project>{bd006d4c-d481-4b9b-a2a2-4505876ca0e3}</Project>
+      <Name>CodeWarfares.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Web\CodeWarfares.Web.csproj">
+      <Project>{0B9587D8-FD24-4B05-8728-C6915E38AFEA}</Project>
+      <Name>CodeWarfares.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Requester\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
