@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data", "CodeWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data.Models", "CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj", "{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Web.Presenters", "CodeWarfares.Web.Presenters\CodeWarfares.Web.Presenters.csproj", "{64362298-E110-4FB2-9986-97CF030BE95C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data.Services", "CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj", "{BD006D4C-D481-4B9B-A2A2-4505876CA0E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7FAFB614-2D3E-4521-A940-B2D2C74BD0FA}"
@@ -43,10 +41,6 @@ Global
 		{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64362298-E110-4FB2-9986-97CF030BE95C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64362298-E110-4FB2-9986-97CF030BE95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64362298-E110-4FB2-9986-97CF030BE95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64362298-E110-4FB2-9986-97CF030BE95C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD006D4C-D481-4B9B-A2A2-4505876CA0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD006D4C-D481-4B9B-A2A2-4505876CA0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD006D4C-D481-4B9B-A2A2-4505876CA0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU

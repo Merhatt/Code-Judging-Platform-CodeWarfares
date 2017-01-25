@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using CodeWarfares.Utils;
 using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Services.Account;
 
 namespace CodeWarfares.Web.Account
 {

@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data;
+using CodeWarfares.Data.Services.Account;
 
 namespace CodeWarfares.Web
 {

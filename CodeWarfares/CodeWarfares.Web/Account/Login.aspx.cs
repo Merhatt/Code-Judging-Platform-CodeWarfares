@@ -7,11 +7,16 @@ using Owin;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Utils;
 using CodeWarfares.Web.Views.Contracts.Account;
+using CodeWarfares.Web.Presenters.Account.Contracts;
+using Ninject;
 
 namespace CodeWarfares.Web.Account
 {
     public partial class Login : Page, ILoginView
     {
+        [Inject]
+        private ILoginPresenter loginPresenter;
+
         public string Username
         {
             get
@@ -94,10 +99,12 @@ namespace CodeWarfares.Web.Account
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.loginPresenter.Initialize();
         }
 
         protected void LogIn(object sender, EventArgs e)
         {
+            this.loginPresenter.SignIn();
         }
 
         public void Success()

@@ -272,8 +272,6 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Start\Contracts\IApplicationSignInManager.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -295,6 +293,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\Account\LoginPresenter.cs" />
+    <Compile Include="Presenters\Contracts\Account\ILoginPresenter.cs" />
+    <Compile Include="Presenters\Contracts\IPresenter.cs" />
+    <Compile Include="Presenters\Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -324,6 +326,10 @@
     <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
       <Project>{71a135fd-afe0-41c9-b48d-f01a544b2eef}</Project>
       <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj">
+      <Project>{bd006d4c-d481-4b9b-a2a2-4505876ca0e3}</Project>
+      <Name>CodeWarfares.Data.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\CodeWarfares.Data\CodeWarfares.Data.csproj">
       <Project>{c3ca7aa6-bb80-41fe-9d81-294c332bfcb7}</Project>

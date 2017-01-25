@@ -12,6 +12,8 @@ namespace CodeWarfares.Web.App_Start
     using Ninject.Extensions.Conventions;
     using Views.Contracts.Account;
     using System.Web.UI.WebControls;
+    using Data.Services.Contracts.Account;
+    using Data.Services.Account;
 
     public static class NinjectWebCommon 
     {
@@ -68,6 +70,7 @@ namespace CodeWarfares.Web.App_Start
                 .BindDefaultInterfaces());
 
             kernel.Bind<ILoginView>().To<Account.Login>();
+            kernel.Bind<IApplicationSignInManager>().To<ApplicationSignInManager>();
         }        
     }
 }

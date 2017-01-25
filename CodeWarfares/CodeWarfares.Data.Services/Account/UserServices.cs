@@ -1,12 +1,5 @@
 ﻿using CodeWarfares.Data.Services.Contracts.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CodeWarfares.Data.Services.Enums;
-using CodeWarfares.Web;
-using CodeWarfares.Web.AppStart.Contracts;
 
 namespace CodeWarfares.Data.Services.Account
 {
