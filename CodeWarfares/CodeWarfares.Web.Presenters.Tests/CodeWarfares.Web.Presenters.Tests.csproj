@@ -63,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Account\LoginPresenterTests.cs" />
+    <Compile Include="Account\RegisterPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
+      <Project>{71a135fd-afe0-41c9-b48d-f01a544b2eef}</Project>
+      <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj">
       <Project>{bd006d4c-d481-4b9b-a2a2-4505876ca0e3}</Project>
       <Name>CodeWarfares.Data.Services</Name>
