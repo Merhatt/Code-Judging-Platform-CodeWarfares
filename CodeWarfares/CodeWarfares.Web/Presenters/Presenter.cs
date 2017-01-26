@@ -14,7 +14,7 @@ namespace CodeWarfares.Web.Presenters
 
         public Presenter(TView view)
         {
-            this.view = view;
+            this.View = view;
         }
 
         public TView View
