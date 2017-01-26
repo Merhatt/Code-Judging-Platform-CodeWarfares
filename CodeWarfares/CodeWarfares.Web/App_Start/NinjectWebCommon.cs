@@ -18,21 +18,25 @@ namespace CodeWarfares.Web.App_Start
     using Presenters.Account;
     using Presenters;
     using Presenters.Factories;
+    using Data.Models.Factories;
+    using Data.Models.Contracts;
+    using Data.Models;
+    using Presenters.Contracts.Account;
 
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -40,7 +44,7 @@ namespace CodeWarfares.Web.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -85,12 +89,18 @@ namespace CodeWarfares.Web.App_Start
                .SelectAllClasses()
                .BindDefaultInterfaces());
 
+            //Classes and Intefaces
             kernel.Bind<ILoginView>().To<Account.Login>();
-            kernel.Bind<IApplicationSignInManager>().To<ApplicationSignInManager>();
-            kernel.Bind<ILoginPresenter>().To<LoginPresenter>().InRequestScope();
-            kernel.Bind<IUserServices>().To<UserServices>();
 
+            //Factories
             kernel.Bind<ILoginPresenterFactory>().ToFactory().InRequestScope();
-        }        
+            kernel.Bind<IUserFactory>().ToFactory().InSingletonScope();
+            kernel.Bind<IRegisterPresenterFactory>().ToFactory().InRequestScope();
+
+            //Presenters
+            kernel.Bind<ILoginPresenter>().To<LoginPresenter>();
+            kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>()
+                                            .WithConstructorArgument("userFactory", kernel.Get<IUserFactory>());
+        }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Account\ApplicationUserManager.cs" />
     <Compile Include="Account\UserServices.cs" />
     <Compile Include="Contracts\Account\IApplicationSignInManager.cs" />
+    <Compile Include="Contracts\Account\IApplicationUserManager.cs" />
     <Compile Include="Contracts\Account\IUserServices.cs" />
     <Compile Include="Enums\LoginType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

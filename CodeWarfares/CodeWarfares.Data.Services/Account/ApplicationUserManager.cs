@@ -1,5 +1,6 @@
 ﻿using CodeWarfares.Data;
 using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Services.Contracts.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -9,10 +10,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeWarfares.Data.Models.Contracts;
 
 namespace CodeWarfares.Data.Services.Account
 {
-    public class ApplicationUserManager : UserManager<User>
+    public class ApplicationUserManager : UserManager<User>, IApplicationUserManager
     {
         public ApplicationUserManager(IUserStore<User> store)
             : base(store)
@@ -58,6 +60,13 @@ namespace CodeWarfares.Data.Services.Account
                 manager.UserTokenProvider = new DataProtectorTokenProvider<User>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+
+        public bool CreateUser(Models.Contracts.IUser user, string password)
+        {
+            var identity = this.Create(user as User, password);
+
+            return identity.Succeeded;
         }
     }
 }

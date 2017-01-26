@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Models
 {
-    public class User : IdentityUser
+    public class User : IdentityUser, Contracts.IUser
     {
         public ClaimsIdentity GenerateUserIdentity(UserManager<User> manager)
         {
