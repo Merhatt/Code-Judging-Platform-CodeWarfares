@@ -296,6 +296,7 @@
     <Compile Include="Presenters\Account\LoginPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\ILoginPresenter.cs" />
     <Compile Include="Presenters\Contracts\IPresenter.cs" />
+    <Compile Include="Presenters\Factories\ILoginPresenterFactory.cs" />
     <Compile Include="Presenters\Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -307,8 +308,6 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\IdentityHelper.cs" />
-    <Compile Include="Utils\Redirecter\IRedirecter.cs" />
-    <Compile Include="Utils\Redirecter\WebFormsRedirecter.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

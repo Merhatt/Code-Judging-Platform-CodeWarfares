@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Services.Contracts.Account
 {
-    public interface IUserServices : ILoginProvider
+    public interface IUserServices
     {
     }
 }

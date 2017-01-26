@@ -3,6 +3,5 @@
     public interface ILoginPresenter
     {
         void Initialize();
-        void SignIn();
     }
 }

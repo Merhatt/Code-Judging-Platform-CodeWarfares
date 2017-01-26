@@ -14,6 +14,10 @@ namespace CodeWarfares.Web.App_Start
     using System.Web.UI.WebControls;
     using Data.Services.Contracts.Account;
     using Data.Services.Account;
+    using Presenters.Account.Contracts;
+    using Presenters.Account;
+    using Presenters;
+    using Presenters.Factories;
 
     public static class NinjectWebCommon 
     {
@@ -65,12 +69,28 @@ namespace CodeWarfares.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind(b => b.From(AppDomain.CurrentDomain.GetAssemblies())
+            kernel.Bind(b => b.From("CodeWarfares.Data")
                 .SelectAllClasses()
                 .BindDefaultInterfaces());
 
+            kernel.Bind(b => b.From("CodeWarfares.Data.Models")
+                .SelectAllClasses()
+                .BindDefaultInterfaces());
+
+            kernel.Bind(b => b.From("CodeWarfares.Data.Services")
+                .SelectAllClasses()
+                .BindDefaultInterfaces());
+
+            kernel.Bind(b => b.From("CodeWarfares.Data.Web")
+               .SelectAllClasses()
+               .BindDefaultInterfaces());
+
             kernel.Bind<ILoginView>().To<Account.Login>();
             kernel.Bind<IApplicationSignInManager>().To<ApplicationSignInManager>();
+            kernel.Bind<ILoginPresenter>().To<LoginPresenter>().InRequestScope();
+            kernel.Bind<IUserServices>().To<UserServices>();
+
+            kernel.Bind<ILoginPresenterFactory>().ToFactory().InRequestScope();
         }        
     }
 }
