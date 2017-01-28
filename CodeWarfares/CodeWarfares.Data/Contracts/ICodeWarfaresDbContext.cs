@@ -15,6 +15,12 @@ namespace CodeWarfares.Data.Contracts
 
         IDbSet<User> Users { get; set; }
 
+        IDbSet<Problem> Problems { get; set; }
+
+        IDbSet<Submition> Submitions { get; set; }
+
+        IDbSet<Test> Tests { get; set; }
+
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

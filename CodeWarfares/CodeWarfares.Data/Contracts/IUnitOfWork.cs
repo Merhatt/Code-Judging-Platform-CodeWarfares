@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Contracts
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         void Commit();
     }

@@ -32,7 +32,7 @@ namespace CodeWarfares.Data.Repositories
             return this.DbSet.AsQueryable();
         }
 
-        public virtual T GetById(int id)
+        public virtual T GetById<TId>(TId id)
         {
             return this.DbSet.Find(id);
         }
@@ -75,7 +75,7 @@ namespace CodeWarfares.Data.Repositories
             }
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete<TId>(TId id)
         {
             var entity = this.GetById(id);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeWarfares.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace CodeWarfares.Data.Services.Contracts.Account
 {
     public interface IUserServices
     {
+        void AddSubmitionToUser(string userId, Submition submition);
     }
 }

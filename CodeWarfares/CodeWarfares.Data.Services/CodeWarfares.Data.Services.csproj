@@ -66,8 +66,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
@@ -88,9 +88,15 @@
     <Compile Include="Account\ApplicationSignInManager.cs" />
     <Compile Include="Account\ApplicationUserManager.cs" />
     <Compile Include="Account\UserServices.cs" />
+    <Compile Include="CodeTesting\CodeSubmitionService.cs" />
+    <Compile Include="CodeTesting\CodeTestingServices.cs" />
+    <Compile Include="Contracts\CodeTesting\ICodeSubmitionService.cs" />
+    <Compile Include="CodeTesting\ProblemService.cs" />
+    <Compile Include="Contracts\CodeTesting\ICodeTestingServices.cs" />
     <Compile Include="Contracts\Account\IApplicationSignInManager.cs" />
     <Compile Include="Contracts\Account\IApplicationUserManager.cs" />
     <Compile Include="Contracts\Account\IUserServices.cs" />
+    <Compile Include="Enums\ContestLaungagesTypes.cs" />
     <Compile Include="Enums\LoginType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -109,6 +115,10 @@
     <ProjectReference Include="..\CodeWarfares.Data\CodeWarfares.Data.csproj">
       <Project>{C3CA7AA6-BB80-41FE-9D81-294C332BFCB7}</Project>
       <Name>CodeWarfares.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Utils\CodeWarfares.Utils.csproj">
+      <Project>{a2a77190-e4ef-4c67-8b34-950786c2a89c}</Project>
+      <Name>CodeWarfares.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

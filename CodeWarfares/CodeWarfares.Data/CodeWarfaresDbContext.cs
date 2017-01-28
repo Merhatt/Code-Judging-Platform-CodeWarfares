@@ -15,8 +15,13 @@ namespace CodeWarfares.Data
         public CodeWarfaresDbContext()
             : base("CodeWarfaresDB", throwIfV1Schema: false)
         {
-
         }
+
+        public IDbSet<Problem> Problems { get; set; }
+
+        public IDbSet<Submition> Submitions { get; set; }
+
+        public IDbSet<Test> Tests { get; set; }
 
         //TODO No statics
         public static CodeWarfaresDbContext Create()

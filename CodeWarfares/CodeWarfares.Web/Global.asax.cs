@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeWarfares.Web.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,7 @@ namespace CodeWarfares.Web
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DbConfig.Initialize();
         }
     }
 }

@@ -29,3 +29,5 @@ C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\Code
 C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Services\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Services\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Services\bin\Debug\CodeWarfares.Data.pdb
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Services\bin\Debug\CodeWarfares.Utils.dll
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Data.Services\bin\Debug\CodeWarfares.Utils.pdb

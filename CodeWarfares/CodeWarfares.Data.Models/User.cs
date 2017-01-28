@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -7,6 +8,15 @@ namespace CodeWarfares.Data.Models
 {
     public class User : IdentityUser, Contracts.IUser
     {
+        private ICollection<Submition> submition;
+
+        public User()
+        {
+            this.submition = new HashSet<Submition>();
+        }
+
+        public virtual ICollection<Submition> Submition { get { return this.submition; } set { this.submition = value; } }
+
         public ClaimsIdentity GenerateUserIdentity(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

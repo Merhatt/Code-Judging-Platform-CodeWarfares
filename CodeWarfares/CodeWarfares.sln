@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Data.Models.Tests", "CodeWarfares.Data.Models.Tests\CodeWarfares.Data.Models.Tests.csproj", "{E126433B-DDE1-4B26-8674-17824E736EB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeWarfares.Utils", "CodeWarfares.Utils\CodeWarfares.Utils.csproj", "{A2A77190-E4EF-4C67-8B34-950786C2A89C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{E126433B-DDE1-4B26-8674-17824E736EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E126433B-DDE1-4B26-8674-17824E736EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E126433B-DDE1-4B26-8674-17824E736EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A77190-E4EF-4C67-8B34-950786C2A89C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A77190-E4EF-4C67-8B34-950786C2A89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A77190-E4EF-4C67-8B34-950786C2A89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A77190-E4EF-4C67-8B34-950786C2A89C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

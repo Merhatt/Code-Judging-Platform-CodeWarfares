@@ -11,7 +11,7 @@ namespace CodeWarfares.Data.Contracts
     {
         IQueryable<T> All();
 
-        T GetById(int id);
+        T GetById<TId>(TId id);
 
         void Add(T entity);
 
@@ -19,7 +19,7 @@ namespace CodeWarfares.Data.Contracts
 
         void Delete(T entity);
 
-        void Delete(int id);
+        void Delete<TId>(TId id);
 
         void Detach(T entity);
 

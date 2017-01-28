@@ -20,8 +20,5 @@ namespace CodeWarfares.Data.UnitsOfWork
         {
             this.dbContext.SaveChanges();
         }
-        public void Dispose()
-        {
-        }
     }
 }
