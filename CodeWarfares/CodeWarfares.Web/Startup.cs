@@ -1,5 +1,11 @@
-﻿using CodeWarfares.Data.Services.CodeTesting;
+﻿using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Models.Factories;
+using CodeWarfares.Data.Repositories;
+using CodeWarfares.Data.Services.Account;
+using CodeWarfares.Data.Services.CodeTesting;
 using CodeWarfares.Data.Services.Enums;
+using CodeWarfares.Utils.Https;
+using CodeWarfares.Utils.Json;
 using Microsoft.Owin;
 using Owin;
 
@@ -9,9 +15,6 @@ namespace CodeWarfares.Web
     public partial class Startup {
         public void Configuration(IAppBuilder app) {
             ConfigureAuth(app);
-            CodeTestingServices testing = new CodeTestingServices();
-
-            testing.TestCode("using System; using System.Collections.Generic; using System.Linq; 			 public class Program {   public static void Main()   {     Console.WriteLine(\"Hello C#\");   } }", ContestLaungagesTypes.CSharp, new string[] {"1"});
         }
     }
 }

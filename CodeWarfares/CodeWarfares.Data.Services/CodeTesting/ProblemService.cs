@@ -38,7 +38,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public void AddSubmitionToProblem(int problemId, Submition submition)
         {
-            this.problems.GetById(problemId).Submition.Add(submition);
+            this.problems.GetById(problemId).Submitions.Add(submition);
             this.problems.SaveChanges();
         }
     }

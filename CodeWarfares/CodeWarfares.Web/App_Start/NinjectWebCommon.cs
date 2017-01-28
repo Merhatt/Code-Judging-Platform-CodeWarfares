@@ -24,6 +24,8 @@ namespace CodeWarfares.Web.App_Start
     using Presenters.Contracts.Account;
     using Data.Contracts;
     using Data.Repositories;
+    using Data;
+    using Data.UnitsOfWork;
 
     public static class NinjectWebCommon
     {
@@ -75,10 +77,6 @@ namespace CodeWarfares.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind(b => b.From("CodeWarfares.Data")
-                .SelectAllClasses()
-                .BindDefaultInterfaces());
-
             kernel.Bind(b => b.From("CodeWarfares.Data.Models")
                 .SelectAllClasses()
                 .BindDefaultInterfaces());
@@ -97,7 +95,10 @@ namespace CodeWarfares.Web.App_Start
 
             //Classes and Intefaces
             kernel.Bind<ILoginView>().To<Account.Login>();
+            kernel.Bind<ICodeWarfaresDbContext>().To<CodeWarfaresDbContext>().InSingletonScope();
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+            kernel.Bind<IUnitOfWork>().To<GenericUnitOfWork>();
+
 
             //Factories
             kernel.Bind<ILoginPresenterFactory>().ToFactory().InRequestScope();

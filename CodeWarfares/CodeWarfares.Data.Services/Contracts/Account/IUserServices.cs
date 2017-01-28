@@ -10,5 +10,7 @@ namespace CodeWarfares.Data.Services.Contracts.Account
     public interface IUserServices
     {
         void AddSubmitionToUser(string userId, Submition submition);
+
+        IQueryable<User> GetAll();
     }
 }

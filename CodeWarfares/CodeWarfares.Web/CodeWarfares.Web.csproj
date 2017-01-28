@@ -339,6 +339,10 @@
       <Project>{c3ca7aa6-bb80-41fe-9d81-294c332bfcb7}</Project>
       <Name>CodeWarfares.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Utils\CodeWarfares.Utils.csproj">
+      <Project>{A2A77190-E4EF-4C67-8B34-950786C2A89C}</Project>
+      <Name>CodeWarfares.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

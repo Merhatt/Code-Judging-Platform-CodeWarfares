@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Utils.Https
 {
-    public class HttpProvider
+    public class HttpProvider : IHttpProvider
     {
         public string HttpPostJson(string url, string parameters)
         {

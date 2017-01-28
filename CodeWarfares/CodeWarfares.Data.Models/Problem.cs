@@ -30,7 +30,7 @@ namespace CodeWarfares.Data.Models
 
         public int TestsCount { get; set; }
 
-        public virtual ICollection<Submition> Submition { get { return this.submition; } set { this.submition = value; } }
+        public virtual ICollection<Submition> Submitions { get { return this.submition; } set { this.submition = value; } }
 
         public virtual ICollection<Test> Tests { get { return this.tests; } set { this.tests = value; } }
     }

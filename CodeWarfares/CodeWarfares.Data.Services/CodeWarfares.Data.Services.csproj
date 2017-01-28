@@ -90,6 +90,7 @@
     <Compile Include="Account\UserServices.cs" />
     <Compile Include="CodeTesting\CodeSubmitionService.cs" />
     <Compile Include="CodeTesting\CodeTestingServices.cs" />
+    <Compile Include="Contracts\CodeTesting\IProblemService.cs" />
     <Compile Include="Contracts\CodeTesting\ICodeSubmitionService.cs" />
     <Compile Include="CodeTesting\ProblemService.cs" />
     <Compile Include="Contracts\CodeTesting\ICodeTestingServices.cs" />
