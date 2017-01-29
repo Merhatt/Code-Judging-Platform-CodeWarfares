@@ -62,6 +62,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CodeTesting\CodeSubmitionServiceTests.cs" />
     <Compile Include="CodeTesting\CodeTestingServicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,9 +70,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
+      <Project>{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}</Project>
+      <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj">
       <Project>{BD006D4C-D481-4B9B-A2A2-4505876CA0E3}</Project>
       <Name>CodeWarfares.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Data\CodeWarfares.Data.csproj">
+      <Project>{c3ca7aa6-bb80-41fe-9d81-294c332bfcb7}</Project>
+      <Name>CodeWarfares.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\CodeWarfares.Utils\CodeWarfares.Utils.csproj">
       <Project>{A2A77190-E4EF-4C67-8B34-950786C2A89C}</Project>
