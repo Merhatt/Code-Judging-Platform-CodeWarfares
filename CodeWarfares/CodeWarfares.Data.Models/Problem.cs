@@ -28,6 +28,10 @@ namespace CodeWarfares.Data.Models
 
         public string Description { get; set; }
 
+        public long MaxMemory { get; set; }
+
+        public double MaxTime { get; set; }
+
         public int TestsCount { get; set; }
 
         public virtual ICollection<Submition> Submitions { get { return this.submition; } set { this.submition = value; } }

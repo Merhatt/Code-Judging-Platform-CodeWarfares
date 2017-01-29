@@ -7,7 +7,9 @@ namespace CodeWarfares.Data.Models
     {
         public int Id { get; set; }
 
-        public string TestParameters { get; set; }
+        public string TestParameter { get; set; }
+
+        public string CorrectAnswer { get; set; }
 
         [Required]
         public int ProblemId { get; set; }

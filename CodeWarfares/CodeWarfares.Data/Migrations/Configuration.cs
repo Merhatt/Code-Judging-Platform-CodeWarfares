@@ -10,6 +10,7 @@ namespace CodeWarfares.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "CodeWarfares.Data.CodeWarfaresDbContext";
         }
 

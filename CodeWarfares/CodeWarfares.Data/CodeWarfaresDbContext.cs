@@ -23,6 +23,8 @@ namespace CodeWarfares.Data
 
         public IDbSet<Test> Tests { get; set; }
 
+        public IDbSet<TestCompleted> TestsCompleted { get; set; }
+
         //TODO No statics
         public static CodeWarfaresDbContext Create()
         {

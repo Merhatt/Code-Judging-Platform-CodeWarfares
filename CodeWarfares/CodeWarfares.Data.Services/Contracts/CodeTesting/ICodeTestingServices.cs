@@ -1,4 +1,5 @@
-﻿using CodeWarfares.Data.Services.Enums;
+﻿using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Services.Enums;
 using CodeWarfares.Utils.JsonModels;
 
 namespace CodeWarfares.Data.Services.Contracts.CodeTesting

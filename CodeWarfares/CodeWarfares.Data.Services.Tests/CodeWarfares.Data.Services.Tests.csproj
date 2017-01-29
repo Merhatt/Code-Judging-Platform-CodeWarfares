@@ -62,10 +62,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CodeTesting\CodeTestingServicesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj">
+      <Project>{BD006D4C-D481-4B9B-A2A2-4505876CA0E3}</Project>
+      <Name>CodeWarfares.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Utils\CodeWarfares.Utils.csproj">
+      <Project>{A2A77190-E4EF-4C67-8B34-950786C2A89C}</Project>
+      <Name>CodeWarfares.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

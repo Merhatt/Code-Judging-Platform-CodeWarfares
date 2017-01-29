@@ -21,6 +21,8 @@ namespace CodeWarfares.Data.Contracts
 
         IDbSet<Test> Tests { get; set; }
 
+        IDbSet<TestCompleted> TestsCompleted { get; set; }
+
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

@@ -1,8 +1,11 @@
-﻿using CodeWarfares.Data.Services.Contracts.CodeTesting;
+﻿using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using CodeWarfares.Data.Services.Enums;
 using CodeWarfares.Utils.Https;
 using CodeWarfares.Utils.Json;
 using CodeWarfares.Utils.JsonModels;
+using System;
+using System.Linq;
 
 namespace CodeWarfares.Data.Services.CodeTesting
 {
@@ -16,12 +19,32 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public CodeTestingServices(IHttpProvider httpProvider, IJsonConverter jsonConverter)
         {
+            if (httpProvider == null)
+            {
+                throw new ArgumentNullException("Http provider canot be null");
+            }
+
+            if (jsonConverter == null)
+            {
+                throw new ArgumentNullException("Json converter canot be null");
+            }
+
             this.httpProvider = httpProvider;
             this.jsonConverter = jsonConverter;
         }
 
         public SubmitionModel TestCode(string source, ContestLaungagesTypes laungage, string[] testCases)
         {
+            if (source == null)
+            {
+                throw new ArgumentNullException("Source cannot be null");
+            }
+
+            if (testCases == null)
+            {
+                throw new ArgumentNullException("Test cases cannot be null");
+            }
+
             string tests = "";
 
             for (int i = 0; i < testCases.Length; i++)

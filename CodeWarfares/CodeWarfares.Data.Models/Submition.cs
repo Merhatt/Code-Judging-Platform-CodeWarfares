@@ -10,30 +10,29 @@ namespace CodeWarfares.Data.Models
 {
     public class Submition
     {
+        private ICollection<TestCompleted> completedTests;
+
         public int Id { get; set; }
 
         public Submition()
         {
             this.SubmitionTime = DateTime.Now;
+            this.completedTests = new HashSet<TestCompleted>();
         }
 
-        public bool Compiled { get; set; }
-
-        public int PassingTests { get; set; }
+        public bool Finished { get; set; }      
 
         public int TestCounts { get; set; }
 
         public string Code { get; set; }
 
+        public bool CanCompile { get; set; }
+
         public string CompileMessage { get; set; }
 
-        public string Memories { get; set; }
-
-        public string Errors { get; set; }
-
-        public string StdOuts { get; set; }
-
         public DateTime SubmitionTime { get; set; }
+
+        public virtual ICollection<TestCompleted> CompletedTests { get { return this.completedTests; } set { this.completedTests = value; } }
 
         [Required]
         public int ProblemId { get; set; }

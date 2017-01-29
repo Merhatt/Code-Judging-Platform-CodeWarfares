@@ -50,10 +50,18 @@
     <Compile Include="JsonModels\SubmitionModel.cs" />
     <Compile Include="Json\IJsonConverter.cs" />
     <Compile Include="Json\JsonConverter.cs" />
+    <Compile Include="PassingTests\IPassingTestsChecker.cs" />
+    <Compile Include="PassingTests\TrimPassingTestsChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
+      <Project>{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}</Project>
+      <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
