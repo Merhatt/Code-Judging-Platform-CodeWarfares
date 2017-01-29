@@ -1,6 +1,7 @@
 ﻿using CodeWarfares.Data.Contracts;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
+using System;
 using System.Linq;
 
 namespace CodeWarfares.Data.Services.CodeTesting
@@ -11,6 +12,11 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public ProblemService(IRepository<Problem> problems)
         {
+            if (problems == null)
+            {
+                throw new ArgumentNullException("problems cannot be null");
+            }
+
             this.problems = problems;
         }
 
@@ -26,6 +32,11 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public void Create(Problem problem)
         {
+            if (problem == null)
+            {
+                throw new ArgumentNullException("Problem cannot be null");
+            }
+
             this.problems.Add(problem);
             this.problems.SaveChanges();
         }
@@ -38,6 +49,11 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public void AddSubmitionToProblem(int problemId, Submition submition)
         {
+            if (submition == null)
+            {
+                throw new ArgumentNullException("submition cannot be null");
+            }
+
             this.problems.GetById(problemId).Submitions.Add(submition);
             this.problems.SaveChanges();
         }

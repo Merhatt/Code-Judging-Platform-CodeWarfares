@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="CodeTesting\CodeSubmitionServiceTests.cs" />
     <Compile Include="CodeTesting\CodeTestingServicesTests.cs" />
+    <Compile Include="CodeTesting\ProblemServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
