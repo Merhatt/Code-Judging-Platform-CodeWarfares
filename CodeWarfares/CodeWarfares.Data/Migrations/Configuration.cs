@@ -34,7 +34,8 @@ namespace CodeWarfares.Data.Migrations
 
             for (int i = 0; i < roles.Length; i++)
             {
-                if (context.Roles.FirstOrDefault(x => x.Name == roles[i]) == null)
+                var role = roles[i];
+                if (context.Roles.FirstOrDefault(x => x.Name == role) == null)
                 {
                     context.Roles.Add(new IdentityRole(roles[i]));
                 }
