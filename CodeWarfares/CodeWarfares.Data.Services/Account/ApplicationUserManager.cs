@@ -58,7 +58,8 @@ namespace CodeWarfares.Data.Services.Account
 
         public bool CreateUser(Models.Contracts.IUser user, string password)
         {
-            var identity = this.Create(user as User, password);
+            User userNow = user as User;
+            var identity = this.Create(userNow, password);
 
             return identity.Succeeded;
         }

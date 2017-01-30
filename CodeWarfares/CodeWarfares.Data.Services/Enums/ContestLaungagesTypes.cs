@@ -10,7 +10,6 @@ namespace CodeWarfares.Data.Services.Enums
     {
         C = 1,
         CPP = 2,
-        CSharp = 9,
-        JavaScript = 20,
+        CSharp = 9
     }
 }

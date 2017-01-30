@@ -1,5 +1,6 @@
 namespace CodeWarfares.Data.Migrations
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -28,6 +29,16 @@ namespace CodeWarfares.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            string[] roles = { "Administrator", "User" };
+
+            for (int i = 0; i < roles.Length; i++)
+            {
+                if (context.Roles.FirstOrDefault(x => x.Name == roles[i]) == null)
+                {
+                    context.Roles.Add(new IdentityRole(roles[i]));
+                }
+            }
         }
     }
 }
