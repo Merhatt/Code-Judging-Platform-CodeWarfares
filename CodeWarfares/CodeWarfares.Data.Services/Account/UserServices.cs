@@ -3,6 +3,7 @@ using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Services.Contracts.Account;
 using CodeWarfares.Data.Services.Enums;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Linq;
 
 namespace CodeWarfares.Data.Services.Account
@@ -13,6 +14,11 @@ namespace CodeWarfares.Data.Services.Account
 
         public UserServices(IRepository<User> users)
         {
+            if (users == null)
+            {
+                throw new ArgumentNullException("Users cannot be null");
+            }
+
             this.users = users;
         }
 
@@ -24,7 +30,7 @@ namespace CodeWarfares.Data.Services.Account
         public void AssignRole(User user, IdentityUserRole role)
         {
             user.Roles.Add(role);
-            users.SaveChanges();
+            this.users.SaveChanges();
         }
 
         public void AddSubmitionToUser(string userId, Submition submition)

@@ -12,13 +12,13 @@ namespace CodeWarfares.Data.Models
     {
         private ICollection<TestCompleted> completedTests;
 
-        public int Id { get; set; }
-
         public Submition()
         {
             this.SubmitionTime = DateTime.Now;
             this.completedTests = new HashSet<TestCompleted>();
         }
+
+        public int Id { get; set; }
 
         public bool Finished { get; set; }      
 

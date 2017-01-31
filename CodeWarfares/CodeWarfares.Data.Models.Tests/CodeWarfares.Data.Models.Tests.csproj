@@ -62,10 +62,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ProblemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubmitionTests.cs" />
+    <Compile Include="TestCompletedTests.cs" />
+    <Compile Include="TestTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
+      <Project>{71A135FD-AFE0-41C9-B48D-F01A544B2EEF}</Project>
+      <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
