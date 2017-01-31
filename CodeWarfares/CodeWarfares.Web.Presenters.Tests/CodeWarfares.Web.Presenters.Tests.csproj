@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Account\LoginPresenterTests.cs" />
     <Compile Include="Account\RegisterPresenterTests.cs" />
+    <Compile Include="MasterPages\SiteMasterPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

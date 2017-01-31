@@ -15,6 +15,7 @@ namespace CodeWarfares.Web.Presenters.MasterPages
 
         public SiteMasterPresenter(ISiteMaster view) : base(view)
         {
+
         }
 
         public void Initialize()
@@ -34,7 +35,10 @@ namespace CodeWarfares.Web.Presenters.MasterPages
                 this.antiXsrfTokenValue = Guid.NewGuid().ToString("N");
                 this.View.ViewStateUserKey = this.antiXsrfTokenValue;
 
-                this.SetResponseCookieEvent.Invoke("Presenter", new EventArgs());
+                if (this.SetResponseCookieEvent != null)
+                {
+                    this.SetResponseCookieEvent.Invoke("Presenter", new EventArgs());
+                }
             }
         }
 
