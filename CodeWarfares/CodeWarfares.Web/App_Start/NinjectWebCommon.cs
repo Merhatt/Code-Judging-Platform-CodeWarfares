@@ -27,6 +27,8 @@ namespace CodeWarfares.Web.App_Start
     using Data;
     using Data.UnitsOfWork;
     using Utils.PassingTests;
+    using Presenters.Contracts.MasterPages;
+    using Presenters.MasterPages;
 
     public static class NinjectWebCommon
     {
@@ -107,11 +109,13 @@ namespace CodeWarfares.Web.App_Start
             kernel.Bind<IRegisterPresenterFactory>().ToFactory().InRequestScope();
             kernel.Bind<ISubmitionFactory>().ToFactory().InSingletonScope();
             kernel.Bind<ITestCompletedFactory>().ToFactory().InSingletonScope();
+            kernel.Bind<ISiteMasterPresenterFactory>().ToFactory().InSingletonScope();
 
             //Presenters
             kernel.Bind<ILoginPresenter>().To<LoginPresenter>();
             kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>()
                        .WithConstructorArgument("userFactory", kernel.Get<IUserFactory>());
+            kernel.Bind<ISiteMasterPresenter>().To<SiteMasterPresenter>();
 
             //Services
         }
