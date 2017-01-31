@@ -11,22 +11,14 @@ namespace CodeWarfares.Web.App_Start
     using Ninject.Extensions.Factory;
     using Ninject.Extensions.Conventions;
     using Views.Contracts.Account;
-    using System.Web.UI.WebControls;
-    using Data.Services.Contracts.Account;
-    using Data.Services.Account;
     using Presenters.Account.Contracts;
     using Presenters.Account;
-    using Presenters;
     using Presenters.Factories;
     using Data.Models.Factories;
-    using Data.Models.Contracts;
-    using Data.Models;
     using Presenters.Contracts.Account;
     using Data.Contracts;
     using Data.Repositories;
     using Data;
-    using Data.UnitsOfWork;
-    using Utils.PassingTests;
     using Presenters.Contracts.MasterPages;
     using Presenters.MasterPages;
 
@@ -100,7 +92,6 @@ namespace CodeWarfares.Web.App_Start
             kernel.Bind<ILoginView>().To<Account.Login>();
             kernel.Bind<ICodeWarfaresDbContext>().To<CodeWarfaresDbContext>().InSingletonScope();
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
-            kernel.Bind<IUnitOfWork>().To<GenericUnitOfWork>();
 
 
             //Factories
