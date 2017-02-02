@@ -1,5 +1,7 @@
-﻿using CodeWarfares.Web.Presenters.MasterPages;
+﻿using CodeWarfares.Web.EventArguments;
+using CodeWarfares.Web.Presenters.MasterPages;
 using CodeWarfares.Web.Views.Contracts.MasterPages;
+using CodeWarfares.Web.Views.Models;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -19,16 +21,17 @@ namespace CodeWarfares.Web.Presenters.Tests.MasterPages
         {
             var siteMasterViewMock = new Mock<ISiteMaster>();
             string cookie = Guid.NewGuid().ToString("N");
-            
-            siteMasterViewMock.SetupSet(x => x.ViewStateUserKey = cookie).Verifiable();
 
-            siteMasterViewMock.SetupGet(x => x.Cookie).Returns(cookie);
+            var model = new SiteMasterModel();
+
+            siteMasterViewMock.SetupGet(x => x.Model).Returns(model);
 
             SiteMasterPresenter presenter = new SiteMasterPresenter(siteMasterViewMock.Object);
+            MasterPageInitEventArgs args = new MasterPageInitEventArgs(cookie);
 
-            presenter.Initialize();
+            presenter.Initialize("asd", args);
 
-            siteMasterViewMock.Verify();
+            Assert.AreEqual(cookie, model.ViewStateUserKey);
         }
 
         [Test]
@@ -37,18 +40,17 @@ namespace CodeWarfares.Web.Presenters.Tests.MasterPages
             var siteMasterViewMock = new Mock<ISiteMaster>();
             string cookie = null;
 
-            siteMasterViewMock.SetupSet(x => x.ViewStateUserKey = cookie).Verifiable();
+            var model = new SiteMasterModel();
+
+            siteMasterViewMock.SetupGet(x => x.Model).Returns(model);
 
             SiteMasterPresenter presenter = new SiteMasterPresenter(siteMasterViewMock.Object);
 
-            bool eventRaised = false;
+            MasterPageInitEventArgs args = new MasterPageInitEventArgs(cookie);
 
-            presenter.SetResponseCookieEvent += (object obj, EventArgs e) => 
-            { eventRaised = true; };
+            presenter.Initialize("asd", args);
 
-            presenter.Initialize();
-
-            Assert.AreEqual(true, eventRaised);
+            Assert.IsTrue(model.SetCookies);
         }
 
         [Test]
@@ -62,21 +64,17 @@ namespace CodeWarfares.Web.Presenters.Tests.MasterPages
             string name = "ivan";
             identityMock.SetupGet(x => x.Name).Returns(name);
 
-            siteMasterViewMock.SetupGet(x => x.Identity).Returns(identityMock.Object);
+            var model = new SiteMasterModel();
+            siteMasterViewMock.SetupGet(x => x.Model).Returns(model);
 
-            siteMasterViewMock.SetupGet(x => x.IsPostBack).Returns(false);
+            SiteMasterPresenter presenter = new SiteMasterPresenter(siteMasterViewMock.Object);
 
-            siteMasterViewMock.SetupGet(x => x.ViewStateUserKey).Returns(viewStateUserKey);
+            MasterPageValidateTokenEventArgs args = new MasterPageValidateTokenEventArgs(false, viewStateUserKey, name, "asd", "asd");
 
-            siteMasterViewMock.SetupSet(x => x.TokenKey = viewStateUserKey).Verifiable();
+            presenter.ValidateTokens("asd", args);
 
-            siteMasterViewMock.SetupSet(x => x.UserNameKey = name).Verifiable();
-
-            SiteMasterPresenter presenter = new SiteMasterPresenter(siteMasterViewMock.Object);         
-
-            presenter.ValidateTokens();
-
-            siteMasterViewMock.Verify();
+            Assert.AreEqual(viewStateUserKey, model.TokenKey);
+            Assert.AreEqual(name, model.UserNameKey);
         }
 
         [Test]
@@ -90,21 +88,12 @@ namespace CodeWarfares.Web.Presenters.Tests.MasterPages
             string name = "ivan";
             identityMock.SetupGet(x => x.Name).Returns(name);
 
-            siteMasterViewMock.SetupGet(x => x.Identity).Returns(identityMock.Object);
-
-            siteMasterViewMock.SetupGet(x => x.TokenKey).Returns("not same");
-
-            siteMasterViewMock.SetupGet(x => x.IsPostBack).Returns(true);
-
-            siteMasterViewMock.SetupGet(x => x.ViewStateUserKey).Returns(viewStateUserKey);
-
-            siteMasterViewMock.SetupSet(x => x.TokenKey = viewStateUserKey).Verifiable();
-
-            siteMasterViewMock.SetupSet(x => x.UserNameKey = name).Verifiable();
+            var model = new SiteMasterModel();
+            siteMasterViewMock.SetupGet(x => x.Model).Returns(model);
 
             SiteMasterPresenter presenter = new SiteMasterPresenter(siteMasterViewMock.Object);
-
-            Assert.Throws<InvalidOperationException>(() => presenter.ValidateTokens());
+            MasterPageValidateTokenEventArgs args = new MasterPageValidateTokenEventArgs(true, viewStateUserKey, name, "asd", "asd");
+            Assert.Throws<InvalidOperationException>(() => presenter.ValidateTokens("asd", args));
         }
     }
 }

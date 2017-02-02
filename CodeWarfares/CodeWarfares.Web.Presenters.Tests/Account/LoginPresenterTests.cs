@@ -1,6 +1,8 @@
 ﻿using CodeWarfares.Data.Services.Contracts.Account;
+using CodeWarfares.Web.EventArguments;
 using CodeWarfares.Web.Presenters.Account;
 using CodeWarfares.Web.Views.Contracts.Account;
+using CodeWarfares.Web.Views.Models;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -29,22 +31,21 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
         {
             ILoginView view = null;
 
-            Assert.Throws<ArgumentNullException>(() =>  new LoginPresenter(view) );
+            Assert.Throws<NullReferenceException>(() =>  new LoginPresenter(view) );
         }
 
         [Test]
         public void Initialize_ShouldBeCalledAndShouldSetProperty()
         {
             var mockedILoginView = new Mock<ILoginView>();
-            string settedNavigationUrl = "";
-            mockedILoginView.SetupSet(p => p.RegisterNavigateUrl = It.IsAny<string>())
-                .Callback<string>(value => settedNavigationUrl = value);
+            var model = new LoginViewModel();
+            mockedILoginView.SetupGet(p => p.Model).Returns(model);
 
             var loginPresenter = new LoginPresenter(mockedILoginView.Object);
 
-            loginPresenter.Initialize();
+            loginPresenter.Initialize("sender", null);
 
-            Assert.AreEqual("Register", settedNavigationUrl);
+            Assert.AreEqual("Register", model.RegisterNavigateUrl);
         }
 
         [Test]
@@ -56,26 +57,24 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             string password = "Dragan";
             bool isPersistent = true;
 
+
             var mockedSignInManager = new Mock<IApplicationSignInManager>();
 
-            mockedILoginView.SetupGet(p => p.Username).Returns(username);
-            mockedILoginView.SetupGet(p => p.Password).Returns(password);
-            mockedILoginView.SetupGet(p => p.ShouldRemember).Returns(isPersistent);
+            SignInEventArgs args = new SignInEventArgs(true, mockedSignInManager.Object, username, password, isPersistent);
 
             mockedSignInManager.Setup(m => m.SignIn(username, password, isPersistent, false)).Returns(true);
 
-            mockedILoginView.SetupGet(g => g.AreFieldsValid).Returns(true);
+            var model = new LoginViewModel();
 
-            mockedILoginView.SetupGet(g => g.SignInManager).Returns(mockedSignInManager.Object);
+            mockedILoginView.SetupGet(x => x.Model).Returns(model);
 
             var loginPresenter = new LoginPresenter(mockedILoginView.Object);
 
-            loginPresenter.SignIn();
+            loginPresenter.SignIn("sender", args);
 
 
             mockedSignInManager.Verify(x => x.SignIn(username, password, isPersistent, false), Times.Once);
-
-            mockedILoginView.Verify(x => x.Success(), Times.Once);
+            Assert.IsTrue(model.IsSignedIn);
         }
 
         [Test]
@@ -87,35 +86,25 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             string password = "Dragan";
             bool isPersistent = true;
 
-            string errorText = "";
-            mockedILoginView.SetupSet(p => p.ErrorText = It.IsAny<string>())
-                .Callback<string>(value => errorText = value);
+            var model = new LoginViewModel();
 
-            bool errorVisible = false;
-            mockedILoginView.SetupSet(p => p.ErrorTextVisible = It.IsAny<bool>())
-                .Callback<bool>(value => errorVisible = value);
+            mockedILoginView.SetupGet(x => x.Model).Returns(model);
 
             var mockedSignInManager = new Mock<IApplicationSignInManager>();
 
-            mockedILoginView.SetupGet(p => p.Username).Returns(username);
-            mockedILoginView.SetupGet(p => p.Password).Returns(password);
-            mockedILoginView.SetupGet(p => p.ShouldRemember).Returns(isPersistent);
-
             mockedSignInManager.Setup(m => m.SignIn(username, password, isPersistent, false)).Returns(false);
 
-            mockedILoginView.SetupGet(g => g.AreFieldsValid).Returns(true);
-
-            mockedILoginView.SetupGet(g => g.SignInManager).Returns(mockedSignInManager.Object);
+            SignInEventArgs args = new SignInEventArgs(true, mockedSignInManager.Object, username, password, isPersistent);
 
             var loginPresenter = new LoginPresenter(mockedILoginView.Object);
 
-            loginPresenter.SignIn();
+            loginPresenter.SignIn("asd", args);
 
 
             mockedSignInManager.Verify(x => x.SignIn(username, password, isPersistent, false), Times.Once);
 
-            Assert.AreEqual("Invalid login attempt", errorText);
-            Assert.AreEqual(true, errorVisible);
+            Assert.AreEqual("Invalid login attempt", model.ErrorText);
+            Assert.AreEqual(true, model.ErrorTextVisible);
         }
     }
 }

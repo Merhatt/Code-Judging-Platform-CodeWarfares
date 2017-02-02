@@ -1,8 +1,10 @@
 ﻿using CodeWarfares.Data.Models.Contracts;
 using CodeWarfares.Data.Models.Factories;
 using CodeWarfares.Data.Services.Contracts.Account;
+using CodeWarfares.Web.EventArguments;
 using CodeWarfares.Web.Presenters.Account;
 using CodeWarfares.Web.Views.Contracts.Account;
+using CodeWarfares.Web.Views.Models;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -33,7 +35,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
         {
             IRegisterView view = null;
 
-            Assert.Throws<ArgumentNullException>(() => new RegisterPresenter(view, null));
+            Assert.Throws<NullReferenceException>(() => new RegisterPresenter(view, null));
         }
 
         [Test]
@@ -45,10 +47,6 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             var mockedUserManager = new Mock<IApplicationUserManager>();
 
-            mockedIRegisterView.SetupGet(p => p.UserManager).Returns(mockedUserManager.Object);
-
-            mockedIRegisterView.SetupGet(p => p.SignInManager).Returns(mockedSignInManager.Object);
-
             var mockedIUserFactory = new Mock<IUserFactory>();
 
             string username = "Ivan";
@@ -57,6 +55,9 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             var mockedUser = new Mock<IUser>();
 
+            var model = new RegisterViewModel();
+
+            mockedIRegisterView.SetupGet(x => x.Model).Returns(model);
 
             string recivedUsername = "";
             mockedUser.SetupSet(p => p.UserName = It.IsAny<string>())
@@ -66,15 +67,13 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             mockedUser.SetupSet(p => p.Email = It.IsAny<string>())
                 .Callback<string>(value => recivedEmail = value);
 
-            mockedIRegisterView.SetupGet(p => p.Username).Returns(username);
-            mockedIRegisterView.SetupGet(p => p.Password).Returns(password);
-            mockedIRegisterView.SetupGet(p => p.Email).Returns(email);
-
             mockedIUserFactory.Setup(f => f.Create()).Returns(mockedUser.Object);
 
             var registerPresenter = new RegisterPresenter(mockedIRegisterView.Object, mockedIUserFactory.Object);
 
-            registerPresenter.Register();
+            RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
+
+            registerPresenter.Register("asd", args);
 
             Assert.AreEqual(username, recivedUsername);
             Assert.AreEqual(email, recivedEmail);
@@ -89,10 +88,6 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             var mockedUserManager = new Mock<IApplicationUserManager>();        
 
-            mockedIRegisterView.SetupGet(p => p.UserManager).Returns(mockedUserManager.Object);
-
-            mockedIRegisterView.SetupGet(p => p.SignInManager).Returns(mockedSignInManager.Object);
-
             var mockedIUserFactory = new Mock<IUserFactory>();
 
             string username = "Ivan";
@@ -104,6 +99,9 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             mockedUserManager.Setup(x => x.CreateUser(It.IsAny<IUser>(), It.IsAny<string>()))
                                     .Returns(true);
 
+            var model = new RegisterViewModel();
+
+            mockedIRegisterView.SetupGet(x => x.Model).Returns(model);
 
             string recivedUsername = "";
             mockedUser.SetupSet(p => p.UserName = It.IsAny<string>())
@@ -113,15 +111,13 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             mockedUser.SetupSet(p => p.Email = It.IsAny<string>())
                 .Callback<string>(value => recivedEmail = value);
 
-            mockedIRegisterView.SetupGet(p => p.Username).Returns(username);
-            mockedIRegisterView.SetupGet(p => p.Password).Returns(password);
-            mockedIRegisterView.SetupGet(p => p.Email).Returns(email);
-
             mockedIUserFactory.Setup(f => f.Create()).Returns(mockedUser.Object);
 
             var registerPresenter = new RegisterPresenter(mockedIRegisterView.Object, mockedIUserFactory.Object);
 
-            registerPresenter.Register();
+            RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
+
+            registerPresenter.Register("asd", args);
 
             mockedUserManager.Verify(x => x.CreateUser(mockedUser.Object, password), Times.Once());
         }
@@ -134,10 +130,6 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             var mockedSignInManager = new Mock<IApplicationSignInManager>();
 
             var mockedUserManager = new Mock<IApplicationUserManager>();
-
-            mockedIRegisterView.SetupGet(p => p.UserManager).Returns(mockedUserManager.Object);
-
-            mockedIRegisterView.SetupGet(p => p.SignInManager).Returns(mockedSignInManager.Object);
 
             var mockedIUserFactory = new Mock<IUserFactory>();
 
@@ -152,6 +144,9 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             mockedUserManager.Setup(x => x.CreateUser(It.IsAny<IUser>(), It.IsAny<string>()))
                                     .Returns(true);
 
+            var model = new RegisterViewModel();
+
+            mockedIRegisterView.SetupGet(x => x.Model).Returns(model);
 
             string recivedUsername = "";
             mockedUser.SetupSet(p => p.UserName = It.IsAny<string>())
@@ -161,18 +156,16 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             mockedUser.SetupSet(p => p.Email = It.IsAny<string>())
                 .Callback<string>(value => recivedEmail = value);
 
-            mockedIRegisterView.SetupGet(p => p.Username).Returns(username);
-            mockedIRegisterView.SetupGet(p => p.Password).Returns(password);
-            mockedIRegisterView.SetupGet(p => p.Email).Returns(email);
-
             mockedIUserFactory.Setup(f => f.Create()).Returns(mockedUser.Object);
 
             var registerPresenter = new RegisterPresenter(mockedIRegisterView.Object, mockedIUserFactory.Object);
 
-            registerPresenter.Register();
+            RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
+
+            registerPresenter.Register("asd", args);
 
             mockedSignInManager.Verify(x => x.SignIn(It.IsAny<string>(), password, false, false), Times.Once);
-            mockedIRegisterView.Verify(x => x.Success(), Times.Once());
+            Assert.IsTrue(model.Success);
         }
 
         [Test]
@@ -183,10 +176,6 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             var mockedSignInManager = new Mock<IApplicationSignInManager>();
 
             var mockedUserManager = new Mock<IApplicationUserManager>();
-
-            mockedIRegisterView.SetupGet(p => p.UserManager).Returns(mockedUserManager.Object);
-
-            mockedIRegisterView.SetupGet(p => p.SignInManager).Returns(mockedSignInManager.Object);
 
             var mockedIUserFactory = new Mock<IUserFactory>();
 
@@ -209,22 +198,19 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             string recivedEmail = "";
             mockedUser.SetupSet(p => p.Email = It.IsAny<string>())
                 .Callback<string>(value => recivedEmail = value);
-
-            string recivedError = "";
-            mockedIRegisterView.SetupSet(p => p.ErrorText = It.IsAny<string>())
-                .Callback<string>(value => recivedError = value);
-
-            mockedIRegisterView.SetupGet(p => p.Username).Returns(username);
-            mockedIRegisterView.SetupGet(p => p.Password).Returns(password);
-            mockedIRegisterView.SetupGet(p => p.Email).Returns(email);
+            
+            var model = new RegisterViewModel();
+            mockedIRegisterView.SetupGet(p => p.Model).Returns(model);
 
             mockedIUserFactory.Setup(f => f.Create()).Returns(mockedUser.Object);
 
             var registerPresenter = new RegisterPresenter(mockedIRegisterView.Object, mockedIUserFactory.Object);
 
-            registerPresenter.Register();
+            RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
 
-            Assert.AreEqual("Cannot register", recivedError);
+            registerPresenter.Register("asd", args);
+
+            Assert.AreEqual("Cannot register", model.ErrorText);
         }
     }
 }
