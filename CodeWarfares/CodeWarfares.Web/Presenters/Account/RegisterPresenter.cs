@@ -1,12 +1,14 @@
 ﻿using CodeWarfares.Data.Models.Contracts;
 using CodeWarfares.Data.Models.Factories;
 using CodeWarfares.Data.Services.Contracts.Account;
+using CodeWarfares.Web.EventArguments;
 using CodeWarfares.Web.Presenters.Contracts.Account;
 using CodeWarfares.Web.Views.Contracts.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebFormsMvp;
 
 namespace CodeWarfares.Web.Presenters.Account
 {
@@ -17,24 +19,25 @@ namespace CodeWarfares.Web.Presenters.Account
         public RegisterPresenter(IRegisterView view, IUserFactory userFactory) : base(view)
         {
             this.userFactory = userFactory;
+            view.RegisterEvent += Register;
         }
 
-        public void Register()
+        public void Register(object sender, RegisterEventArgs e)
         {
-            IApplicationUserManager userManager = this.View.UserManager;
-            IApplicationSignInManager signInManager = this.View.SignInManager;
+            IApplicationUserManager userManager = e.UserManager;
+            IApplicationSignInManager signInManager = e.SignInManager;
             IUser user = this.userFactory.Create();
-            user.UserName = this.View.Username;
-            user.Email = this.View.Email;
-            bool isCreated = userManager.CreateUser(user, this.View.Password);
+            user.UserName = e.Username;
+            user.Email = e.Email;
+            bool isCreated = userManager.CreateUser(user, e.Password);
             if (isCreated)
             {
-                signInManager.SignIn(user.UserName, this.View.Password, false);
-                this.View.Success();
+                signInManager.SignIn(user.UserName, e.Password, false);
+                this.View.Model.Success = true;
             }
             else
             {
-                this.View.ErrorText = "Cannot register";
+                this.View.Model.ErrorText = "Cannot register";
             }
         }
     }

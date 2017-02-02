@@ -1,29 +1,18 @@
 ﻿using CodeWarfares.Data.Services.Contracts.Account;
+using CodeWarfares.Web.EventArguments;
+using CodeWarfares.Web.Views.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Account
 {
-    public interface ILoginView : IView
+    public interface ILoginView : IView<LoginViewModel>
     {
-        IApplicationSignInManager SignInManager { get; }
+        event EventHandler MyInit;
 
-        string Username { get; set; }
-
-        string Password { get; set; }
-
-        string ErrorText { get; set; }
-
-        bool ErrorTextVisible { get; set; }
-
-        bool ShouldRemember { get; set; }
-
-        bool AreFieldsValid { get; }
-
-        string RegisterNavigateUrl { get; set; }
-
-        void Success();
+        event EventHandler<SignInEventArgs> SignInEvent;
     }
 }

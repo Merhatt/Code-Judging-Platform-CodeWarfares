@@ -12,94 +12,40 @@ using CodeWarfares.Data.Services.Contracts.Account;
 using CodeWarfares.Web.Presenters.Factories;
 using CodeWarfares.Web.Presenters.Contracts.Account;
 using Ninject;
+using WebFormsMvp.Web;
+using CodeWarfares.Web.Views.Models;
+using CodeWarfares.Web.EventArguments;
+using WebFormsMvp;
+using CodeWarfares.Web.Presenters.Account;
 
 namespace CodeWarfares.Web.Account
 {
-    public partial class Register : Page, IRegisterView
+    [PresenterBinding(typeof(RegisterPresenter))]
+    public partial class Register : MvpPage<RegisterViewModel>, IRegisterView
     {
-        [Inject]
-        public IRegisterPresenterFactory PresenterFactory { get; set; }
+        public event EventHandler<RegisterEventArgs> RegisterEvent;
 
-        public IRegisterPresenter RegisterPresenter { get; set; }
-
-        public string ErrorText
+        public Register()
         {
-            get
-            {
-                return this.ErrorMessage.Text;
-            }
 
-            set
-            {
-                this.ErrorMessage.Text = value;
-            }
-        }
-
-        public IApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return Context.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-        }
-
-        public IApplicationUserManager UserManager
-        {
-            get
-            {
-                return this.Context.GetOwinContext().Get<ApplicationUserManager>();
-            }
-        }
-
-        public string Password
-        {
-            get
-            {
-                return this.PasswordTextBox.Text;
-            }
-            set
-            {
-                this.PasswordTextBox.Text = value;
-            }
-        }
-
-        public string Username
-        {
-            get
-            {
-                return this.UsernameTextBox.Text;
-            }
-            set
-            {
-                this.UsernameTextBox.Text = value;
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return this.EmailTextBox.Text;
-            }
-            set
-            {
-                this.EmailTextBox.Text = value;
-            }
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            this.RegisterPresenter = this.PresenterFactory.Create(this);
         }
 
         protected void CreateUser_Click(object sender, EventArgs e)
         {
-            this.RegisterPresenter.Register();
-        }
+            RegisterEventArgs args = new RegisterEventArgs(this.Context.GetOwinContext().Get<ApplicationUserManager>(),
+                                            Context.GetOwinContext().Get<ApplicationSignInManager>(),
+                                            this.UsernameTextBox.Text,
+                                            this.EmailTextBox.Text,
+                                            this.PasswordTextBox.Text);
 
-        public void Success()
-        {
-            this.Response.Redirect("~/");
+            this.RegisterEvent?.Invoke(sender, args);
+
+            this.ErrorMessage.Text = this.Model.ErrorText;
+
+            if (this.Model.Success)
+            {
+                this.Response.Redirect("~/");
+            }
         }
     }
 }

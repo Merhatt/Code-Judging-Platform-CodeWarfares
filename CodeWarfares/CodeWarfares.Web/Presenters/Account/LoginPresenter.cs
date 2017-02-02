@@ -7,6 +7,8 @@ using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using CodeWarfares.Data.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using WebFormsMvp;
+using CodeWarfares.Web.EventArguments;
 
 namespace CodeWarfares.Web.Presenters.Account
 {
@@ -14,32 +16,31 @@ namespace CodeWarfares.Web.Presenters.Account
     {
         public LoginPresenter(ILoginView view) : base(view)
         {
+            view.MyInit += Initialize;
+            view.SignInEvent += SignIn;
         }
 
-        public void Initialize()
+        public void Initialize(object obj, EventArgs e)
         {
-            this.View.RegisterNavigateUrl = "Register";
+            this.View.Model.RegisterNavigateUrl = "Register";
         }
 
-        public void SignIn()
+        public void SignIn(object sender, SignInEventArgs e)
         {
-            if (this.View.AreFieldsValid)
+            if (e.AreFieldsValid)
             {
-                // Validate the user password;
-                IApplicationSignInManager signinManager = this.View.SignInManager;
-
-                // This doen't count login failures towards account lockout
-                // To enable password failures to trigger lockout, change to shouldLockout: true
-                bool isSignedIn = signinManager.SignIn(this.View.Username, this.View.Password, this.View.ShouldRemember);
+                IApplicationSignInManager signinManager = e.SignInManager;
+ 
+                bool isSignedIn = signinManager.SignIn(e.Username, e.Password, e.ShouldRemember);
 
                 if (isSignedIn)
                 {
-                    this.View.Success();
+                    this.View.Model.IsSignedIn = true;
                 }
                 else
                 {
-                    this.View.ErrorText = "Invalid login attempt";
-                    this.View.ErrorTextVisible = true;
+                    this.View.Model.ErrorText = "Invalid login attempt";
+                    this.View.Model.ErrorTextVisible = true;
                 }
             }
         }

@@ -1,9 +1,12 @@
-﻿namespace CodeWarfares.Web.Presenters.Account.Contracts
+﻿using CodeWarfares.Web.EventArguments;
+using System;
+
+namespace CodeWarfares.Web.Presenters.Account.Contracts
 {
     public interface ILoginPresenter
     {
-        void Initialize();
+        void Initialize(object obj, EventArgs e);
 
-        void SignIn();
+        void SignIn(object sender, SignInEventArgs e);
     }
 }

@@ -8,120 +8,45 @@ using Ninject;
 using CodeWarfares.Data.Services.Account;
 using CodeWarfares.Web.Presenters.Factories;
 using CodeWarfares.Data.Services.Contracts.Account;
+using WebFormsMvp.Web;
+using CodeWarfares.Web.Views.Models;
+using CodeWarfares.Web.EventArguments;
+using WebFormsMvp;
+using CodeWarfares.Web.Presenters.Account;
 
 namespace CodeWarfares.Web.Account
 {
-    public partial class Login : Page, ILoginView
+    [PresenterBinding(typeof(LoginPresenter))]
+    public partial class Login : MvpPage<LoginViewModel>, ILoginView
     {
+        public event EventHandler MyInit;
 
-        [Inject]
-        public ILoginPresenterFactory LoginPresenterFactory { get; set; }
-
-        public ILoginPresenter LoginPresenter { get; set; }
-
-        public string Username
-        {
-            get
-            {
-                return this.UsernameTextBox.Text;
-            }
-            set
-            {
-                this.UsernameTextBox.Text = value;
-            }
-        }
-
-        public string Password
-        {
-            get
-            {
-                return this.PasswordTextBox.Text;
-            }
-            set
-            {
-                this.PasswordTextBox.Text = value;
-            }
-        }
-
-        public bool ShouldRemember
-        {
-            get
-            {
-                return this.RememberMe.Checked;
-            }
-            set
-            {
-                this.RememberMe.Checked = value;
-            }
-        }
-
-        public bool AreFieldsValid
-        {
-            get
-            {
-                return this.IsValid;
-            }
-        }
-
-        public string ErrorText
-        {
-            get
-            {
-                return this.FailureText.Text;
-            }
-            set
-            {
-                this.FailureText.Text = value;
-            }
-        }
-
-        public bool ErrorTextVisible
-        {
-            get
-            {
-                return this.ErrorMessage.Visible;
-            }
-            set
-            {
-                this.ErrorMessage.Visible = value;
-            }
-        }
-
-        public string RegisterNavigateUrl
-        {
-            get
-            {
-                return this.RegisterHyperLink.NavigateUrl;
-            }
-            set
-            {
-                this.RegisterHyperLink.NavigateUrl = value;
-            }
-        }
-
-        public IApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return this.Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-            }
-        }
+        public event EventHandler<SignInEventArgs> SignInEvent;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.LoginPresenter = this.LoginPresenterFactory.Create(this);
+            this.MyInit(sender, e);
 
-            this.LoginPresenter.Initialize();
+            this.RegisterHyperLink.NavigateUrl = this.Model.RegisterNavigateUrl;
         }
 
         protected void LogIn(object sender, EventArgs e)
         {
-            this.LoginPresenter.SignIn();
-        }
+            SignInEventArgs args = new SignInEventArgs(this.IsValid,
+                                                  this.Context.GetOwinContext().GetUserManager<ApplicationSignInManager>(),
+                                                  this.UsernameTextBox.Text,
+                                                  this.PasswordTextBox.Text,
+                                                  this.RememberMe.Checked);
 
-        public void Success()
-        {
-            this.Response.Redirect("~/");
+            this.SignInEvent?.Invoke(sender, args);
+
+            this.FailureText.Text = this.Model.ErrorText;
+            this.ErrorMessage.Visible = this.Model.ErrorTextVisible;
+
+            if (this.Model.IsSignedIn)
+            {
+                this.Response.Redirect("~/");
+            }
         }
     }
 }

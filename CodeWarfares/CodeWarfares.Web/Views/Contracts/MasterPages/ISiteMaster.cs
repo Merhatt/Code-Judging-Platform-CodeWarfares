@@ -1,24 +1,18 @@
-﻿using System;
+﻿using CodeWarfares.Web.EventArguments;
+using CodeWarfares.Web.Views.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
+using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.MasterPages
 {
-    public interface ISiteMaster : IView
+    public interface ISiteMaster : IView<SiteMasterModel>
     {
+        event EventHandler<MasterPageInitEventArgs> MyInit;
 
-        string Cookie { get; }
-
-        string ViewStateUserKey { get; set; }
-
-        bool IsPostBack { get; }
-
-        string TokenKey { get; set; }
-
-        string UserNameKey { get; set; }
-
-        IIdentity Identity { get; }
+        event EventHandler<MasterPageValidateTokenEventArgs> ValidateToken;
     }
 }

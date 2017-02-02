@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeWarfares.Web.EventArguments;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace CodeWarfares.Web.Presenters.Contracts.Account
 {
     public interface IRegisterPresenter
     {
-        void Register();
+        void Register(object sender, RegisterEventArgs e);
     }
 }

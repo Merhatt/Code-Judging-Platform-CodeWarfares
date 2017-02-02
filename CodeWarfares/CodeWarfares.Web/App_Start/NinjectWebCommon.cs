@@ -21,9 +21,12 @@ namespace CodeWarfares.Web.App_Start
     using Data;
     using Presenters.Contracts.MasterPages;
     using Presenters.MasterPages;
+    using WebFormsMvp.Binder;
+    using NinjectModules;
 
     public static class NinjectWebCommon
     {
+        public static IKernel NinjectKernel;
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
@@ -57,9 +60,12 @@ namespace CodeWarfares.Web.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
                 RegisterServices(kernel);
+
+                NinjectKernel = kernel;
+
                 return kernel;
             }
-            catch
+            catch (Exception ex)
             {
                 kernel.Dispose();
                 throw;
@@ -72,6 +78,10 @@ namespace CodeWarfares.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Load(new MvpNinjectModule());
+
+            PresenterBinder.Factory = kernel.Get<IPresenterFactory>();
+
             kernel.Bind(b => b.From("CodeWarfares.Data.Models")
                 .SelectAllClasses()
                 .BindDefaultInterfaces());
@@ -95,20 +105,18 @@ namespace CodeWarfares.Web.App_Start
 
 
             //Factories
-            kernel.Bind<ILoginPresenterFactory>().ToFactory().InRequestScope();
+            //kernel.Bind<ILoginPresenterFactory>().ToFactory().InRequestScope();
             kernel.Bind<IUserFactory>().ToFactory().InSingletonScope();
-            kernel.Bind<IRegisterPresenterFactory>().ToFactory().InRequestScope();
+            //kernel.Bind<IRegisterPresenterFactory>().ToFactory().InRequestScope();
             kernel.Bind<ISubmitionFactory>().ToFactory().InSingletonScope();
             kernel.Bind<ITestCompletedFactory>().ToFactory().InSingletonScope();
-            kernel.Bind<ISiteMasterPresenterFactory>().ToFactory().InSingletonScope();
+            //kernel.Bind<ISiteMasterPresenterFactory>().ToFactory().InSingletonScope();
 
             //Presenters
             kernel.Bind<ILoginPresenter>().To<LoginPresenter>();
-            kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>()
-                       .WithConstructorArgument("userFactory", kernel.Get<IUserFactory>());
+            kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>();
+                       //.WithConstructorArgument("userFactory", kernel.Get<IUserFactory>());
             kernel.Bind<ISiteMasterPresenter>().To<SiteMasterPresenter>();
-
-            //Services
         }
     }
 }

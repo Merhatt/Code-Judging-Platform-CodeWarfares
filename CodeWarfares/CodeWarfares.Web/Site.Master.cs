@@ -14,26 +14,28 @@ using Ninject;
 using CodeWarfares.Web.Presenters.Contracts.MasterPages;
 using Ninject.Web;
 using CodeWarfares.Web.Presenters.MasterPages;
+using WebFormsMvp.Web;
+using CodeWarfares.Web.Views.Models;
+using CodeWarfares.Web.EventArguments;
+using WebFormsMvp;
 
 namespace CodeWarfares.Web
 {
-    public partial class SiteMaster : MasterPageBase, ISiteMaster
+    [PresenterBinding(typeof(SiteMasterPresenter))]
+    public partial class SiteMaster : MasterPage, ISiteMaster
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
 
+        public event EventHandler<MasterPageInitEventArgs> MyInit;
+        public event EventHandler<MasterPageValidateTokenEventArgs> ValidateToken;
+
         public SiteMaster()
         {
-            this.SiteMasterPresenter = new SiteMasterPresenter(this);
+            this.Model = new SiteMasterModel();
         }
 
-        //It does't work because Page must be called in Page Init but factori is injected in page load :(
-        //[Inject]
-        //public ISiteMasterPresenterFactory SiteMasterPresenterFactory { get; set; }
-
-        public ISiteMasterPresenter SiteMasterPresenter { get; set; }
-
-        public string Cookie
+        private string Cookie
         {
             get
             {
@@ -48,65 +50,29 @@ namespace CodeWarfares.Web
             }
         }
 
-        public string ViewStateUserKey
-        {
-            get
-            {
-                return this.Page.ViewStateUserKey;
-            }
+        public SiteMasterModel Model { get; set; }
 
-            set
-            {
-                this.Page.ViewStateUserKey = value;
-            }
-        }
-
-        public string TokenKey
-        {
-            get
-            {
-                return (string)this.ViewState[AntiXsrfTokenKey];
-            }
-
-            set
-            {
-                this.ViewState[AntiXsrfTokenKey] = value;
-            }
-        }
-
-        public string UserNameKey
-        {
-            get
-            {
-                return (string)this.ViewState[AntiXsrfUserNameKey];
-            }
-
-            set
-            {
-                this.ViewState[AntiXsrfUserNameKey] = value;
-            }
-        }
-
-        public IIdentity Identity
-        {
-            get
-            {
-                return this.Context.User.Identity;
-            }
-        }
+        public bool ThrowExceptionIfNoPresenterBound { get { return true; } }
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.SiteMasterPresenter.SetResponseCookieEvent += new EventHandler(SetResponseCookie);
-            this.SiteMasterPresenter.Initialize();
+            MasterPageInitEventArgs args = new MasterPageInitEventArgs(this.Cookie);
+            this.MyInit?.Invoke(sender, args);
+
+            this.Page.ViewStateUserKey = this.Model.ViewStateUserKey;
+
+            if (this.Model.SetCookies)
+            {
+                SetResponseCookie();
+            }
         }
 
-        public void SetResponseCookie(object sender, EventArgs e)
+        private void SetResponseCookie()
         {
             var responseCookie = new HttpCookie(AntiXsrfTokenKey)
             {
                 HttpOnly = true,
-                Value = this.ViewStateUserKey
+                Value = this.Model.ViewStateUserKey
             };
 
             if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
@@ -119,7 +85,14 @@ namespace CodeWarfares.Web
 
         protected void PreLoad()
         {
-            this.SiteMasterPresenter.ValidateTokens();
+            MasterPageValidateTokenEventArgs args = new MasterPageValidateTokenEventArgs
+                (this.IsPostBack, (string)this.ViewState[AntiXsrfUserNameKey], this.Context.User.Identity.Name,
+                (string)this.ViewState[AntiXsrfUserNameKey], (string)this.ViewState[AntiXsrfTokenKey]);
+
+            this.ValidateToken?.Invoke(this, args);
+
+            this.ViewState[AntiXsrfTokenKey] = this.Model.TokenKey;
+            this.ViewState[AntiXsrfUserNameKey] = this.Model.UserNameKey;
         }
 
        
