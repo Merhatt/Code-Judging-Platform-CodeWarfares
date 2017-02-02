@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using CodeWarfares.Utils;
-using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Services.Account;
 using CodeWarfares.Web.Views.Contracts.Account;
-using CodeWarfares.Data.Services.Contracts.Account;
-using CodeWarfares.Web.Presenters.Factories;
-using CodeWarfares.Web.Presenters.Contracts.Account;
 using Ninject;
 using WebFormsMvp.Web;
 using CodeWarfares.Web.Views.Models;
