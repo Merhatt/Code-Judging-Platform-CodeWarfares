@@ -6,10 +6,11 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using CodeWarfares.Utils;
+using System.Web.UI;
 
 namespace CodeWarfares.Web.Account
 {
-    public partial class OpenAuthProviders : System.Web.UI.UserControl
+    public partial class OpenAuthProviders : UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

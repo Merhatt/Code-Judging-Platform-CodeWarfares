@@ -9,13 +9,17 @@ namespace CodeWarfares.Data.Models
     public class User : IdentityUser, Contracts.IUser
     {
         private ICollection<Submition> submition;
+        private ICollection<Problem> problems;
 
         public User()
         {
             this.submition = new HashSet<Submition>();
+            this.problems = new HashSet<Problem>();
         }
 
         public virtual ICollection<Submition> Submition { get { return this.submition; } set { this.submition = value; } }
+
+        public virtual ICollection<Problem> Problems { get { return this.problems; } set { this.problems = value; } }
 
         public ClaimsIdentity GenerateUserIdentity(UserManager<User> manager)
         {

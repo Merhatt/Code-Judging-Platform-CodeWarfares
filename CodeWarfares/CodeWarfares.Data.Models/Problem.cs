@@ -12,11 +12,13 @@ namespace CodeWarfares.Data.Models
     {
         private ICollection<Submition> submition;
         private ICollection<Test> tests;
+        private ICollection<User> users;
 
         public Problem()
         {
             this.submition = new HashSet<Submition>();
             this.tests = new HashSet<Test>();
+            this.users = new HashSet<User>();
         }
         
         public int Id { get; set; }
@@ -34,8 +36,12 @@ namespace CodeWarfares.Data.Models
 
         public int TestsCount { get; set; }
 
+        public string CoverImageUrl { get; set; }
+
         public virtual ICollection<Submition> Submitions { get { return this.submition; } set { this.submition = value; } }
 
         public virtual ICollection<Test> Tests { get { return this.tests; } set { this.tests = value; } }
+
+        public virtual ICollection<User> Users { get { return this.users; } set { this.users = value; } }
     }
 }
