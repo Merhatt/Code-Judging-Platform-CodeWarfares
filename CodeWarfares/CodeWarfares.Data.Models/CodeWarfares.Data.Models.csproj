@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IUser.cs" />
+    <Compile Include="Enums\DifficultyType.cs" />
     <Compile Include="Factories\ISubmitionFactory.cs" />
     <Compile Include="Factories\ITestCompletedFactory.cs" />
     <Compile Include="Factories\IUserFactory.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeWarfares.Data.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -37,6 +38,8 @@ namespace CodeWarfares.Data.Models
         public int TestsCount { get; set; }
 
         public string CoverImageUrl { get; set; }
+
+        public DifficultyType Difficulty { get; set; }
 
         public virtual ICollection<Submition> Submitions { get { return this.submition; } set { this.submition = value; } }
 

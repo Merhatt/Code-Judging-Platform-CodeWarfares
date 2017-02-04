@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand navbar-link" runat="server" href="~/">Code Warfares</a>
-                    <a class="navbar-brand navbar-link" runat="server" href="~/">Задачи</a>
+                    <a class="navbar-brand navbar-link" runat="server" href="~/Codings/Competitions.aspx">Задачи</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
