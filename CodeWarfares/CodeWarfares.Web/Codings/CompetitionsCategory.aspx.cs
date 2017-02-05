@@ -24,6 +24,15 @@ namespace CodeWarfares.Web.Codings
             CompetitionsCategoryEventArgs args = new CompetitionsCategoryEventArgs(this.Request.QueryString["Difficulty"]);
 
             this.MyInit.Invoke(sender, args);
+            this.GridViewProblems.DataSource = this.Model.Problems;
+            this.GridViewProblems.DataBind();
+        }
+
+        protected void GridViewProblems_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.GridViewProblems.PageIndex = e.NewPageIndex;
+            this.GridViewProblems.DataSource = this.Model.Problems;
+            this.GridViewProblems.DataBind();
         }
     }
 }
