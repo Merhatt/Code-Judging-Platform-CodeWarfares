@@ -27,7 +27,7 @@
         </asp:ListView>
         <div class="clear"></div>
         <div>
-            <a href="/CompetitionsCategory?Difficulty=Easy">Виж всички</a>
+            <a href="/Codings/CompetitionsCategory?Difficulty=Easy">Виж всички</a>
         </div>
     </div>
 
@@ -57,7 +57,7 @@
         </asp:ListView>
         <div class="clear"></div>
         <div>
-            <a href="/CompetitionsCategory?Difficulty=Medium">Виж всички</a>
+            <a href="/Codings/CompetitionsCategory?Difficulty=Medium">Виж всички</a>
         </div>
     </div>
 
@@ -87,7 +87,7 @@
         </asp:ListView>
         <div class="clear"></div>
         <div>
-            <a href="/CompetitionsCategory?Difficulty=Hard">Виж всички</a>
+            <a href="/Codings/CompetitionsCategory?Difficulty=Hard">Виж всички</a>
         </div>
     </div>
 
@@ -117,7 +117,7 @@
         </asp:ListView>
         <div class="clear"></div>
         <div>
-            <a href="/CompetitionsCategory?Difficulty=VeryHard">Виж всички</a>
+            <a href="/Codings/CompetitionsCategory?Difficulty=VeryHard">Виж всички</a>
         </div>
     </div>
 </asp:Content>

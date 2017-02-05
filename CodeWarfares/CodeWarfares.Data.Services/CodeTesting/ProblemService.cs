@@ -26,6 +26,11 @@ namespace CodeWarfares.Data.Services.CodeTesting
             return this.problems.All();
         }
 
+        public IQueryable<Problem> GetAllOrderedByType(DifficultyType type)
+        {
+            return this.problems.All().Where(x => x.Difficulty == type).OrderBy(x => x.CreationTime);
+        }
+
         public IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)
         {
             if (count < 0)

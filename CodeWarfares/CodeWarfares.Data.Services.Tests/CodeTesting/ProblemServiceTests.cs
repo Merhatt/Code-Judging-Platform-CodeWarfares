@@ -37,6 +37,34 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         }
 
         [Test]
+        public void GetAllOrderedByType_ShouldReturnAll()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+            Problem problem = new Problem();
+            problem.CreationTime = DateTime.Now;
+            problem.Difficulty = DifficultyType.Easy;
+
+            Problem problem2 = new Problem();
+            problem2.CreationTime = DateTime.Now;
+            problem2.Difficulty = DifficultyType.Hard;
+
+            var problems = new List<Problem>()
+            {
+                problem,
+                problem2
+            };
+
+            problemsMock.Setup(x => x.All()).Returns(problems.AsQueryable());
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Easy).ToList();
+
+            Assert.AreEqual(1, problemsRes.Count);
+            Assert.AreSame(problem, problemsRes[0]);
+        }
+
+        [Test]
         public void GetById_ShouldReturnCorrectly()
         {
             var problemsMock = new Mock<IRepository<Problem>>();

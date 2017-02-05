@@ -107,6 +107,7 @@ namespace CodeWarfares.Web.App_Start
             kernel.Bind<IRegisterView>().To<Register>();
             kernel.Bind<IRegisterView>().To<Register>();
             kernel.Bind<ICompetitionsView>().To<Competitions>();
+            kernel.Bind<ICompetitionsCategoryView>().To<CompetitionsCategory>();
             kernel.Bind<ICodeWarfaresDbContext>().To<CodeWarfaresDbContext>().InSingletonScope();
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
 
@@ -121,6 +122,7 @@ namespace CodeWarfares.Web.App_Start
             kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>();
             kernel.Bind<ICompetitionsPresenter>().To<CompetitionsPresenter>();
             kernel.Bind<ISiteMasterPresenter>().To<SiteMasterPresenter>();
+            kernel.Bind<ICompetitionsCategoryPresenter>().To<CompetitionsCategoryPresenter>();
         }
     }
 }
