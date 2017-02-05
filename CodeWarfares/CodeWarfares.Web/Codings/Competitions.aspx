@@ -24,8 +24,100 @@
                     </a>
                 </div>
             </ItemTemplate>
-
         </asp:ListView>
         <div class="clear"></div>
+        <div>
+            <a href="/CompetitionsCategory?Difficulty=Easy">Виж всички</a>
+        </div>
+    </div>
+
+    <div class="task-group">
+        <asp:ListView ID="MediumProblems" runat="server"
+            ItemType="CodeWarfares.Data.Models.Problem">
+            <LayoutTemplate>
+                <h3>Средни Задачи</h3>
+                <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+            </LayoutTemplate>
+
+            <ItemTemplate>
+                <div class="task-description">
+                    <a href="/CompetitionProblem?Id=<%#: Item.Id %> ">
+                        <div class="task-img">
+                            <div class="up-bar">
+                                <span class="task-name"><%#: Item.Name %></span>
+                                <span class="task-points">
+                                    <img src="/Images/points.png" alt="points" />
+                                    +<%#: Item.Xp %> Точки</span>
+                            </div>
+                            <img src="<%#: Item.CoverImageUrl %>" />
+                        </div>
+                    </a>
+                </div>
+            </ItemTemplate>
+        </asp:ListView>
+        <div class="clear"></div>
+        <div>
+            <a href="/CompetitionsCategory?Difficulty=Medium">Виж всички</a>
+        </div>
+    </div>
+
+     <div class="task-group">
+        <asp:ListView ID="HardProblems" runat="server"
+            ItemType="CodeWarfares.Data.Models.Problem">
+            <LayoutTemplate>
+                <h3>Трудни Задачи</h3>
+                <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+            </LayoutTemplate>
+
+            <ItemTemplate>
+                <div class="task-description">
+                    <a href="/CompetitionProblem?Id=<%#: Item.Id %> ">
+                        <div class="task-img">
+                            <div class="up-bar">
+                                <span class="task-name"><%#: Item.Name %></span>
+                                <span class="task-points">
+                                    <img src="/Images/points.png" alt="points" />
+                                    +<%#: Item.Xp %> Точки</span>
+                            </div>
+                            <img src="<%#: Item.CoverImageUrl %>" />
+                        </div>
+                    </a>
+                </div>
+            </ItemTemplate>
+        </asp:ListView>
+        <div class="clear"></div>
+        <div>
+            <a href="/CompetitionsCategory?Difficulty=Hard">Виж всички</a>
+        </div>
+    </div>
+
+    <div class="task-group">
+        <asp:ListView ID="VeryHardProblems" runat="server"
+            ItemType="CodeWarfares.Data.Models.Problem">
+            <LayoutTemplate>
+                <h3>Много Трудни Задачи</h3>
+                <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+            </LayoutTemplate>
+
+            <ItemTemplate>
+                <div class="task-description">
+                    <a href="/CompetitionProblem?Id=<%#: Item.Id %> ">
+                        <div class="task-img">
+                            <div class="up-bar">
+                                <span class="task-name"><%#: Item.Name %></span>
+                                <span class="task-points">
+                                    <img src="/Images/points.png" alt="points" />
+                                    +<%#: Item.Xp %> Точки</span>
+                            </div>
+                            <img src="<%#: Item.CoverImageUrl %>" />
+                        </div>
+                    </a>
+                </div>
+            </ItemTemplate>
+        </asp:ListView>
+        <div class="clear"></div>
+        <div>
+            <a href="/CompetitionsCategory?Difficulty=VeryHard">Виж всички</a>
+        </div>
     </div>
 </asp:Content>

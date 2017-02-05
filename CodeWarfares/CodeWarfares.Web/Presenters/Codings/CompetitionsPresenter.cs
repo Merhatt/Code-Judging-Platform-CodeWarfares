@@ -30,6 +30,9 @@ namespace CodeWarfares.Web.Presenters.Codings
         public void Initialize(object sender, EventArgs e)
         {
             this.View.Model.EasyProblems = this.problemService.GetNewestTopFromCategory(ProblemCount, DifficultyType.Easy).ToList();
+            this.View.Model.MediumProblems = this.problemService.GetNewestTopFromCategory(ProblemCount, DifficultyType.Medium).ToList();
+            this.View.Model.HardProblems = this.problemService.GetNewestTopFromCategory(ProblemCount, DifficultyType.Hard).ToList();
+            this.View.Model.VeryHardProblems = this.problemService.GetNewestTopFromCategory(ProblemCount, DifficultyType.VeryHard).ToList();
         }
     }
 }

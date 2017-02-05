@@ -24,6 +24,15 @@ namespace CodeWarfares.Web.Codings
 
             this.EasyProblems.DataSource = this.Model.EasyProblems;
             this.EasyProblems.DataBind();
+
+            this.MediumProblems.DataSource = this.Model.MediumProblems;
+            this.MediumProblems.DataBind();
+
+            this.HardProblems.DataSource = this.Model.HardProblems;
+            this.HardProblems.DataBind();
+
+            this.VeryHardProblems.DataSource = this.Model.VeryHardProblems;
+            this.VeryHardProblems.DataBind();
         }
     }
 }
