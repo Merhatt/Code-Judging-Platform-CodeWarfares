@@ -13,12 +13,12 @@ namespace CodeWarfares.Web.Codings {
     public partial class Competitions {
         
         /// <summary>
-        /// EasyTasks control.
+        /// EasyProblems control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView EasyTasks;
+        protected global::System.Web.UI.WebControls.ListView EasyProblems;
     }
 }

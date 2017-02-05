@@ -1,5 +1,6 @@
 ﻿using CodeWarfares.Data.Contracts;
 using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Models.Enums;
 using CodeWarfares.Data.Services.CodeTesting;
 using Moq;
 using NUnit.Framework;
@@ -132,6 +133,46 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
 
             Assert.AreSame(submition, problem.Submitions.First());
             problemsMock.Verify(x => x.SaveChanges(), Times.Once());
+        }
+
+        [Test]
+        public void GetNewestTopFromCategory_CountLessThanZero_ShouldThrow()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+
+            Problem problem = new Problem();
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            Assert.Throws<ArgumentException>(() => problemService.GetNewestTopFromCategory(-1, DifficultyType.Easy));
+        }
+
+        [Test]
+        public void GetNewestTopFromCategory_ShouldReturnProblems()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+            Problem problem = new Problem();
+            problem.CreationTime = DateTime.Now;
+            problem.Difficulty = DifficultyType.Easy;
+
+            Problem problem2 = new Problem();
+            problem2.CreationTime = DateTime.Now;
+            problem2.Difficulty = DifficultyType.Hard;
+
+            var problems = new List<Problem>()
+            {
+                problem,
+                problem2
+            };
+
+            problemsMock.Setup(x => x.All()).Returns(problems.AsQueryable());
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            var problemsRes = problemService.GetNewestTopFromCategory(5, DifficultyType.Easy).ToList();
+
+            Assert.AreEqual(1, problemsRes.Count);
+            Assert.AreSame(problem, problemsRes[0]);
         }
     }
 }

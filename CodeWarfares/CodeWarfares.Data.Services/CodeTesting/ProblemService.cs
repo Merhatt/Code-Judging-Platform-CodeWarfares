@@ -1,5 +1,6 @@
 ﻿using CodeWarfares.Data.Contracts;
 using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Models.Enums;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using System;
 using System.Linq;
@@ -23,6 +24,16 @@ namespace CodeWarfares.Data.Services.CodeTesting
         public IQueryable<Problem> GetAll()
         {
             return this.problems.All();
+        }
+
+        public IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)
+        {
+            if (count < 0)
+            {
+                throw new ArgumentException("count cannot be less than 0!");
+            }
+
+            return this.problems.All().Where(x => x.Difficulty == type).OrderBy(x => x.CreationTime).Take(count);
         }
 
         public Problem GetById(int id)

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Models.Enums;
 
 namespace CodeWarfares.Data.Services.Contracts.CodeTesting
 {
@@ -10,5 +11,6 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         void DeleteById(int id);
         IQueryable<Problem> GetAll();
         Problem GetById(int id);
+        IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type);
     }
 }

@@ -21,8 +21,9 @@ namespace CodeWarfares.Data.Services.CodeTesting
         private ISubmitionFactory submitionFactory;
         private IRepository<Submition> submitions;
         private ITestCompletedFactory testCompletedFactory;
+        private IUserServices userServices;
 
-        public CodeSubmitionService(IRepository<Submition> submitions, ICodeTestingServices codeTestingService, ISubmitionFactory submitionFactory, ITestCompletedFactory testCompletedFactory, IPassingTestsChecker passingTestsChecker)
+        public CodeSubmitionService(IRepository<Submition> submitions, ICodeTestingServices codeTestingService, ISubmitionFactory submitionFactory, ITestCompletedFactory testCompletedFactory, IPassingTestsChecker passingTestsChecker, IUserServices userServices)
         {
             if (submitions == null)
             {
@@ -44,12 +45,17 @@ namespace CodeWarfares.Data.Services.CodeTesting
             {
                 throw new ArgumentNullException("passingTestsChecker cannot be null");
             }
+            else if (userServices == null)
+            {
+                throw new ArgumentNullException("userServices cannot be null");
+            }
 
             this.codeTestingService = codeTestingService;
             this.submitionFactory = submitionFactory;
             this.submitions = submitions;
             this.testCompletedFactory = testCompletedFactory;
             this.passingTestsChecker = passingTestsChecker;
+            this.userServices = userServices;
         }
 
         public void Create(Submition submition)
@@ -90,6 +96,8 @@ namespace CodeWarfares.Data.Services.CodeTesting
             this.Create(submition);
 
             string[] testCases = problem.Tests.Select(t => t.TestParameter).ToArray();
+
+            this.userServices.AddProblemToUser(user.Id, problem);
 
             SubmitionModel model = this.codeTestingService.TestCode(source, laungage, testCases);
 

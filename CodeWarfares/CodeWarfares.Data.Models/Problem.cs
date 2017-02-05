@@ -20,6 +20,7 @@ namespace CodeWarfares.Data.Models
             this.submition = new HashSet<Submition>();
             this.tests = new HashSet<Test>();
             this.users = new HashSet<User>();
+            this.CreationTime = DateTime.Now;
         }
         
         public int Id { get; set; }
@@ -37,7 +38,11 @@ namespace CodeWarfares.Data.Models
 
         public int TestsCount { get; set; }
 
+        public int Xp { get; set; }
+
         public string CoverImageUrl { get; set; }
+
+        public DateTime CreationTime { get; set; }
 
         public DifficultyType Difficulty { get; set; }
 

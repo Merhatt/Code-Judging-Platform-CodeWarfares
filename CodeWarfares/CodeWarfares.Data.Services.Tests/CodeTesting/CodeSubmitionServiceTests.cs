@@ -2,6 +2,7 @@
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Models.Factories;
 using CodeWarfares.Data.Services.CodeTesting;
+using CodeWarfares.Data.Services.Contracts.Account;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using CodeWarfares.Data.Services.Enums;
 using CodeWarfares.Utils.JsonModels;
@@ -26,8 +27,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(null, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object));
+            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(null, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object));
         }
 
         [Test]
@@ -38,8 +40,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, null, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object));
+            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, null, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object));
         }
 
         [Test]
@@ -50,8 +53,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, null, testCompleteFactoryMock.Object, passingTestCheckerMock.Object));
+            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, null, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object));
         }
 
         [Test]
@@ -62,8 +66,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, null, passingTestCheckerMock.Object));
+            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, null, passingTestCheckerMock.Object, userServicesMock.Object));
         }
 
         [Test]
@@ -74,8 +79,22 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, null));
+            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, null, userServicesMock.Object));
+        }
+
+        [Test]
+        public void Constructor_NullUserServices_ShouldThrow()
+        {
+            var repositoryMock = new Mock<IRepository<Submition>>();
+            var codeTestingServicesMock = new Mock<ICodeTestingServices>();
+            var submitionFactoryMock = new Mock<ISubmitionFactory>();
+            var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
+
+            Assert.Throws<ArgumentNullException>(() => new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, null));
         }
 
         [Test]
@@ -86,8 +105,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => codeSubmitionService.Create(null));
         }
@@ -100,8 +120,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
             var submition = new Submition();
 
             codeSubmitionService.Create(submition);
@@ -118,8 +139,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
 
             User user = new User();
             Problem problem = new Problem();
@@ -135,8 +157,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
 
             User user = new User();
             Problem problem = new Problem();
@@ -152,8 +175,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
 
             User user = new User();
             Problem problem = new Problem();
@@ -169,12 +193,13 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
             Submition submition = new Submition();
 
             submitionFactoryMock.Setup(x => x.Create()).Returns(submition);
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
 
             User user = new User();
             Problem problem = new Problem();
@@ -207,12 +232,13 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var submitionFactoryMock = new Mock<ISubmitionFactory>();
             var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+            var userServicesMock = new Mock<IUserServices>();
 
             Submition submition = new Submition();
 
             submitionFactoryMock.Setup(x => x.Create()).Returns(submition);
 
-            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object);
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, passingTestCheckerMock.Object, userServicesMock.Object);
 
             User user = new User();
             Problem problem = new Problem();

@@ -58,6 +58,49 @@ input[type="select"] {
     height: 270px;
 }
 
+.task-description {
+    float: left;
+    margin-right: 20px;
+}
+
+.clear {
+    clear: both;
+}
+
+.task-img>img {
+    width: 250px;
+    height: 180px;
+}
+
+.up-bar {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 40px;
+    background-color: #2D3649;
+    padding-top: 10px;
+    clear: both;
+}
+
+.task-name {
+    display: inline-block;
+    margin-left: 15px;
+    color: white;
+    float: left;
+}
+
+.task-points {
+    display: inline-block;
+    margin-right: 15px;
+    color: #F2BB13;
+    float: right;
+}
+
+.task-points>img {
+    width: 20px;
+    height: 20px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {

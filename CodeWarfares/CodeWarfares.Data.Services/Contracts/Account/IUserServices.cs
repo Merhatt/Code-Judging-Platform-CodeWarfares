@@ -11,6 +11,8 @@ namespace CodeWarfares.Data.Services.Contracts.Account
     {
         void AddSubmitionToUser(string userId, Submition submition);
 
+        void AddProblemToUser(string userId, Problem problem);
+
         IQueryable<User> GetAll();
     }
 }

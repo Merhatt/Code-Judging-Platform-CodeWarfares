@@ -22,6 +22,11 @@ namespace CodeWarfares.Web.App_Start
     using Presenters.MasterPages;
     using WebFormsMvp.Binder;
     using NinjectModules;
+    using Presenters.Contracts.Codings;
+    using Presenters.Codings;
+    using Account;
+    using Views.Contracts.Coding;
+    using Codings;
 
     public static class NinjectWebCommon
     {
@@ -98,23 +103,23 @@ namespace CodeWarfares.Web.App_Start
                .BindDefaultInterfaces());
 
             //Classes and Intefaces
-            kernel.Bind<ILoginView>().To<Account.Login>();
+            kernel.Bind<ILoginView>().To<Login>();
+            kernel.Bind<IRegisterView>().To<Register>();
+            kernel.Bind<IRegisterView>().To<Register>();
+            kernel.Bind<ICompetitionsView>().To<Competitions>();
             kernel.Bind<ICodeWarfaresDbContext>().To<CodeWarfaresDbContext>().InSingletonScope();
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
 
 
             //Factories
-            //kernel.Bind<ILoginPresenterFactory>().ToFactory().InRequestScope();
             kernel.Bind<IUserFactory>().ToFactory().InSingletonScope();
-            //kernel.Bind<IRegisterPresenterFactory>().ToFactory().InRequestScope();
             kernel.Bind<ISubmitionFactory>().ToFactory().InSingletonScope();
             kernel.Bind<ITestCompletedFactory>().ToFactory().InSingletonScope();
-            //kernel.Bind<ISiteMasterPresenterFactory>().ToFactory().InSingletonScope();
 
             //Presenters
             kernel.Bind<ILoginPresenter>().To<LoginPresenter>();
             kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>();
-                       //.WithConstructorArgument("userFactory", kernel.Get<IUserFactory>());
+            kernel.Bind<ICompetitionsPresenter>().To<CompetitionsPresenter>();
             kernel.Bind<ISiteMasterPresenter>().To<SiteMasterPresenter>();
         }
     }

@@ -1,17 +1,29 @@
-﻿using System;
+﻿using CodeWarfares.Data.Models;
+using CodeWarfares.Web.Presenters.Codings;
+using CodeWarfares.Web.Views.Contracts.Coding;
+using CodeWarfares.Web.Views.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebFormsMvp;
+using WebFormsMvp.Web;
 
 namespace CodeWarfares.Web.Codings
 {
-    public partial class Competitions : System.Web.UI.Page
+    [PresenterBinding(typeof(CompetitionsPresenter))]
+    public partial class Competitions : MvpPage<CompetitionsViewModel>, ICompetitionsView
     {
+        public event EventHandler MyInit;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.MyInit?.Invoke(sender, e);
 
+            this.EasyProblems.DataSource = this.Model.EasyProblems;
+            this.EasyProblems.DataBind();
         }
     }
 }
