@@ -24,7 +24,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<IPresenter>().ToMethod(this.GetPresenter).NamedLikeFactoryMethod((ICustomPresenterFactory factory) => factory.GetPresenter(null, null));
         }
 
-        private IPresenter GetPresenter(IContext context)
+        public IPresenter GetPresenter(IContext context)
         {
             var parameters = context.Parameters.ToList();
 

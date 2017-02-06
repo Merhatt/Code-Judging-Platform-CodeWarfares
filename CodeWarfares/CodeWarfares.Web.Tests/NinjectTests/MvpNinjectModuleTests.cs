@@ -2,6 +2,8 @@
 using CodeWarfares.Web.App_Start.NinjectModules;
 using Moq;
 using Ninject;
+using Ninject.Activation;
+using Ninject.Parameters;
 using Ninject.Syntax;
 using NUnit.Framework;
 using System;
@@ -51,7 +53,19 @@ namespace CodeWarfares.Web.Tests.NinjectTests
             [Test]
             public void GetPresenter_ShouldReturnCorrectly()
             {
+                var module = new MvpNinjectModule();
 
+                var contextMock = new Mock<IContext>();
+
+                var parameters = new List<IParameter>();
+                var parameterOneMock = new Mock<IParameter>();
+                var parameterTwoMock = new Mock<IParameter>();
+                parameters.Add(parameterOneMock.Object);
+                parameters.Add(parameterTwoMock.Object);
+
+                contextMock.SetupGet(x => x.Parameters).Returns(parameters);
+
+                Assert.Throws<ArgumentNullException>(() => module.GetPresenter(contextMock.Object));
             }
         }
     }
