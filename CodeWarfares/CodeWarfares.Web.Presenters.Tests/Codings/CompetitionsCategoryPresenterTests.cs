@@ -52,6 +52,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             presenter.Initialize("sender", args);
 
             Assert.AreEqual(2, model.Problems.Count());
+            Assert.AreEqual("Лесни Задачи", model.CategoryTitle);
             serviceMock.Verify(x => x.GetAllOrderedByType(DifficultyType.Easy), Times.Once());
         }
 
@@ -81,6 +82,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             presenter.Initialize("sender", args);
 
             Assert.AreEqual(2, model.Problems.Count());
+            Assert.AreEqual("Средни Задачи", model.CategoryTitle);
             serviceMock.Verify(x => x.GetAllOrderedByType(DifficultyType.Medium), Times.Once());
         }
 
@@ -110,6 +112,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             presenter.Initialize("sender", args);
 
             Assert.AreEqual(2, model.Problems.Count());
+            Assert.AreEqual("Трудни Задачи", model.CategoryTitle);
             serviceMock.Verify(x => x.GetAllOrderedByType(DifficultyType.Hard), Times.Once());
         }
 
@@ -139,6 +142,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             presenter.Initialize("sender", args);
 
             Assert.AreEqual(2, model.Problems.Count());
+            Assert.AreEqual("Много Трудни Задачи", model.CategoryTitle);
             serviceMock.Verify(x => x.GetAllOrderedByType(DifficultyType.VeryHard), Times.Once());
         }
     }

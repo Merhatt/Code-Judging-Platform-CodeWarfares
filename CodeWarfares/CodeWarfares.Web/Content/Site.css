@@ -101,6 +101,46 @@ input[type="select"] {
     height: 20px;
 }
 
+.table-problems {
+    border: 0px !important;
+}
+
+.white-link {
+    color: white !important;
+}
+
+.white-link:hover {
+    color: yellowgreen !important;
+}
+
+pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.page-list {
+    color: black !important;
+    float: left !important;
+    padding: 8px 16px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    cursor: pointer;
+}
+
+.page-current {
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.page-list:hover {
+    background-color: #ddd;
+}
+
+.tasks-page {
+    margin-bottom: 25px !important;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {

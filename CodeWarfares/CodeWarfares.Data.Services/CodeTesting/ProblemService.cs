@@ -3,6 +3,7 @@ using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Models.Enums;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeWarfares.Data.Services.CodeTesting
@@ -28,7 +29,21 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public IQueryable<Problem> GetAllOrderedByType(DifficultyType type)
         {
-            return this.problems.All().Where(x => x.Difficulty == type).OrderBy(x => x.CreationTime);
+            var problemsAll = this.problems.All();
+
+            if (problemsAll == null || problemsAll.Count() == 0)
+            {
+                return new List<Problem>().AsQueryable();
+            }
+
+            problemsAll = problemsAll.Where(x => x.Difficulty == type);
+
+            if (problemsAll == null || problemsAll.Count() == 0)
+            {
+                return new List<Problem>().AsQueryable();
+            }
+
+            return problemsAll.OrderBy(x => x.CreationTime);
         }
 
         public IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)

@@ -37,6 +37,79 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         }
 
         [Test]
+        public void GetAllOrderedByType_NullAll_ShouldReturnEmptyQueriable()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+            Problem problem = new Problem();
+            problem.CreationTime = DateTime.Now;
+            problem.Difficulty = DifficultyType.Easy;
+
+            Problem problem2 = new Problem();
+            problem2.CreationTime = DateTime.Now;
+            problem2.Difficulty = DifficultyType.Hard;
+
+            IQueryable<Problem> problems = null;
+
+            problemsMock.Setup(x => x.All()).Returns(problems);
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Easy).ToList();
+
+            Assert.AreEqual(0, problemsRes.Count);
+        }
+
+        [Test]
+        public void GetAllOrderedByType_EmptyAll_ShouldReturnEmptyQueriable()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+            Problem problem = new Problem();
+            problem.CreationTime = DateTime.Now;
+            problem.Difficulty = DifficultyType.Easy;
+
+            Problem problem2 = new Problem();
+            problem2.CreationTime = DateTime.Now;
+            problem2.Difficulty = DifficultyType.Hard;
+
+            IQueryable<Problem> problems = new List<Problem>().AsQueryable();
+
+            problemsMock.Setup(x => x.All()).Returns(problems);
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Easy).ToList();
+
+            Assert.AreEqual(0, problemsRes.Count);
+        }
+
+        [Test]
+        public void GetAllOrderedByType_ZeroInCategory_ShouldReturnEmptyIQueriable()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+            Problem problem = new Problem();
+            problem.CreationTime = DateTime.Now;
+            problem.Difficulty = DifficultyType.Easy;
+
+            Problem problem2 = new Problem();
+            problem2.CreationTime = DateTime.Now;
+            problem2.Difficulty = DifficultyType.Hard;
+
+            var problems = new List<Problem>()
+            {
+                problem,
+                problem2
+            };
+
+            problemsMock.Setup(x => x.All()).Returns(problems.AsQueryable());
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Medium).ToList();
+
+            Assert.AreEqual(0, problemsRes.Count);
+        }
+
+        [Test]
         public void GetAllOrderedByType_ShouldReturnAll()
         {
             var problemsMock = new Mock<IRepository<Problem>>();

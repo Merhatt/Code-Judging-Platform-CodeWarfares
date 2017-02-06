@@ -11,6 +11,7 @@ using CodeWarfares.Web.EventArguments;
 using CodeWarfares.Data.Models.Enums;
 using WebFormsMvp;
 using CodeWarfares.Web.Presenters.Codings;
+using CodeWarfares.Data.Models;
 
 namespace CodeWarfares.Web.Codings
 {
@@ -19,20 +20,16 @@ namespace CodeWarfares.Web.Codings
     {
         public event EventHandler<CompetitionsCategoryEventArgs> MyInit;
 
+        public string CategoryName { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             CompetitionsCategoryEventArgs args = new CompetitionsCategoryEventArgs(this.Request.QueryString["Difficulty"]);
 
             this.MyInit.Invoke(sender, args);
-            this.GridViewProblems.DataSource = this.Model.Problems;
-            this.GridViewProblems.DataBind();
-        }
-
-        protected void GridViewProblems_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            this.GridViewProblems.PageIndex = e.NewPageIndex;
-            this.GridViewProblems.DataSource = this.Model.Problems;
-            this.GridViewProblems.DataBind();
+            this.Problems.DataSource = this.Model.Problems;
+            this.Problems.DataBind();
+            this.CategoryName = this.Model.CategoryTitle;
         }
     }
 }
