@@ -288,7 +288,14 @@
     <Compile Include="App_Start\DbConfig.cs" />
     <Compile Include="App_Start\Factories\ICustomPresenterFactory.cs" />
     <Compile Include="App_Start\Factories\WebFormsMvpPresenterFactory.cs" />
+    <Compile Include="App_Start\NinjectModules\DateModelsNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\DbNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\FactoriesNinjectModule.cs" />
     <Compile Include="App_Start\NinjectModules\MvpNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\PresentersNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\ServicesNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\UtilsNinjectModule.cs" />
+    <Compile Include="App_Start\NinjectModules\ViewsNinjectModule.cs" />
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -317,16 +324,19 @@
     <Compile Include="EventArguments\CompetitionsCategoryEventArgs.cs" />
     <Compile Include="EventArguments\MasterPageInitEventArgs.cs" />
     <Compile Include="EventArguments\MasterPageValidateTokenEventArgs.cs" />
+    <Compile Include="EventArguments\OpenAuthProvidersInitEventArgs.cs" />
     <Compile Include="EventArguments\RegisterEventArgs.cs" />
     <Compile Include="EventArguments\SignInEventArgs.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Presenters\Account\LoginPresenter.cs" />
+    <Compile Include="Presenters\Account\OpenAuthProvidersPresenter.cs" />
     <Compile Include="Presenters\Account\RegisterPresenter.cs" />
     <Compile Include="Presenters\Codings\CompetitionsCategoryPresenter.cs" />
     <Compile Include="Presenters\Codings\CompetitionsPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\ILoginPresenter.cs" />
+    <Compile Include="Presenters\Contracts\Account\IOpenAuthProvidersPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\IRegisterPresenter.cs" />
     <Compile Include="Presenters\Contracts\Codings\ICompetitionsCategoryPresenter.cs" />
     <Compile Include="Presenters\Contracts\Codings\ICompetitionsPresenter.cs" />
@@ -350,6 +360,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
     <Compile Include="Views\Contracts\Account\ILoginView.cs" />
+    <Compile Include="Views\Contracts\Account\IOpenAuthProvidersView.cs" />
     <Compile Include="Views\Contracts\Account\IRegisterView.cs" />
     <Compile Include="Views\Contracts\Coding\ICompetitionsCategoryView.cs" />
     <Compile Include="Views\Contracts\Coding\ICompetitionsView.cs" />
@@ -357,6 +368,7 @@
     <Compile Include="Views\Models\CompetitionsCategoryViewModel.cs" />
     <Compile Include="Views\Models\CompetitionsViewModel.cs" />
     <Compile Include="Views\Models\LoginViewModel.cs" />
+    <Compile Include="Views\Models\OpenAuthProvidersModel.cs" />
     <Compile Include="Views\Models\RegisterViewModel.cs" />
     <Compile Include="Views\Models\SiteMasterModel.cs" />
   </ItemGroup>

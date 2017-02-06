@@ -51,8 +51,18 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="Moq, Version=4.5.30.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.5.30\lib\net45\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -64,6 +74,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
     <Reference Include="WebFormsMvp, Version=1.4.5.0, Culture=neutral, PublicKeyToken=537f18701145dff0, processorArchitecture=MSIL">
       <HintPath>..\packages\WebFormsMvp.1.4.5.0\lib\WebFormsMvp.dll</HintPath>
       <Private>True</Private>
@@ -82,10 +93,40 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CompetitionsCategoryViewTests.cs" />
+    <Compile Include="NinjectTests\DateModelsNinjectModuleTests.cs" />
+    <Compile Include="NinjectTests\DbNinjectModuleTests.cs" />
+    <Compile Include="NinjectTests\FactoriesNinjectModuleTests.cs" />
+    <Compile Include="NinjectTests\MvpNinjectModuleTests.cs" />
+    <Compile Include="NinjectTests\ServicesNinjectModuleTests.cs" />
+    <Compile Include="NinjectTests\UtilsNinjectModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeWarfares.Data.Models\CodeWarfares.Data.Models.csproj">
+      <Project>{71a135fd-afe0-41c9-b48d-f01a544b2eef}</Project>
+      <Name>CodeWarfares.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Data.Services\CodeWarfares.Data.Services.csproj">
+      <Project>{bd006d4c-d481-4b9b-a2a2-4505876ca0e3}</Project>
+      <Name>CodeWarfares.Data.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Data\CodeWarfares.Data.csproj">
+      <Project>{c3ca7aa6-bb80-41fe-9d81-294c332bfcb7}</Project>
+      <Name>CodeWarfares.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Utils\CodeWarfares.Utils.csproj">
+      <Project>{a2a77190-e4ef-4c67-8b34-950786c2a89c}</Project>
+      <Name>CodeWarfares.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeWarfares.Web\CodeWarfares.Web.csproj">
+      <Project>{0B9587D8-FD24-4B05-8728-C6915E38AFEA}</Project>
+      <Name>CodeWarfares.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

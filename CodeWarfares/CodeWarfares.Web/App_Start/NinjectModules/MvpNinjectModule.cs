@@ -17,11 +17,11 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
     {
         public override void Load()
         {
-            this.Bind<IPresenterFactory>().To<WebFormsMvpPresenterFactory>().InSingletonScope();
+            this.Kernel.Bind<IPresenterFactory>().To<WebFormsMvpPresenterFactory>().InSingletonScope();
 
-            this.Bind<ICustomPresenterFactory>().ToFactory().InSingletonScope();
+            this.Kernel.Bind<ICustomPresenterFactory>().ToFactory().InSingletonScope();
 
-            this.Bind<IPresenter>().ToMethod(this.GetPresenter).NamedLikeFactoryMethod((ICustomPresenterFactory factory) => factory.GetPresenter(null, null));
+            this.Kernel.Bind<IPresenter>().ToMethod(this.GetPresenter).NamedLikeFactoryMethod((ICustomPresenterFactory factory) => factory.GetPresenter(null, null));
         }
 
         private IPresenter GetPresenter(IContext context)

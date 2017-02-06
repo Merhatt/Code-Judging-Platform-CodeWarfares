@@ -22,11 +22,13 @@ namespace CodeWarfares.Web.Codings
 
         public string CategoryName { get; set; }
 
-        protected void Page_Load(object sender, EventArgs e)
+        public void Page_Load(object sender, EventArgs e)
         {
-            CompetitionsCategoryEventArgs args = new CompetitionsCategoryEventArgs(this.Request.QueryString["Difficulty"]);
+            string difficulty = this.Request.QueryString["Difficulty"];
 
-            this.MyInit.Invoke(sender, args);
+            CompetitionsCategoryEventArgs args = new CompetitionsCategoryEventArgs(difficulty);
+
+            this.MyInit?.Invoke(sender, args);
             this.Problems.DataSource = this.Model.Problems;
             this.Problems.DataBind();
             this.CategoryName = this.Model.CategoryTitle;

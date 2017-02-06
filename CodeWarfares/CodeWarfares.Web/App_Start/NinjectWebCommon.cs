@@ -8,25 +8,8 @@ namespace CodeWarfares.Web.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
-    using Ninject.Extensions.Factory;
-    using Ninject.Extensions.Conventions;
-    using Views.Contracts.Account;
-    using Presenters.Account.Contracts;
-    using Presenters.Account;
-    using Data.Models.Factories;
-    using Presenters.Contracts.Account;
-    using Data.Contracts;
-    using Data.Repositories;
-    using Data;
-    using Presenters.Contracts.MasterPages;
-    using Presenters.MasterPages;
     using WebFormsMvp.Binder;
     using NinjectModules;
-    using Presenters.Contracts.Codings;
-    using Presenters.Codings;
-    using Account;
-    using Views.Contracts.Coding;
-    using Codings;
 
     public static class NinjectWebCommon
     {
@@ -86,43 +69,19 @@ namespace CodeWarfares.Web.App_Start
 
             PresenterBinder.Factory = kernel.Get<IPresenterFactory>();
 
-            kernel.Bind(b => b.From("CodeWarfares.Data.Models")
-                .SelectAllClasses()
-                .BindDefaultInterfaces());
+            kernel.Load(new DateModelsNinjectModule());
 
-            kernel.Bind(b => b.From("CodeWarfares.Data.Services")
-                .SelectAllClasses()
-                .BindDefaultInterfaces());
+            kernel.Load(new ServicesNinjectModule());
 
-            kernel.Bind(b => b.From("CodeWarfares.Data.Web")
-               .SelectAllClasses()
-               .BindDefaultInterfaces());
+            kernel.Load(new UtilsNinjectModule());
 
-            kernel.Bind(b => b.From("CodeWarfares.Utils")
-               .SelectAllClasses()
-               .BindDefaultInterfaces());
+            kernel.Load(new ViewsNinjectModule());
 
-            //Classes and Intefaces
-            kernel.Bind<ILoginView>().To<Login>();
-            kernel.Bind<IRegisterView>().To<Register>();
-            kernel.Bind<IRegisterView>().To<Register>();
-            kernel.Bind<ICompetitionsView>().To<Competitions>();
-            kernel.Bind<ICompetitionsCategoryView>().To<CompetitionsCategory>();
-            kernel.Bind<ICodeWarfaresDbContext>().To<CodeWarfaresDbContext>().InSingletonScope();
-            kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+            kernel.Load(new DbNinjectModule());
 
+            kernel.Load(new FactoriesNinjectModule());
 
-            //Factories
-            kernel.Bind<IUserFactory>().ToFactory().InSingletonScope();
-            kernel.Bind<ISubmitionFactory>().ToFactory().InSingletonScope();
-            kernel.Bind<ITestCompletedFactory>().ToFactory().InSingletonScope();
-
-            //Presenters
-            kernel.Bind<ILoginPresenter>().To<LoginPresenter>();
-            kernel.Bind<IRegisterPresenter>().To<RegisterPresenter>();
-            kernel.Bind<ICompetitionsPresenter>().To<CompetitionsPresenter>();
-            kernel.Bind<ISiteMasterPresenter>().To<SiteMasterPresenter>();
-            kernel.Bind<ICompetitionsCategoryPresenter>().To<CompetitionsCategoryPresenter>();
+            kernel.Load(new PresentersNinjectModule());
         }
     }
 }

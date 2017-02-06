@@ -27,7 +27,7 @@ namespace CodeWarfares.Data.Services.Account
 
         public bool SignIn(string userName, string password, bool isPersistent, bool shouldLockout)
         {
-            var signedIn = this.PasswordSignIn<User, string>(userName, password, isPersistent, shouldLockout);
+            var signedIn = this.PasswordSignIn(userName, password, isPersistent, shouldLockout);
 
             if (signedIn == SignInStatus.Success)
             {

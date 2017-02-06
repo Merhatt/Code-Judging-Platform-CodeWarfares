@@ -71,6 +71,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Account\LoginPresenterTests.cs" />
+    <Compile Include="Account\OpenAuthProvidersPresenterTests.cs" />
     <Compile Include="Account\RegisterPresenterTests.cs" />
     <Compile Include="Codings\CompetitionsCategoryPresenterTests.cs" />
     <Compile Include="Codings\CompetitionsPresenterTests.cs" />
