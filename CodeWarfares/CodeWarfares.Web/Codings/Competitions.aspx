@@ -11,7 +11,7 @@
 
             <ItemTemplate>
                 <div class="task-description">
-                    <a href="/CompetitionProblem?Id=<%#: Item.Id %> ">
+                    <a href="/Codings/CompetitionProblem?Id=<%#: Item.Id %> ">
                         <div class="task-img">
                             <div class="up-bar">
                                 <span class="task-name"><%#: Item.Name %></span>

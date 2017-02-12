@@ -18,6 +18,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<ICompetitionsCategoryView>().To<CompetitionsCategory>();
             this.Kernel.Bind<ISiteMaster>().To<SiteMaster>();
             this.Kernel.Bind<IOpenAuthProvidersView>().To<OpenAuthProviders>();
+            this.Kernel.Bind<ICompetitionProblemView>().To<CompetitionProblem>();
         }
     }
 }

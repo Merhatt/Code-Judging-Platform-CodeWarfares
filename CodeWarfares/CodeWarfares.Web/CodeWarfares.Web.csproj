@@ -205,6 +205,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Codings\CompetitionProblem.aspx" />
     <Content Include="Codings\Competitions.aspx" />
     <Content Include="Codings\CompetitionsCategory.aspx" />
     <Content Include="Content\bootstrap.css" />
@@ -300,6 +301,13 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Codings\CompetitionProblem.aspx.cs">
+      <DependentUpon>CompetitionProblem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Codings\CompetitionProblem.aspx.designer.cs">
+      <DependentUpon>CompetitionProblem.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Codings\Competitions.aspx.cs">
       <DependentUpon>Competitions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -321,11 +329,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EventArguments\CompetitionProblemInitEventArgs.cs" />
     <Compile Include="EventArguments\CompetitionsCategoryEventArgs.cs" />
     <Compile Include="EventArguments\MasterPageInitEventArgs.cs" />
     <Compile Include="EventArguments\MasterPageValidateTokenEventArgs.cs" />
     <Compile Include="EventArguments\OpenAuthProvidersInitEventArgs.cs" />
     <Compile Include="EventArguments\RegisterEventArgs.cs" />
+    <Compile Include="EventArguments\SendTaskEventArgs.cs" />
     <Compile Include="EventArguments\SignInEventArgs.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -333,11 +343,13 @@
     <Compile Include="Presenters\Account\LoginPresenter.cs" />
     <Compile Include="Presenters\Account\OpenAuthProvidersPresenter.cs" />
     <Compile Include="Presenters\Account\RegisterPresenter.cs" />
+    <Compile Include="Presenters\Codings\CompetitionProbelmPresenter.cs" />
     <Compile Include="Presenters\Codings\CompetitionsCategoryPresenter.cs" />
     <Compile Include="Presenters\Codings\CompetitionsPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\ILoginPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\IOpenAuthProvidersPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\IRegisterPresenter.cs" />
+    <Compile Include="Presenters\Contracts\Codings\ICompetitionProbelmPresenter.cs" />
     <Compile Include="Presenters\Contracts\Codings\ICompetitionsCategoryPresenter.cs" />
     <Compile Include="Presenters\Contracts\Codings\ICompetitionsPresenter.cs" />
     <Compile Include="Presenters\Contracts\MasterPages\ISiteMasterPresenter.cs" />
@@ -362,9 +374,11 @@
     <Compile Include="Views\Contracts\Account\ILoginView.cs" />
     <Compile Include="Views\Contracts\Account\IOpenAuthProvidersView.cs" />
     <Compile Include="Views\Contracts\Account\IRegisterView.cs" />
+    <Compile Include="Views\Contracts\Coding\ICompetitionProblemView.cs" />
     <Compile Include="Views\Contracts\Coding\ICompetitionsCategoryView.cs" />
     <Compile Include="Views\Contracts\Coding\ICompetitionsView.cs" />
     <Compile Include="Views\Contracts\MasterPages\ISiteMaster.cs" />
+    <Compile Include="Views\Models\CompetitionProblemViewModel.cs" />
     <Compile Include="Views\Models\CompetitionsCategoryViewModel.cs" />
     <Compile Include="Views\Models\CompetitionsViewModel.cs" />
     <Compile Include="Views\Models\LoginViewModel.cs" />
