@@ -20,9 +20,9 @@ namespace CodeWarfares.Data.Models
 
         public int Id { get; set; }
 
-        public bool Finished { get; set; }      
+        public int LaungageId { get; set; }
 
-        public int TestCounts { get; set; }
+        public bool Finished { get; set; }  
 
         public string Code { get; set; }
 
@@ -31,6 +31,8 @@ namespace CodeWarfares.Data.Models
         public string CompileMessage { get; set; }
 
         public DateTime SubmitionTime { get; set; }
+
+        public double CompletedPercentage { get; set; }
 
         public virtual ICollection<TestCompleted> CompletedTests { get { return this.completedTests; } set { this.completedTests = value; } }
 

@@ -30,7 +30,7 @@ namespace CodeWarfares.Data.Models.Tests
             test.SubmitionId = submitionId;
             test.Time = time;
             test.Error = error;
-            test.Correct = correct;
+            test.IsCorrect = correct;
 
             Assert.AreEqual(test.Id, id);
             Assert.AreEqual(test.Memory, memory);
@@ -38,7 +38,7 @@ namespace CodeWarfares.Data.Models.Tests
             Assert.AreEqual(test.SubmitionId, submitionId);
             Assert.AreEqual(test.Time, time);
             Assert.AreEqual(test.Error, error);
-            Assert.AreEqual(test.Correct, correct);
+            Assert.AreEqual(test.IsCorrect, correct);
             Assert.AreEqual(test.Result, result);
         }
     }

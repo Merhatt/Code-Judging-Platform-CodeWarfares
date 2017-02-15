@@ -9,37 +9,23 @@ namespace CodeWarfares.Utils.PassingTests
 {
     public class TrimPassingTestsChecker : IPassingTestsChecker
     {
-        public bool[] GetPassingTests(Submition submition, Problem problem)
+        public bool IsPassingTest(Problem problem, TestCompleted testCompleted)
         {
-            if (submition == null)
+            if (problem == null)
             {
-                throw new NullReferenceException("Submition cannot be null");
-            }
-            else if (problem == null)
-            {
-                throw new NullReferenceException("Problem cannot be null");
+                throw new NullReferenceException("problem cannot be null");
             }
 
-            bool[] passingTests = new bool[problem.TestsCount];
-
-            string[] correctAnswers = problem.Tests.Select(t => t.CorrectAnswer).ToArray();
-
-            double maxTime = problem.MaxTime;
-            long maxMemory = problem.MaxMemory;
-
-            TestCompleted[] recivedAnswers = submition.CompletedTests.ToArray();
-
-            for (int i = 0; i < problem.TestsCount; i++)
+            if (testCompleted == null)
             {
-                if (correctAnswers[i].Trim() == recivedAnswers[i].Result.Trim() &&
-                    maxTime >= recivedAnswers[i].Time &&
-                    maxMemory >= recivedAnswers[i].Memory)
-                {
-                    passingTests[i] = true;
-                }
+                throw new NullReferenceException("testCompleted cannot be null");
             }
 
-            return passingTests;
+            bool isTrueAnswer = testCompleted.Result.Trim() == testCompleted.ExpectedResult.Trim() &&
+                                testCompleted.Memory <= problem.MaxMemory &&
+                                testCompleted.Time <= problem.MaxTime;
+
+            return isTrueAnswer;
         }
     }
 }

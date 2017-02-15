@@ -14,5 +14,7 @@ namespace CodeWarfares.Data.Services.Contracts.Account
         void AddProblemToUser(string userId, Problem problem);
 
         IQueryable<User> GetAll();
+
+        User GetByUsername(string username);
     }
 }

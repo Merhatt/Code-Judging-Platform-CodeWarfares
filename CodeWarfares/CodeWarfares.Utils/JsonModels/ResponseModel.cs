@@ -9,7 +9,7 @@ namespace CodeWarfares.Utils.JsonModels
 {
     public class ResponseModel
     {
-        [JsonProperty("result")]
-        public SubmitionModel Model { get; set; }
+        [JsonProperty("id")]
+        public string Id { get; set; }
     }
 }

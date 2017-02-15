@@ -23,7 +23,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<ISiteMasterPresenter>().To<SiteMasterPresenter>();
             this.Kernel.Bind<IOpenAuthProvidersPresenter>().To<OpenAuthProvidersPresenter>();
             this.Kernel.Bind<ICompetitionsCategoryPresenter>().To<CompetitionsCategoryPresenter>();
-            this.Kernel.Bind<ICompetitionProbelmPresenter>().To<CompetitionProbelmPresenter>();
+            this.Kernel.Bind<ICompetitionProblemPresenter>().To<CompetitionProblemPresenter>();
         }
     }
 }

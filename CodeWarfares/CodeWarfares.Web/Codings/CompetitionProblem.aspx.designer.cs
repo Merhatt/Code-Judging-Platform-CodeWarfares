@@ -56,5 +56,23 @@ namespace CodeWarfares.Web.Codings {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropdownLaungages;
+        
+        /// <summary>
+        /// UpdatePanelCountriesTowns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelCountriesTowns;
+        
+        /// <summary>
+        /// SubmitionsGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView SubmitionsGridView;
     }
 }

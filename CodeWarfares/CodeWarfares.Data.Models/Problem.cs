@@ -30,8 +30,6 @@ namespace CodeWarfares.Data.Models
         [MaxLength(1000)]
         public string Name { get; set; }
 
-        public string Description { get; set; }
-
         public long MaxMemory { get; set; }
 
         public double MaxTime { get; set; }

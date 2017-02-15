@@ -9,34 +9,25 @@ namespace CodeWarfares.Utils.JsonModels
 {
     public class SubmitionModel
     {
-        [JsonProperty("censored_compile_message")]
-        public string CensoredCompileMessage { get; set; }
-
-        [JsonProperty("codechecker_hash")]
-        public string CodecheckerHash { get; set; }
-
-        [JsonProperty("compile_command")]
-        public string CompileCommand { get; set; }
-
-        [JsonProperty("compilemessage")]
-        public string CompileMessage { get; set; }
-
-        [JsonProperty("hash")]
-        public string Hash { get; set; }
-
         [JsonProperty("memory")]
-        public long[] Memory { get; set; }
+        public long Memory { get; set; }
 
-        [JsonProperty("message")]
-        public string[] Message { get; set; }
+        [JsonProperty("cmpinfo")]
+        public string Message { get; set; }
 
         [JsonProperty("stderr")]
-        public bool[] Errors { get; set; }
+        public string Error { get; set; }
 
-        [JsonProperty("stdout")]
-        public string[] StdOuts { get; set; }
+        [JsonProperty("output")]
+        public string StdOut { get; set; }
 
         [JsonProperty("time")]
-        public double[] Times { get; set; }
+        public double Time { get; set; }
+
+        [JsonProperty("status")]
+        public int Status { get; set; }
+
+        [JsonProperty("result")]
+        public int Result { get; set; }
     }
 }

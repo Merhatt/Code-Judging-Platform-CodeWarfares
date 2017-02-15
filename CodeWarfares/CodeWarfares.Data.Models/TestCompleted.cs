@@ -9,13 +9,17 @@ namespace CodeWarfares.Data.Models
 
         public string Result { get; set; }
 
-        public bool Error { get; set; }
-
-        public bool Correct { get; set; }
+        public bool IsCorrect { get; set; }
 
         public double Time { get; set; }
 
+        public bool Compiled { get; set; }
+
+        public string ExpectedResult { get; set; }
+
         public long Memory { get; set; }
+
+        public string SendId { get; set; }
 
         [Required]
         public int SubmitionId { get; set; }

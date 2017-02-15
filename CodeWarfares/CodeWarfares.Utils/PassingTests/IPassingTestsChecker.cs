@@ -9,6 +9,6 @@ namespace CodeWarfares.Utils.PassingTests
 {
     public interface IPassingTestsChecker
     {
-        bool[] GetPassingTests(Submition submition, Problem problem);
+        bool IsPassingTest(Problem problem, TestCompleted testCompleted);
     }
 }

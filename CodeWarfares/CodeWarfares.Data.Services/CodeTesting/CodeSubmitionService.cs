@@ -17,13 +17,12 @@ namespace CodeWarfares.Data.Services.CodeTesting
     public class CodeSubmitionService : ICodeSubmitionService
     {
         private ICodeTestingServices codeTestingService;
-        private IPassingTestsChecker passingTestsChecker;
         private ISubmitionFactory submitionFactory;
         private IRepository<Submition> submitions;
         private ITestCompletedFactory testCompletedFactory;
         private IUserServices userServices;
 
-        public CodeSubmitionService(IRepository<Submition> submitions, ICodeTestingServices codeTestingService, ISubmitionFactory submitionFactory, ITestCompletedFactory testCompletedFactory, IPassingTestsChecker passingTestsChecker, IUserServices userServices)
+        public CodeSubmitionService(IRepository<Submition> submitions, ICodeTestingServices codeTestingService, ISubmitionFactory submitionFactory, ITestCompletedFactory testCompletedFactory, IUserServices userServices)
         {
             if (submitions == null)
             {
@@ -41,10 +40,6 @@ namespace CodeWarfares.Data.Services.CodeTesting
             {
                 throw new ArgumentNullException("testCompletedFactory cannot be null");
             }
-            else if (passingTestsChecker == null)
-            {
-                throw new ArgumentNullException("passingTestsChecker cannot be null");
-            }
             else if (userServices == null)
             {
                 throw new ArgumentNullException("userServices cannot be null");
@@ -54,7 +49,6 @@ namespace CodeWarfares.Data.Services.CodeTesting
             this.submitionFactory = submitionFactory;
             this.submitions = submitions;
             this.testCompletedFactory = testCompletedFactory;
-            this.passingTestsChecker = passingTestsChecker;
             this.userServices = userServices;
         }
 
@@ -88,57 +82,64 @@ namespace CodeWarfares.Data.Services.CodeTesting
             submition.Code = source;
             submition.Author = user;
             submition.Problem = problem;
-            submition.TestCounts = problem.TestsCount;
             submition.Finished = false;
             submition.Author = user;
             submition.Problem = problem;
 
             this.Create(submition);
 
-            string[] testCases = problem.Tests.Select(t => t.TestParameter).ToArray();
+            var testCases = problem.Tests.ToList();
 
             this.userServices.AddProblemToUser(user.Id, problem);
 
-            SubmitionModel model = this.codeTestingService.TestCode(source, laungage, testCases);
-
-            if (string.IsNullOrEmpty(model.CompileMessage) == false)
+            for (int i = 0; i < testCases.Count; i++)
             {
-                submition.CompileMessage = model.CompileMessage;
-                submition.CanCompile = false;
-            }
-            else
-            {
-                submition.CanCompile = true;
+                string resultId = this.codeTestingService.TestCode(source, laungage, testCases[i].TestParameter);
 
-                for (int i = 0; i < model.StdOuts.Length; i++)
-                {
-                    TestCompleted completedTest = this.testCompletedFactory.Create();
-                    completedTest.Error = model.Errors[i];
-                    completedTest.Result = model.StdOuts[i];
-                    completedTest.Memory = model.Memory[i];
-                    completedTest.Time = model.Times[i];
+                TestCompleted completedTest = this.testCompletedFactory.Create();
+                completedTest.SendId = resultId;
+                completedTest.ExpectedResult = testCases[i].CorrectAnswer;
 
-                    submition.CompletedTests.Add(completedTest);
-                }
-
-                bool[] passingTests = this.passingTestsChecker.GetPassingTests(submition, problem);
-
-                int index = 0;
-
-                foreach (TestCompleted subTest in submition.CompletedTests)
-                {
-                    if (passingTests[index])
-                    {
-                        subTest.Correct = true;
-                    }
-
-                    index++;
-                }
+                submition.CompletedTests.Add(completedTest);
             }
 
-            submition.Finished = true;
+            submition.CanCompile = true;
 
             this.submitions.SaveChanges();
+        }
+
+        public IEnumerable<Submition> GetAllUserSubmition(User user, Problem problem)
+        {
+            if (user == null)
+            {
+                throw new NullReferenceException("user cannot be null");
+            }
+
+            if (problem == null)
+            {
+                throw new NullReferenceException("problem cannot be null");
+            }
+
+            List<Submition> userSubmitions = new List<Submition>();
+
+            if (user.Submition == null)
+            {
+                return userSubmitions;
+            }
+
+            userSubmitions = user.Submition.Where(x => x.ProblemId == problem.Id)
+                  .OrderBy(x => x.SubmitionTime).ToList();
+
+            foreach (var item in userSubmitions)
+            {
+                if (item.Finished == false)
+                {
+                    item.Finished = this.codeTestingService.GetAreAllTestsCompleted(problem, item);
+                    this.submitions.SaveChanges();
+                }
+            }
+
+            return userSubmitions;
         }
     }
 }

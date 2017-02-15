@@ -15,5 +15,7 @@ namespace CodeWarfares.Web.Views.Models
         public string ProblemPath { get; set; }
 
         public Problem Problem { get; set; }
+
+        public IEnumerable<Submition> UserSubmitions { get; set; }
     }
 }

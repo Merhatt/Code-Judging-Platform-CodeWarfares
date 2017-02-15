@@ -13,7 +13,7 @@ namespace CodeWarfares.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701241751449_InitialCreate"; }
+            get { return "201702152204125_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

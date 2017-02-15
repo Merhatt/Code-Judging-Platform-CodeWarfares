@@ -61,9 +61,9 @@
     <Compile Include="Contracts\ICodeWarfaresDbContext.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Contracts\IUnitOfWork.cs" />
-    <Compile Include="Migrations\201701241751449_InitialCreate.cs" />
-    <Compile Include="Migrations\201701241751449_InitialCreate.Designer.cs">
-      <DependentUpon>201701241751449_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201702152204125_InitialCreate.cs" />
+    <Compile Include="Migrations\201702152204125_InitialCreate.Designer.cs">
+      <DependentUpon>201702152204125_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,12 +80,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701241751449_InitialCreate.resx">
-      <DependentUpon>201701241751449_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="UnitsOfWork\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitsOfWork\" />
+    <EmbeddedResource Include="Migrations\201702152204125_InitialCreate.resx">
+      <DependentUpon>201702152204125_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

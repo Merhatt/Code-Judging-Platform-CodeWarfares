@@ -343,13 +343,13 @@
     <Compile Include="Presenters\Account\LoginPresenter.cs" />
     <Compile Include="Presenters\Account\OpenAuthProvidersPresenter.cs" />
     <Compile Include="Presenters\Account\RegisterPresenter.cs" />
-    <Compile Include="Presenters\Codings\CompetitionProbelmPresenter.cs" />
+    <Compile Include="Presenters\Codings\CompetitionProblemPresenter.cs" />
     <Compile Include="Presenters\Codings\CompetitionsCategoryPresenter.cs" />
     <Compile Include="Presenters\Codings\CompetitionsPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\ILoginPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\IOpenAuthProvidersPresenter.cs" />
     <Compile Include="Presenters\Contracts\Account\IRegisterPresenter.cs" />
-    <Compile Include="Presenters\Contracts\Codings\ICompetitionProbelmPresenter.cs" />
+    <Compile Include="Presenters\Contracts\Codings\ICompetitionProblemPresenter.cs" />
     <Compile Include="Presenters\Contracts\Codings\ICompetitionsCategoryPresenter.cs" />
     <Compile Include="Presenters\Contracts\Codings\ICompetitionsPresenter.cs" />
     <Compile Include="Presenters\Contracts\MasterPages\ISiteMasterPresenter.cs" />

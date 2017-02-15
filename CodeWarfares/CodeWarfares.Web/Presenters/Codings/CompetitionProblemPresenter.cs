@@ -3,23 +3,23 @@ using CodeWarfares.Web.Presenters.Contracts.Codings;
 using CodeWarfares.Web.Views.Contracts.Coding;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebFormsMvp;
 using CodeWarfares.Web.EventArguments;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Services.Contracts.Account;
+using CodeWarfares.Data.Models.Enums;
 
 namespace CodeWarfares.Web.Presenters.Codings
 {
-    public class CompetitionProbelmPresenter : Presenter<ICompetitionProblemView>, ICompetitionProbelmPresenter
+    public class CompetitionProblemPresenter : Presenter<ICompetitionProblemView>, ICompetitionProblemPresenter
     {
         private IDictionary<string, ContestLaungagesTypes> laungages;
         private IProblemService problemService;
         private ICodeSubmitionService codeSubmitionService;
+        private IUserServices userServices;
 
-        public CompetitionProbelmPresenter(ICompetitionProblemView view, IProblemService problemService, ICodeSubmitionService codeSubmitionService) : base(view)
+        public CompetitionProblemPresenter(ICompetitionProblemView view, IProblemService problemService, ICodeSubmitionService codeSubmitionService, IUserServices userServices) : base(view)
         {
             this.laungages = new Dictionary<string, ContestLaungagesTypes>();
             this.laungages.Add("C#", ContestLaungagesTypes.CSharp);
@@ -32,13 +32,16 @@ namespace CodeWarfares.Web.Presenters.Codings
 
             this.problemService = problemService;
             this.codeSubmitionService = codeSubmitionService;
+            this.userServices = userServices;
         }
 
         private void SendTask(object sender, SendTaskEventArgs e)
         {
             ContestLaungagesTypes laungageNow = laungages[e.Laungage];
 
-            this.codeSubmitionService.SendSubmition(e.User, this.View.Model.Problem, e.Code, laungageNow);
+            User user = this.userServices.GetByUsername(e.Username);
+
+            this.codeSubmitionService.SendSubmition(user, this.View.Model.Problem, e.Code, laungageNow);
         }
 
         private void GetDescription(object sender, EventArgs e)
@@ -60,6 +63,10 @@ namespace CodeWarfares.Web.Presenters.Codings
             }
 
             this.View.Model.ProgrammingLaungages = problemLaungages;
+
+            User user = this.userServices.GetByUsername(e.Username);
+
+            this.View.Model.UserSubmitions = this.codeSubmitionService.GetAllUserSubmition(user, problemNow);
         }
     }
 }

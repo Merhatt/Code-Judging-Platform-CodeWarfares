@@ -66,5 +66,10 @@ namespace CodeWarfares.Data.Services.Account
 
             this.users.SaveChanges();
         }
+
+        public User GetByUsername(string username)
+        {
+            return this.users.All().FirstOrDefault(x => x.UserName == username);
+        }
     }
 }

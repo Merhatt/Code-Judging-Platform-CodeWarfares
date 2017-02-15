@@ -8,8 +8,8 @@ namespace CodeWarfares.Data.Services.Enums
 {
     public enum ContestLaungagesTypes
     {
-        C = 1,
-        CPP = 2,
-        CSharp = 9
+        C = 11,
+        CPP = 1,
+        CSharp = 27
     }
 }
