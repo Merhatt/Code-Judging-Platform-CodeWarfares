@@ -26,13 +26,23 @@ namespace CodeWarfares.Web.Presenters.Codings
             this.laungages.Add("C++", ContestLaungagesTypes.CPP);
             this.laungages.Add("C", ContestLaungagesTypes.C);
 
-            view.MyInit += Initialization;
+            view.MyInitEvent += Initialization;
             view.GetDescriptionEvent += GetDescription;
             view.SendTaskEvent += SendTask;
+            view.SetSubmitionsEventArgs += SetSubmitions;
 
             this.problemService = problemService;
             this.codeSubmitionService = codeSubmitionService;
             this.userServices = userServices;
+        }
+
+        private void SetSubmitions(object sender, CompetitionProblemEventArgs e)
+        {
+            User user = this.userServices.GetByUsername(e.Username);
+
+            Problem problemNow = this.problemService.GetById(e.ProblemId);
+
+            this.View.Model.UserSubmitions = GetSubmitions(user, problemNow);
         }
 
         private void SendTask(object sender, SendTaskEventArgs e)
@@ -49,7 +59,7 @@ namespace CodeWarfares.Web.Presenters.Codings
             this.View.Model.ProblemPath = "../ProblemDescriptions/ProblemDescription" + this.View.Model.Problem.Id  + ".docx";
         }
 
-        private void Initialization(object sender, CompetitionProblemInitEventArgs e)
+        private void Initialization(object sender, CompetitionProblemEventArgs e)
         {
             Problem problemNow = this.problemService.GetById(e.ProblemId);
             this.View.Model.ProblemTitle = problemNow.Name;
@@ -66,7 +76,12 @@ namespace CodeWarfares.Web.Presenters.Codings
 
             User user = this.userServices.GetByUsername(e.Username);
 
-            this.View.Model.UserSubmitions = this.codeSubmitionService.GetAllUserSubmition(user, problemNow);
+            this.View.Model.UserSubmitions = GetSubmitions(user, problemNow);
+        }
+
+        private IEnumerable<Submition> GetSubmitions(User user, Problem problem)
+        {
+            return this.codeSubmitionService.GetAllUserSubmition(user, problem);
         }
     }
 }

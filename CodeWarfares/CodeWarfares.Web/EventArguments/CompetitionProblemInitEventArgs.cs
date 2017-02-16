@@ -5,9 +5,9 @@ using System.Web;
 
 namespace CodeWarfares.Web.EventArguments
 {
-    public class CompetitionProblemInitEventArgs : EventArgs
+    public class CompetitionProblemEventArgs : EventArgs
     {
-        public CompetitionProblemInitEventArgs(int problemId, string username)
+        public CompetitionProblemEventArgs(int problemId, string username)
         {
             this.ProblemId = problemId;
             this.Username = username;

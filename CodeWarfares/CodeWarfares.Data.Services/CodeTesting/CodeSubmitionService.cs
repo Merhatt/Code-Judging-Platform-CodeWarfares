@@ -128,7 +128,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             }
 
             userSubmitions = user.Submition.Where(x => x.ProblemId == problem.Id)
-                  .OrderBy(x => x.SubmitionTime).ToList();
+                  .OrderByDescending(x => x.SubmitionTime).ToList();
 
             foreach (var item in userSubmitions)
             {

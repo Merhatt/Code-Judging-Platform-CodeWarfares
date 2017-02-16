@@ -32,13 +32,21 @@
         <asp:UpdatePanel ID="UpdatePanelCountriesTowns" UpdateMode="Conditional"
             runat="server" class="panel">
             <ContentTemplate>
+                <asp:Button runat="server" Text="Сихронизирай" ID="PartialPostBackSynchronization" OnClick="PartialPostBackSynchronization_Click" CssClass="btn btn-warning synchronize float-right"/>
+                <div class="clear"></div>
                 <asp:GridView ID="SubmitionsGridView" runat="server" AutoGenerateColumns="False"
                     AllowPaging="True" DataKeyNames="ID" ItemType="CodeWarfares.Data.Models.Submition"
-                    OnPageIndexChanging="SubmitionsGridView_PageIndexChanging" PageSize="10"
-                    OnRowDataBound="SubmitionsGridView_RowDataBound">
+                    OnPageIndexChanging="SubmitionsGridView_PageIndexChanging" PageSize="5"
+                    CssClass="history-table" >
                     <Columns>
-                        <asp:BoundField DataField="SubmitionTime" HeaderText="Submition Time" DataFormatString="{0:MMMM d, yyyy}" />
-                        <asp:TemplateField HeaderText="Test Progress">
+                        <asp:BoundField DataField="SubmitionTime" HeaderText="Време на Изпращане" DataFormatString="{0:MMMM d, yyyy}" />
+                        <asp:BoundField DataField="CompileMessage" HeaderText="Компилационно Съобщение"/>
+                        <asp:TemplateField HeaderText="Точки">
+                            <ItemTemplate>
+                                <div class="progress-text"><%# Eval("CompletedPercentage") %>/100</div>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Прогрес">
                             <ItemTemplate>
                                 <progress value="<%# Eval("CompletedPercentage") %>" max="100"></progress>
                             </ItemTemplate>

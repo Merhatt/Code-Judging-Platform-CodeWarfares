@@ -167,11 +167,32 @@ input[type="select"] {
 }
 
 .page-middle {
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 .choose-laungage {
     margin-right: 10px;
+}
+
+.history-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.history-table th, .history-table td {
+    text-align: left;
+    padding: 8px;
+}
+
+.history-table tr:nth-child(even){background-color: #f2f2f2}
+
+.history-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.synchronize {
+    margin-bottom: 10px;
 }
 
 /* Responsive: Portrait tablets and up */

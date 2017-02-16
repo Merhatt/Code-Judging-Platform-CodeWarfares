@@ -7,10 +7,12 @@ namespace CodeWarfares.Web.Views.Contracts.Coding
 {
     public interface ICompetitionProblemView : IView<CompetitionProblemViewModel>
     {
-        event EventHandler<CompetitionProblemInitEventArgs> MyInit;
+        event EventHandler<CompetitionProblemEventArgs> MyInitEvent;
 
         event EventHandler GetDescriptionEvent;
 
         event EventHandler<SendTaskEventArgs> SendTaskEvent;
+
+        event EventHandler<CompetitionProblemEventArgs> SetSubmitionsEventArgs;
     }
 }

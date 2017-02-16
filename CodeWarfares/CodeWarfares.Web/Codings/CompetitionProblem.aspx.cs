@@ -13,15 +13,16 @@ namespace CodeWarfares.Web.Codings
     [PresenterBinding(typeof(CompetitionProblemPresenter))]
     public partial class CompetitionProblem : MvpPage<CompetitionProblemViewModel>, ICompetitionProblemView
     {
-        public event EventHandler<CompetitionProblemInitEventArgs> MyInit;
+        public event EventHandler<CompetitionProblemEventArgs> MyInitEvent;
         public event EventHandler GetDescriptionEvent;
         public event EventHandler<SendTaskEventArgs> SendTaskEvent;
+        public event EventHandler<CompetitionProblemEventArgs> SetSubmitionsEventArgs;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = int.Parse(this.Request.QueryString["Id"]);
 
-            MyInit.Invoke(this, new CompetitionProblemInitEventArgs(id, this.User.Identity.Name));
+            MyInitEvent.Invoke(this, new CompetitionProblemEventArgs(id, this.User.Identity.Name));
 
             this.PageTitle.InnerText = this.Model.ProblemTitle;
 
@@ -56,12 +57,19 @@ namespace CodeWarfares.Web.Codings
 
         protected void SubmitionsGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
+            this.SubmitionsGridView.PageIndex = e.NewPageIndex;
+            this.SubmitionsGridView.DataSource = this.Model.UserSubmitions;
+            this.SubmitionsGridView.DataBind();
         }
 
-        protected void SubmitionsGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void PartialPostBackSynchronization_Click(object sender, EventArgs e)
         {
+            int id = int.Parse(this.Request.QueryString["Id"]);
 
+            this.SetSubmitionsEventArgs.Invoke(this, new CompetitionProblemEventArgs(id, this.User.Identity.Name));
+            
+            this.SubmitionsGridView.DataSource = this.Model.UserSubmitions.ToList();
+            this.SubmitionsGridView.DataBind();
         }
     }
 }

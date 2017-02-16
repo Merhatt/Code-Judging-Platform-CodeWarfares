@@ -117,10 +117,22 @@ namespace CodeWarfares.Data.Services.CodeTesting
                         {
                             passingTestsCount++;
                         }
+
+                        submition.CompileMessage = "Компилира се Успешно!";
+                    }
+                    else
+                    {
+                        submition.CompileMessage = model.Message;
+
+                        if (string.IsNullOrEmpty(submition.CompileMessage))
+                        {
+                            submition.CompileMessage = "Грешка при компилация";
+                        }
                     }
                 }
                 else
                 {
+                    submition.CompileMessage = "Компилира се";
                     areAllTestsCompleted = false;
                     break;
                 }
