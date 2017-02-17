@@ -195,6 +195,15 @@ input[type="select"] {
     margin-bottom: 10px;
 }
 
+.leaderboard-problemname {
+    text-align: center !important;
+    font-weight: bold !important;
+    font-size: 20px !important;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .jumbotron {

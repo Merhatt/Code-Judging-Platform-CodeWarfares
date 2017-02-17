@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Models.Enums;
+using System.Collections.Generic;
 
 namespace CodeWarfares.Data.Services.Contracts.CodeTesting
 {
@@ -19,5 +20,7 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type);
 
         IQueryable<Problem> GetAllOrderedByType(DifficultyType type);
+
+        IEnumerable<Submition> GetLeaderboard(Problem problem);
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System;
+using CodeWarfares.Data.Models.Contracts;
 
 namespace CodeWarfares.Data.Services.Account
 {
@@ -56,7 +57,7 @@ namespace CodeWarfares.Data.Services.Account
             return manager;
         }
 
-        public bool CreateUser(Models.Contracts.IUser user, string password)
+        public bool CreateUser(Data.Models.Contracts.IUser user, string password)
         {
             User userNow = user as User;
             var identity = this.Create(userNow, password);

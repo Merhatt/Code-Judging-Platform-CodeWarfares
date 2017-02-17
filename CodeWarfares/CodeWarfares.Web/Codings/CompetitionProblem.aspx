@@ -33,6 +33,7 @@
             runat="server" class="panel">
             <ContentTemplate>
                 <asp:Button runat="server" Text="Сихронизирай" ID="PartialPostBackSynchronization" OnClick="PartialPostBackSynchronization_Click" CssClass="btn btn-warning synchronize float-right"/>
+                <asp:LinkButton runat="server" ID="LeaderboardButton" CssClass="btn btn-info">Класация</asp:LinkButton>
                 <div class="clear"></div>
                 <asp:GridView ID="SubmitionsGridView" runat="server" AutoGenerateColumns="False"
                     AllowPaging="True" DataKeyNames="ID" ItemType="CodeWarfares.Data.Models.Submition"

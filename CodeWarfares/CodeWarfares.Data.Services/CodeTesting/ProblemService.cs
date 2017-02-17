@@ -88,5 +88,29 @@ namespace CodeWarfares.Data.Services.CodeTesting
             this.problems.GetById(problemId).Submitions.Add(submition);
             this.problems.SaveChanges();
         }
+
+        public IEnumerable<Submition> GetLeaderboard(Problem problem)
+        {
+            IList<User> users = problem.Users.ToList();
+
+            ICollection<Submition> leaderboard = new List<Submition>();
+
+            foreach (var user in users)
+            {
+                var userSubmitions = user.Submition.Where(s => s.ProblemId == problem.Id &&
+                                s.Finished);
+
+                if (userSubmitions == null)
+                {
+                    continue;
+                }
+
+                Submition submition = userSubmitions.OrderByDescending(s => s.CompletedPercentage).FirstOrDefault();
+
+                leaderboard.Add(submition);
+            }
+
+            return leaderboard.OrderByDescending(x => x.CompletedPercentage);
+        }
     }
 }

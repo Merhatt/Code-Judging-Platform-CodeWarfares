@@ -32,6 +32,8 @@ namespace CodeWarfares.Web.Codings
 
             this.SubmitionsGridView.DataSource = this.Model.UserSubmitions.ToList();
             this.SubmitionsGridView.DataBind();
+
+            this.LeaderboardButton.PostBackUrl = "/Codings/ProblemLeaderboard?Id=" + id;
         }
 
         protected void GetDescription_Click(object sender, EventArgs e)
