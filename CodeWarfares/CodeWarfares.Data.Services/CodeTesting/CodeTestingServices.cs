@@ -72,14 +72,14 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public bool GetAreAllTestsCompleted(Problem problem, Submition submition)
         {
-            if (submition == null)
-            {
-                throw new NullReferenceException("submition cannot be null");
-            }
-
             if (problem == null)
             {
                 throw new NullReferenceException("problem cannot be null");
+            }
+
+            if (submition == null)
+            {
+                throw new NullReferenceException("submition cannot be null");
             }
 
             if (submition.Finished)

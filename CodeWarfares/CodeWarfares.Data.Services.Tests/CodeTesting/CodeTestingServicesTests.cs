@@ -1,4 +1,5 @@
-﻿using CodeWarfares.Data.Services.CodeTesting;
+﻿using CodeWarfares.Data.Models;
+using CodeWarfares.Data.Services.CodeTesting;
 using CodeWarfares.Data.Services.Enums;
 using CodeWarfares.Utils.Https;
 using CodeWarfares.Utils.Json;
@@ -110,6 +111,211 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Assert.AreEqual(model.Id, resultId);
             httpProviderMock.Verify(x => x.HttpPostJson("http://api.compilers.sphere-engine.com/api/v3/submissions", "access_token=ad6cce356775b67e6ed8c9b1fae44027", data), Times.Once());
             jsonConverterMock.Verify(x => x.JsonToModel<ResponseModel>(json), Times.Once());
+        }
+
+        [Test]
+        public void GetAreAllTestsCompleted_NullProblem_ShouldThrow()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
+
+            var err = Assert.Throws<NullReferenceException>(() => testingServices.GetAreAllTestsCompleted(null, new Submition()));
+
+            Assert.AreEqual("problem cannot be null", err.Message);
+        }
+
+        [Test]
+        public void GetAreAllTestsCompleted_NullSubmition_ShouldThrow()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
+
+            var err = Assert.Throws<NullReferenceException>(() => testingServices.GetAreAllTestsCompleted(new Problem(), null));
+
+            Assert.AreEqual("submition cannot be null", err.Message);
+        }
+
+        [Test]
+        public void GetAreAllTestsCompleted_SubmitionFinished()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
+
+            var problem = new Problem();
+            var submition = new Submition();
+
+            submition.Finished = true;
+
+            bool res = testingServices.GetAreAllTestsCompleted(problem, submition);
+            Assert.IsTrue(res);
+        }
+
+        [Test]
+        public void GetAreAllTestsCompleted_Status0_Result15_TestCorrect_SubmitionFinishedFalse()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
+
+            var problem = new Problem();
+            var submition = new Submition();
+
+            problem.Tests.Add(new Test());
+            problem.Tests.Add(new Test());
+
+            var completedTest = new TestCompleted();
+            completedTest.Compiled = true;
+            submition.CompletedTests.Add(completedTest);
+
+            var completedTest2 = new TestCompleted();
+            completedTest2.Compiled = false;
+            completedTest2.SendId = "asdasd";
+            submition.CompletedTests.Add(completedTest2);
+
+            submition.Finished = false;
+
+            string json = "it is json";
+
+            httpProviderMock.Setup(x => x.HttpGetJson(It.IsAny<string>())).Returns(json);
+
+            var model = new SubmitionModel();
+
+            model.Status = 0;
+            model.Result = 15;
+            model.StdOut = "stdout";
+            model.Memory = 100000;
+
+            passingTestCheckerMock.Setup(x => x.IsPassingTest(It.IsAny<Problem>(), It.IsAny<TestCompleted>())).Returns(true);
+
+            jsonConverterMock.Setup(x => x.JsonToModel<SubmitionModel>(It.IsAny<string>())).Returns(model);
+
+            bool res = testingServices.GetAreAllTestsCompleted(problem, submition);
+
+            httpProviderMock.Verify(x => x.HttpGetJson("https://c3b70bc3.compilers.sphere-engine.com/api/v3/submissions/asdasd?access_token=ad6cce356775b67e6ed8c9b1fae44027&withOutput=true&withStderr=true&withCmpinfo=true"), Times.Once());
+            jsonConverterMock.Verify(x => x.JsonToModel<SubmitionModel>(json), Times.Once());
+            passingTestCheckerMock.Verify(x => x.IsPassingTest(problem, completedTest2), Times.Once());
+
+            Assert.IsTrue(res);
+            Assert.IsTrue(completedTest2.Compiled);
+            Assert.AreEqual("Компилира се Успешно!", submition.CompileMessage);
+            Assert.AreEqual(50, submition.CompletedPercentage);
+        }
+
+        [Test]
+        public void GetAreAllTestsCompleted_Status0_Result10_TestCorrect_SubmitionFinishedFalse()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
+
+            var problem = new Problem();
+            var submition = new Submition();
+
+            problem.Tests.Add(new Test());
+            problem.Tests.Add(new Test());
+
+            var completedTest = new TestCompleted();
+            completedTest.Compiled = true;
+            submition.CompletedTests.Add(completedTest);
+
+            var completedTest2 = new TestCompleted();
+            completedTest2.Compiled = false;
+            completedTest2.SendId = "asdasd";
+            submition.CompletedTests.Add(completedTest2);
+
+            submition.Finished = false;
+
+            string json = "it is json";
+
+            httpProviderMock.Setup(x => x.HttpGetJson(It.IsAny<string>())).Returns(json);
+
+            var model = new SubmitionModel();
+
+            model.Status = 0;
+            model.Result = 10;
+            model.StdOut = "stdout";
+            model.Memory = 100000;
+
+            passingTestCheckerMock.Setup(x => x.IsPassingTest(It.IsAny<Problem>(), It.IsAny<TestCompleted>())).Returns(true);
+
+            jsonConverterMock.Setup(x => x.JsonToModel<SubmitionModel>(It.IsAny<string>())).Returns(model);
+
+            bool res = testingServices.GetAreAllTestsCompleted(problem, submition);
+
+            httpProviderMock.Verify(x => x.HttpGetJson("https://c3b70bc3.compilers.sphere-engine.com/api/v3/submissions/asdasd?access_token=ad6cce356775b67e6ed8c9b1fae44027&withOutput=true&withStderr=true&withCmpinfo=true"), Times.Once());
+            jsonConverterMock.Verify(x => x.JsonToModel<SubmitionModel>(json), Times.Once());
+            passingTestCheckerMock.Verify(x => x.IsPassingTest(problem, completedTest2), Times.Exactly(0));
+
+            Assert.IsTrue(res);
+            Assert.IsTrue(completedTest2.Compiled);
+            Assert.AreEqual("Грешка при компилация", submition.CompileMessage);
+            Assert.AreEqual(0, submition.CompletedPercentage);
+        }
+
+        [Test]
+        public void GetAreAllTestsCompleted_Status1_TestCorrect_SubmitionFinishedFalse()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
+
+            var problem = new Problem();
+            var submition = new Submition();
+
+            problem.Tests.Add(new Test());
+            problem.Tests.Add(new Test());
+
+            var completedTest = new TestCompleted();
+            completedTest.Compiled = true;
+            submition.CompletedTests.Add(completedTest);
+
+            var completedTest2 = new TestCompleted();
+            completedTest2.Compiled = false;
+            completedTest2.SendId = "asdasd";
+            submition.CompletedTests.Add(completedTest2);
+
+            submition.Finished = false;
+
+            string json = "it is json";
+
+            httpProviderMock.Setup(x => x.HttpGetJson(It.IsAny<string>())).Returns(json);
+
+            var model = new SubmitionModel();
+
+            model.Status = 1;
+            model.Result = 10;
+            model.StdOut = "stdout";
+            model.Memory = 100000;
+
+            passingTestCheckerMock.Setup(x => x.IsPassingTest(It.IsAny<Problem>(), It.IsAny<TestCompleted>())).Returns(true);
+
+            jsonConverterMock.Setup(x => x.JsonToModel<SubmitionModel>(It.IsAny<string>())).Returns(model);
+
+            bool res = testingServices.GetAreAllTestsCompleted(problem, submition);
+
+            httpProviderMock.Verify(x => x.HttpGetJson("https://c3b70bc3.compilers.sphere-engine.com/api/v3/submissions/asdasd?access_token=ad6cce356775b67e6ed8c9b1fae44027&withOutput=true&withStderr=true&withCmpinfo=true"), Times.Once());
+            jsonConverterMock.Verify(x => x.JsonToModel<SubmitionModel>(json), Times.Once());
+            passingTestCheckerMock.Verify(x => x.IsPassingTest(problem, completedTest2), Times.Exactly(0));
+
+            Assert.IsFalse(res);
+            Assert.IsFalse(completedTest2.Compiled);
+            Assert.AreEqual("Компилира се", submition.CompileMessage);
+            Assert.AreEqual(0, submition.CompletedPercentage);
         }
     }
 }

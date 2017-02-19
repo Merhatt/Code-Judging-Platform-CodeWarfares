@@ -63,9 +63,14 @@ namespace CodeWarfares.Data.Services.Account
 
         public void AddProblemToUser(string userId, Problem problem)
         {
+            if (userId == null)
+            {
+                throw new NullReferenceException("userId cannot be null");
+            }
+
             if (problem == null)
             {
-                throw new ArgumentNullException("problem cannot be null");
+                throw new NullReferenceException("problem cannot be null");
             }
 
             var user = this.usersRepository.GetById(userId);
