@@ -24,9 +24,12 @@ namespace CodeWarfares.Web.Admin
         {
             this.MyInit.Invoke(sender, e);
 
-            this.DropdownDifficulty.DataSource = this.Model.Difficulties.ToList();
+            if (IsPostBack == false)
+            {
+                this.DropdownDifficulty.DataSource = this.Model.Difficulties.ToList();
 
-            DropdownDifficulty.DataBind();
+                DropdownDifficulty.DataBind();
+            }
 
             int textBoxes = 0;
 
@@ -74,14 +77,23 @@ namespace CodeWarfares.Web.Admin
                         allTests.Add(new Tuple<string, string>(Vhod5.Text, Izhod5.Text));
                     }
 
+                    long maxTime = 0;
+                    long.TryParse(this.MaxTime.Text, out maxTime);
+
+                    long maxMemory = 0;
+                    long.TryParse(this.MaxMemory.Text, out maxMemory);
+
+                    int points = 0;
+                    int.TryParse(this.Points.Text, out points);
+
                     var args = new ProblemUploadClickEventArgs(DescriptionUpload.FileName, this.ProblemTitle.Text,
-                        this.ImgUrl.Text, long.Parse(this.MaxTime.Text), long.Parse(this.MaxMemory.Text),
-                        int.Parse(this.Points.Text), int.Parse(this.TestsCount.Text), allTests, this.DropdownDifficulty.SelectedValue);
+                        this.ImgUrl.Text, maxTime, maxMemory,
+                        points, testCount, allTests, this.DropdownDifficulty.SelectedItem.Text);
 
                     this.ProblemUploadEvent?.Invoke(sender, args);
                 }
 
-                if (this.Model.ShouldUploadFile)
+                if (this.Model.ShouldUploadFile && this.Model.IsErrorActive == false)
                 {
                     try
                     {
@@ -96,8 +108,17 @@ namespace CodeWarfares.Web.Admin
                 }
                 else
                 {
-                    this.ErrorText.Visible = true;
-                    this.ErrorText.Text = "Изберете файл с формат .docx";
+                    if (this.Model.IsErrorActive)
+                    {
+                        this.Model.IsErrorActive = false;
+                        this.ErrorText.Visible = true;
+                        this.ErrorText.Text = this.Model.ErrorText;
+                    }
+                    else
+                    {
+                        this.ErrorText.Visible = true;
+                        this.ErrorText.Text = "Изберете файл с формат .docx";
+                    }
                 }
             }
         }
