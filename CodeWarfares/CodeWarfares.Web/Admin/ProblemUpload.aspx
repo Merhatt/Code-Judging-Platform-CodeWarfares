@@ -6,7 +6,7 @@
             <asp:Label runat="server" class="error-text" ID="ErrorText"></asp:Label>
         </div>
         <div class="admin-el">
-            <label class="btn btn-default btn-file">
+            <label class="btn btn-warning btn-file">
                 Избери Условие
                 <asp:FileUpload ID="DescriptionUpload" runat="server" CssClass="input-hidden" />
             </label>

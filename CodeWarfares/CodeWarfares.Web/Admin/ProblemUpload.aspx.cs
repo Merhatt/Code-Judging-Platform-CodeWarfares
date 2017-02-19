@@ -99,11 +99,12 @@ namespace CodeWarfares.Web.Admin
                     {
                         string path = Server.MapPath(this.Model.FileUploadPath);
                         DescriptionUpload.PostedFile.SaveAs(path);
+                        this.Response.Redirect("/Codings/Competitions.aspx");
                     }
                     catch (Exception ex)
                     {
                         this.ErrorText.Visible = true;
-                        this.ErrorText.Text = "Изберете файл с формат .docx";
+                        this.ErrorText.Text = "Изберете файл с формати .docx";
                     }
                 }
                 else
@@ -125,7 +126,11 @@ namespace CodeWarfares.Web.Admin
 
         protected void TestsCount_TextChanged(object sender, EventArgs e)
         {
-            ShowTextBoxes(int.Parse(this.TestsCount.Text));
+            int textBoxes = 0;
+
+            int.TryParse(this.TestsCount.Text, out textBoxes);
+
+            ShowTextBoxes(textBoxes);
         }
 
         private void ShowTextBoxes(int count)
@@ -141,6 +146,15 @@ namespace CodeWarfares.Web.Admin
             Izhod3.Visible = false;
             Izhod4.Visible = false;
             Izhod5.Visible = false;
+
+            this.IzhodPanel.Visible = true;
+            this.VhodPanel.Visible = true;
+
+            if (count <= 0 || count > 5)
+            {
+                this.IzhodPanel.Visible = false;
+                this.VhodPanel.Visible = false;
+            }
 
             if ((count <= 0 || count > 5) && IsPostBack)
             {

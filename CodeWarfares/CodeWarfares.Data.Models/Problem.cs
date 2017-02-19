@@ -26,7 +26,6 @@ namespace CodeWarfares.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
         [MaxLength(1000)]
         public string Name { get; set; }
 

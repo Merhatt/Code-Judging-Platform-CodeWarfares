@@ -11,9 +11,8 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/Images/CodeWarfaresLogo.png" rel="shortcut icon" type="image/x-icon" />
-
 </head>
 <body>
     <form runat="server">
@@ -57,9 +56,22 @@
                                 <li><a runat="server" class="white-link" href="~/Account/Login">Влез</a></li>
                             </ul>
                         </AnonymousTemplate>
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="Administrator">
+                                <ContentTemplate>
+                                    <ul class="nav navbar-nav navbar-right navbar-link">
+                                        <li><a runat="server" class="white-link" href="~/Admin/ProblemUpload">Качи Задача</a></li>
+                                        <li><a runat="server" class="white-link" href="~/" title="Manage your account">Здравей, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                        <li>
+                                            <asp:LoginStatus runat="server" class="white-link" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                        </li>
+                                    </ul>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" class="white-link" href="~/Account/Manage" title="Manage your account">Здравей, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li><a runat="server" class="white-link" href="~/" title="Manage your account">Здравей, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                 <li>
                                     <asp:LoginStatus runat="server" class="white-link" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
@@ -74,7 +86,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Code Warfares</p>
             </footer>
         </div>
     </form>
