@@ -12,43 +12,53 @@ namespace CodeWarfares.Data.Services.Account
 {
     public class UserServices : IUserServices
     {
-        private IRepository<User> users;
+        private IRepository<User> usersRepository;
 
         public UserServices(IRepository<User> users)
         {
             if (users == null)
             {
-                throw new ArgumentNullException("Users cannot be null");
+                throw new NullReferenceException("Users cannot be null");
             }
 
-            this.users = users;
+            this.usersRepository = users;
         }
 
         public IQueryable<User> GetAll()
         {
-            return this.users.All();
+            return this.usersRepository.All();
         }
 
         public void AssignRole(User user, IdentityUserRole role)
         {
             if (user == null)
             {
-                throw new ArgumentNullException("user cannot be null");
+                throw new NullReferenceException("user cannot be null");
+            }
+
+            if (role == null)
+            {
+                throw new NullReferenceException("role cannot be null");
             }
 
             user.Roles.Add(role);
-            this.users.SaveChanges();
+            this.usersRepository.SaveChanges();
         }
 
         public void AddSubmitionToUser(string userId, Submition submition)
         {
-            if (submition == null)
+            if (userId == null)
             {
-                throw new ArgumentNullException("submition cannot be null");
+                throw new NullReferenceException("userId cannot be null");
             }
 
-            this.users.GetById(userId).Submition.Add(submition);
-            this.users.SaveChanges();
+            if (submition == null)
+            {
+                throw new NullReferenceException("submition cannot be null");
+            }
+
+            this.usersRepository.GetById(userId).Submition.Add(submition);
+            this.usersRepository.SaveChanges();
         }
 
         public void AddProblemToUser(string userId, Problem problem)
@@ -58,7 +68,7 @@ namespace CodeWarfares.Data.Services.Account
                 throw new ArgumentNullException("problem cannot be null");
             }
 
-            var user = this.users.GetById(userId);
+            var user = this.usersRepository.GetById(userId);
             bool shouldAddProblem = user.Problems.FirstOrDefault(p => p.Id == problem.Id) == null;
 
             if (shouldAddProblem)
@@ -66,12 +76,12 @@ namespace CodeWarfares.Data.Services.Account
                 user.Problems.Add(problem);
             }
 
-            this.users.SaveChanges();
+            this.usersRepository.SaveChanges();
         }
 
         public User GetByUsername(string username)
         {
-            return this.users.All().FirstOrDefault(x => x.UserName == username);
+            return this.usersRepository.All().FirstOrDefault(x => x.UserName == username);
         }
 
         public IEnumerable<User> GetAllUsersWithPoints()
@@ -93,7 +103,7 @@ namespace CodeWarfares.Data.Services.Account
                 }
             }
 
-            this.users.SaveChanges();
+            this.usersRepository.SaveChanges();
 
             return allUsers;
         }

@@ -1,6 +1,7 @@
 ﻿using CodeWarfares.Data.Contracts;
 using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Services.Account;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -17,7 +18,9 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void Constructor_NullRepository_ShouldThrow()
         {
-            Assert.Throws<ArgumentNullException>(() => new UserServices(null));
+            var err = Assert.Throws<NullReferenceException>(() => new UserServices(null));
+
+            Assert.AreEqual("Users cannot be null", err.Message);
         }
 
         [Test]
@@ -49,7 +52,27 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             var services = new UserServices(repoMock.Object);
 
-            Assert.Throws<ArgumentNullException>(() => services.AssignRole(null, null));
+            var err = Assert.Throws<NullReferenceException>(() => services.AssignRole(null, new IdentityUserRole()));
+
+            Assert.AreEqual("user cannot be null", err.Message);
+        }
+
+        [Test]
+        public void AssignRole_NullRole_ShouldThrow()
+        {
+            var repoMock = new Mock<IRepository<User>>();
+
+            var qMock = new Mock<IQueryable<User>>();
+
+            var user = new User();
+
+            repoMock.Setup(x => x.All()).Returns(qMock.Object);
+
+            var services = new UserServices(repoMock.Object);
+
+            var err = Assert.Throws<NullReferenceException>(() => services.AssignRole(user, null));
+
+            Assert.AreEqual("role cannot be null", err.Message);
         }
 
         [Test]
@@ -65,9 +88,11 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             var services = new UserServices(repoMock.Object);
 
-            services.AssignRole(user, null);
+            var role = new IdentityUserRole();
 
-            Assert.AreEqual(user.Roles.First(), null);
+            services.AssignRole(user, role);
+
+            Assert.AreSame(role, user.Roles.First());
             repoMock.Verify(x => x.SaveChanges(), Times.Once());
         }
 
@@ -86,7 +111,9 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             var services = new UserServices(repoMock.Object);
 
-            Assert.Throws<ArgumentNullException>(() => services.AddSubmitionToUser(userId, null));
+            var err = Assert.Throws<NullReferenceException>(() => services.AddSubmitionToUser(userId, null));
+
+            Assert.AreEqual("userId cannot be null", err.Message);
         }
 
         [Test]

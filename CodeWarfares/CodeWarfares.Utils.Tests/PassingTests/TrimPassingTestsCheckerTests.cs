@@ -26,125 +26,92 @@ namespace CodeWarfares.Utils.Tests.PassingTests
         {
             TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
 
-            var err = Assert.Throws<NullReferenceException>(() => trimChecker.IsPassingTest(null, new TestCompleted()));
-            Assert.AreEqual("problem cannot be null", err.Message);
+            var err = Assert.Throws<NullReferenceException>(() => trimChecker.IsPassingTest(new Problem(), null));
+            Assert.AreEqual("testCompleted cannot be null", err.Message);
         }
 
         [Test]
-        public void GetPassingTests_AllTrueTests_ShouldReturnCorrectAnswer()
+        public void GetPassingTests_AllCorrect_ShouldReturnCorrectAnswer()
         {
             TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
 
-            Problem problem = new Problem();
-            problem.TestsCount = 2;
-            problem.MaxMemory = 3000000;
-            problem.MaxTime = 5;
+            var problem = new Problem();
+            var testCompleted = new TestCompleted();
 
-            Test test = new Test();
-            test.CorrectAnswer = "Hello";
-            problem.Tests.Add(test);
+            problem.MaxMemory = 1000;
+            problem.MaxTime = 1000;
 
-            Test test2 = new Test();
-            test2.CorrectAnswer = "World";
-            problem.Tests.Add(test2);
+            testCompleted.Result = "   asd   ";
+            testCompleted.ExpectedResult = "asd";
+            testCompleted.Memory = 500;
+            testCompleted.Time = 500;
 
-            Submition submition = new Submition();
+            bool isPassing = trimChecker.IsPassingTest(problem, testCompleted);
 
-            TestCompleted testCompleted = new TestCompleted();
-            testCompleted.Result = "Hello";
-            testCompleted.Time = 2;
-            testCompleted.Memory = 1000;
-            submition.CompletedTests.Add(testCompleted);
-
-            TestCompleted testCompleted2 = new TestCompleted();
-            testCompleted2.Result = "World";
-            testCompleted2.Time = 2;
-            testCompleted2.Memory = 1000;
-            submition.CompletedTests.Add(testCompleted2);
-
-            bool[] res = trimChecker.GetPassingTests(submition, problem);
-
-            Assert.AreEqual(2, res.Length);
-            Assert.AreEqual(true, res[0]);
-            Assert.AreEqual(true, res[1]);
+            Assert.IsTrue(isPassing);
         }
 
         [Test]
-        public void GetPassingTests_OneTrueOneFalse_ShouldReturnCorrectAnswer()
+        public void GetPassingTests_WrongResult_ShouldReturnCorrectAnswer()
         {
             TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
 
-            Problem problem = new Problem();
-            problem.TestsCount = 2;
-            problem.MaxMemory = 3000000;
-            problem.MaxTime = 5;
+            var problem = new Problem();
+            var testCompleted = new TestCompleted();
 
-            Test test = new Test();
-            test.CorrectAnswer = "Hello";
-            problem.Tests.Add(test);
+            problem.MaxMemory = 1000;
+            problem.MaxTime = 1000;
 
-            Test test2 = new Test();
-            test2.CorrectAnswer = "World";
-            problem.Tests.Add(test2);
+            testCompleted.Result = "   asdd   ";
+            testCompleted.ExpectedResult = "asd";
+            testCompleted.Memory = 500;
+            testCompleted.Time = 500;
 
-            Submition submition = new Submition();
+            bool isPassing = trimChecker.IsPassingTest(problem, testCompleted);
 
-            TestCompleted testCompleted = new TestCompleted();
-            testCompleted.Result = "Hello";
-            testCompleted.Time = 2;
-            testCompleted.Memory = 1000;
-            submition.CompletedTests.Add(testCompleted);
-
-            TestCompleted testCompleted2 = new TestCompleted();
-            testCompleted2.Result = "Wrong";
-            testCompleted2.Time = 2;
-            testCompleted2.Memory = 1000;
-            submition.CompletedTests.Add(testCompleted2);
-
-            bool[] res = trimChecker.GetPassingTests(submition, problem);
-
-            Assert.AreEqual(2, res.Length);
-            Assert.AreEqual(true, res[0]);
-            Assert.AreEqual(false, res[1]);
+            Assert.IsFalse(isPassing);
         }
 
         [Test]
-        public void GetPassingTests_AllFalse_ShouldReturnCorrectAnswer()
+        public void GetPassingTests_WrongMemory_ShouldReturnCorrectAnswer()
         {
             TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
 
-            Problem problem = new Problem();
-            problem.TestsCount = 2;
-            problem.MaxMemory = 3000000;
-            problem.MaxTime = 5;
+            var problem = new Problem();
+            var testCompleted = new TestCompleted();
 
-            Test test = new Test();
-            test.CorrectAnswer = "Hello";
-            problem.Tests.Add(test);
+            problem.MaxMemory = 1000;
+            problem.MaxTime = 1000;
 
-            Test test2 = new Test();
-            test2.CorrectAnswer = "World";
-            problem.Tests.Add(test2);
+            testCompleted.Result = "   asd   ";
+            testCompleted.ExpectedResult = "asd";
+            testCompleted.Memory = 1200;
+            testCompleted.Time = 500;
 
-            Submition submition = new Submition();
+            bool isPassing = trimChecker.IsPassingTest(problem, testCompleted);
 
-            TestCompleted testCompleted = new TestCompleted();
-            testCompleted.Result = "asd";
-            testCompleted.Time = 2;
-            testCompleted.Memory = 1000;
-            submition.CompletedTests.Add(testCompleted);
+            Assert.IsFalse(isPassing);
+        }
 
-            TestCompleted testCompleted2 = new TestCompleted();
-            testCompleted2.Result = "Wrong";
-            testCompleted2.Time = 2;
-            testCompleted2.Memory = 1000;
-            submition.CompletedTests.Add(testCompleted2);
+        [Test]
+        public void GetPassingTests_WrongTime_ShouldReturnCorrectAnswer()
+        {
+            TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
 
-            bool[] res = trimChecker.GetPassingTests(submition, problem);
+            var problem = new Problem();
+            var testCompleted = new TestCompleted();
 
-            Assert.AreEqual(2, res.Length);
-            Assert.AreEqual(false, res[0]);
-            Assert.AreEqual(false, res[1]);
+            problem.MaxMemory = 1000;
+            problem.MaxTime = 1000;
+
+            testCompleted.Result = "   asd   ";
+            testCompleted.ExpectedResult = "asd";
+            testCompleted.Memory = 500;
+            testCompleted.Time = 1200;
+
+            bool isPassing = trimChecker.IsPassingTest(problem, testCompleted);
+
+            Assert.IsFalse(isPassing);
         }
     }
 }

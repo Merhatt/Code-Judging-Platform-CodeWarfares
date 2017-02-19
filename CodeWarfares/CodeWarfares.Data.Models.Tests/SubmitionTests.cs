@@ -21,16 +21,6 @@ namespace CodeWarfares.Data.Models.Tests
         }
 
         [Test]
-        public void TestCounts_ShouldGetAndSet()
-        {
-            var submition = new Submition();
-
-            submition.TestCounts = 5;
-
-            Assert.AreEqual(submition.TestCounts, 5);
-        }
-
-        [Test]
         public void ProblemId_ShouldGetAndSet()
         {
             var submition = new Submition();

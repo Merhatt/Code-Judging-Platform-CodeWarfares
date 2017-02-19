@@ -29,7 +29,6 @@ namespace CodeWarfares.Data.Models.Tests
             test.Submition = sub;
             test.SubmitionId = submitionId;
             test.Time = time;
-            test.Error = error;
             test.IsCorrect = correct;
 
             Assert.AreEqual(test.Id, id);
@@ -37,7 +36,6 @@ namespace CodeWarfares.Data.Models.Tests
             Assert.AreSame(test.Submition, sub);
             Assert.AreEqual(test.SubmitionId, submitionId);
             Assert.AreEqual(test.Time, time);
-            Assert.AreEqual(test.Error, error);
             Assert.AreEqual(test.IsCorrect, correct);
             Assert.AreEqual(test.Result, result);
         }

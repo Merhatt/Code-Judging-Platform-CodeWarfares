@@ -32,16 +32,6 @@ namespace CodeWarfares.Data.Models.Tests
         }
 
         [Test]
-        public void Description_ShouldGetAndSet()
-        {
-            var problem = new Problem();
-
-            problem.Description = "Hi";
-
-            Assert.AreEqual(problem.Description, "Hi");
-        }
-
-        [Test]
         public void MaxMemory_ShouldGetAndSet()
         {
             var problem = new Problem();

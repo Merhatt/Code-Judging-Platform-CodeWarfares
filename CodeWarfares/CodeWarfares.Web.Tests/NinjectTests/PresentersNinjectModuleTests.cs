@@ -1,7 +1,9 @@
 ﻿using CodeWarfares.Web.App_Start.NinjectModules;
 using CodeWarfares.Web.Presenters.Account;
 using CodeWarfares.Web.Presenters.Account.Contracts;
+using CodeWarfares.Web.Presenters.Admin;
 using CodeWarfares.Web.Presenters.Codings;
+using CodeWarfares.Web.Presenters.Contracts;
 using CodeWarfares.Web.Presenters.Contracts.Account;
 using CodeWarfares.Web.Presenters.Contracts.Codings;
 using CodeWarfares.Web.Presenters.Contracts.MasterPages;
@@ -52,6 +54,18 @@ namespace CodeWarfares.Web.Tests.NinjectTests
             kernelMock.Setup(x => x.Bind<ICompetitionsCategoryPresenter>()).Returns(bindingCompetitionsCategoryMock.Object);
             bindingCompetitionsCategoryMock.Setup(x => x.To<CompetitionsCategoryPresenter>());
 
+            var bindingCompetitionsProblemMock = new Mock<IBindingToSyntax<ICompetitionProblemPresenter>>();
+            kernelMock.Setup(x => x.Bind<ICompetitionProblemPresenter>()).Returns(bindingCompetitionsProblemMock.Object);
+            bindingCompetitionsProblemMock.Setup(x => x.To<CompetitionProblemPresenter>());
+
+            var bindingProblemUploadMock = new Mock<IBindingToSyntax<IProblemUploadPresenter>>();
+            kernelMock.Setup(x => x.Bind<IProblemUploadPresenter>()).Returns(bindingProblemUploadMock.Object);
+            bindingProblemUploadMock.Setup(x => x.To<ProblemUploadPresenter>());
+
+            var bindingLeaderboardMock = new Mock<IBindingToSyntax<ILeaderboardPresenter>>();
+            kernelMock.Setup(x => x.Bind<ILeaderboardPresenter>()).Returns(bindingLeaderboardMock.Object);
+            bindingLeaderboardMock.Setup(x => x.To<LeaderboardPresenter>());
+
             module.OnLoad(kernelMock.Object);
 
             kernelMock.Verify(x => x.Bind<ILoginPresenter>(), Times.Once());
@@ -71,6 +85,15 @@ namespace CodeWarfares.Web.Tests.NinjectTests
 
             kernelMock.Verify(x => x.Bind<ICompetitionsCategoryPresenter>(), Times.Once());
             bindingCompetitionsCategoryMock.Verify(x => x.To<CompetitionsCategoryPresenter>(), Times.Once());
+
+            kernelMock.Verify(x => x.Bind<ICompetitionProblemPresenter>(), Times.Once());
+            bindingCompetitionsProblemMock.Verify(x => x.To<CompetitionProblemPresenter>(), Times.Once());
+
+            kernelMock.Verify(x => x.Bind<IProblemUploadPresenter>(), Times.Once());
+            bindingProblemUploadMock.Verify(x => x.To<ProblemUploadPresenter>(), Times.Once());
+
+            kernelMock.Verify(x => x.Bind<ILeaderboardPresenter>(), Times.Once());
+            bindingLeaderboardMock.Verify(x => x.To<LeaderboardPresenter>(), Times.Once());
         }
     }
 }
