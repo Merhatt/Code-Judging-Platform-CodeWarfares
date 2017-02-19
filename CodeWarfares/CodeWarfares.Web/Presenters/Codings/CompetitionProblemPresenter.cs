@@ -56,7 +56,7 @@ namespace CodeWarfares.Web.Presenters.Codings
 
         private void GetDescription(object sender, EventArgs e)
         {
-            this.View.Model.ProblemPath = "../ProblemDescriptions/ProblemDescription" + this.View.Model.Problem.Id  + ".docx";
+            this.View.Model.ProblemPath = "/ProblemDescriptions/ProblemDescription" + this.View.Model.Problem.Id  + ".docx";
         }
 
         private void Initialization(object sender, CompetitionProblemEventArgs e)

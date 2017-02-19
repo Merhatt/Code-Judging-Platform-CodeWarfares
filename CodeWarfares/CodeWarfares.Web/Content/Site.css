@@ -42,9 +42,9 @@ input[type="select"] {
     margin-bottom: 100px;
 }
 
-.header-text h1 {
-    font-weight: bold;
-}
+    .header-text h1 {
+        font-weight: bold;
+    }
 
 .home-menus {
 }
@@ -67,7 +67,7 @@ input[type="select"] {
     clear: both;
 }
 
-.task-img>img {
+.task-img > img {
     width: 250px;
     height: 180px;
 }
@@ -96,10 +96,10 @@ input[type="select"] {
     float: right;
 }
 
-.task-points>img {
-    width: 20px;
-    height: 20px;
-}
+    .task-points > img {
+        width: 20px;
+        height: 20px;
+    }
 
 .table-problems {
     border: 0px !important;
@@ -109,9 +109,9 @@ input[type="select"] {
     color: white !important;
 }
 
-.white-link:hover {
-    color: yellowgreen !important;
-}
+    .white-link:hover {
+        color: yellowgreen !important;
+    }
 
 .pagination {
     display: inline-block;
@@ -151,7 +151,7 @@ input[type="select"] {
 }
 
 .float-right {
-    float:right;
+    float: right;
 }
 
 .problem-title {
@@ -179,17 +179,19 @@ input[type="select"] {
     width: 100%;
 }
 
-.history-table th, .history-table td {
-    text-align: left;
-    padding: 8px;
-}
+    .history-table th, .history-table td {
+        text-align: left;
+        padding: 8px;
+    }
 
-.history-table tr:nth-child(even){background-color: #f2f2f2}
+    .history-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
-.history-table th {
-    background-color: #4CAF50;
-    color: white;
-}
+    .history-table th {
+        background-color: #4CAF50;
+        color: white;
+    }
 
 .synchronize {
     margin-bottom: 10px;
@@ -201,6 +203,54 @@ input[type="select"] {
     font-size: 20px !important;
     display: block;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.error-text {
+    font-weight: bold;
+    font-size: 20px;
+    color: red;
+}
+
+.error-text-outer {
+    text-align: center;
+}
+
+.input-hidden {
+    visibility: hidden;
+    width: 0px;
+    height: 0px;
+}
+
+.ctr {
+    max-width: 280px;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.vhod-panel {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.izhod-panel {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.vhod-panel-all, .izhod-panel-all {
+    float: left;
+}
+
+.izhod-panel-all {
+    margin-left: 20px;
+}
+
+.admin-page {
+    padding-top: 20px;
+}
+
+.admin-el {
     margin-bottom: 20px;
 }
 

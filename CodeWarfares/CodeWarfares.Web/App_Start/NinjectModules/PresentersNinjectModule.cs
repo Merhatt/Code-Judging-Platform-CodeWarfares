@@ -1,6 +1,8 @@
 ﻿using CodeWarfares.Web.Presenters.Account;
 using CodeWarfares.Web.Presenters.Account.Contracts;
+using CodeWarfares.Web.Presenters.Admin;
 using CodeWarfares.Web.Presenters.Codings;
+using CodeWarfares.Web.Presenters.Contracts;
 using CodeWarfares.Web.Presenters.Contracts.Account;
 using CodeWarfares.Web.Presenters.Contracts.Codings;
 using CodeWarfares.Web.Presenters.Contracts.MasterPages;
@@ -24,6 +26,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<IOpenAuthProvidersPresenter>().To<OpenAuthProvidersPresenter>();
             this.Kernel.Bind<ICompetitionsCategoryPresenter>().To<CompetitionsCategoryPresenter>();
             this.Kernel.Bind<ICompetitionProblemPresenter>().To<CompetitionProblemPresenter>();
+            this.Kernel.Bind<IProblemUploadPresenter>().To<ProblemUploadPresenter>();
         }
     }
 }

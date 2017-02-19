@@ -9,8 +9,6 @@ namespace CodeWarfares.Data.Models
 
         public string TestParameter { get; set; }
 
-        public string ResultId { get; set; }
-
         public string CorrectAnswer { get; set; }
 
         [Required]
