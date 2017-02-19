@@ -22,6 +22,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<IOpenAuthProvidersView>().To<OpenAuthProviders>();
             this.Kernel.Bind<ICompetitionProblemView>().To<CompetitionProblem>();
             this.Kernel.Bind<IProblemUploadView>().To<ProblemUpload>();
+            this.Kernel.Bind<ILeaderboardView>().To<Leaderboard>();
         }
     }
 }

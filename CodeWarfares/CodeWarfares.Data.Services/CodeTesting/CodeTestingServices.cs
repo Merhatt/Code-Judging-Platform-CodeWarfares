@@ -25,17 +25,17 @@ namespace CodeWarfares.Data.Services.CodeTesting
         {
             if (httpProvider == null)
             {
-                throw new ArgumentNullException("Http provider canot be null");
+                throw new NullReferenceException("Http provider canot be null");
             }
 
             if (jsonConverter == null)
             {
-                throw new ArgumentNullException("Json converter canot be null");
+                throw new NullReferenceException("Json converter canot be null");
             }
 
             if (passingTestsChecker == null)
             {
-                throw new ArgumentNullException("passingTestsChecker canot be null");
+                throw new NullReferenceException("passingTestsChecker canot be null");
             }
 
             this.httpProvider = httpProvider;

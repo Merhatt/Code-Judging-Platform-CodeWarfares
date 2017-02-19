@@ -17,6 +17,8 @@ namespace CodeWarfares.Data.Models
             this.problems = new HashSet<Problem>();
         }
 
+        public long TotalPoints { get; set; }
+
         public virtual ICollection<Submition> Submition { get { return this.submition; } set { this.submition = value; } }
 
         public virtual ICollection<Problem> Problems { get { return this.problems; } set { this.problems = value; } }

@@ -15,6 +15,8 @@ namespace CodeWarfares.Data.Services.Contracts.Account
 
         IQueryable<User> GetAll();
 
+        IEnumerable<User> GetAllUsersWithPoints();
+
         User GetByUsername(string username);
     }
 }

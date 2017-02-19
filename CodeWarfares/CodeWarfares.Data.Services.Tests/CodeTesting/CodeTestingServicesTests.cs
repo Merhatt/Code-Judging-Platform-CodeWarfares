@@ -3,6 +3,7 @@ using CodeWarfares.Data.Services.Enums;
 using CodeWarfares.Utils.Https;
 using CodeWarfares.Utils.Json;
 using CodeWarfares.Utils.JsonModels;
+using CodeWarfares.Utils.PassingTests;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -20,16 +21,34 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         public void Constructor_NullHttpProvider_ShouldThrow()
         {
             var jsonConverterMock = new Mock<IJsonConverter>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeTestingServices(null, jsonConverterMock.Object));
+            var ex = Assert.Throws<NullReferenceException>(() => new CodeTestingServices(null, jsonConverterMock.Object, passingTestCheckerMock.Object));
+
+            Assert.AreEqual("Http provider canot be null", ex.Message);
         }
 
         [Test]
         public void Constructor_NullJsonConverter_ShouldThrow()
         {
             var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
 
-            Assert.Throws<ArgumentNullException>(() => new CodeTestingServices(httpProviderMock.Object, null));
+            var ex = Assert.Throws<NullReferenceException>(() => new CodeTestingServices(httpProviderMock.Object, null, passingTestCheckerMock.Object));
+
+            Assert.AreEqual("Json converter canot be null", ex.Message);
+        }
+
+        [Test]
+        public void Constructor_NullPassingTestChecker_ShouldThrow()
+        {
+            var jsonConverterMock = new Mock<IJsonConverter>();
+            var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
+
+            var ex = Assert.Throws<NullReferenceException>(() => new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, null));
+
+            Assert.AreEqual("passingTestsChecker canot be null", ex.Message);
         }
 
         [Test]

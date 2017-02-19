@@ -4,6 +4,8 @@ using CodeWarfares.Data.Services.Contracts.Account;
 using CodeWarfares.Data.Services.Enums;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CodeWarfares.Data.Services.Account
@@ -70,6 +72,30 @@ namespace CodeWarfares.Data.Services.Account
         public User GetByUsername(string username)
         {
             return this.users.All().FirstOrDefault(x => x.UserName == username);
+        }
+
+        public IEnumerable<User> GetAllUsersWithPoints()
+        {
+            var allUsers = this.GetAll().ToList();
+
+            foreach (var user in allUsers)
+            {
+                var problems = user.Problems;
+
+                user.TotalPoints = 0;
+
+                foreach (var problem in problems)
+                {
+                    double biggestCompletePercentage = problem.Submitions.Where(s => s.AuthorId == user.Id)
+                        .OrderByDescending(x => x.CompletedPercentage).FirstOrDefault().CompletedPercentage;
+
+                    user.TotalPoints += (long)((biggestCompletePercentage / 100) * problem.Xp);
+                }
+            }
+
+            this.users.SaveChanges();
+
+            return allUsers;
         }
     }
 }

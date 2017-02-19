@@ -27,6 +27,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<ICompetitionsCategoryPresenter>().To<CompetitionsCategoryPresenter>();
             this.Kernel.Bind<ICompetitionProblemPresenter>().To<CompetitionProblemPresenter>();
             this.Kernel.Bind<IProblemUploadPresenter>().To<ProblemUploadPresenter>();
+            this.Kernel.Bind<ILeaderboardPresenter>().To<LeaderboardPresenter>();
         }
     }
 }
