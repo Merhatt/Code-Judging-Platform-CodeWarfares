@@ -47,12 +47,12 @@ namespace CodeWarfares.Data.Services.CodeTesting
         {
             if (source == null)
             {
-                throw new ArgumentNullException("Source cannot be null");
+                throw new NullReferenceException("Source cannot be null");
             }
 
             if (testCase == null)
             {
-                throw new ArgumentNullException("Test case cannot be null");
+                throw new NullReferenceException("Test case cannot be null");
             }
 
             string queryParameters = string.Format("access_token={0}", ApiKey);

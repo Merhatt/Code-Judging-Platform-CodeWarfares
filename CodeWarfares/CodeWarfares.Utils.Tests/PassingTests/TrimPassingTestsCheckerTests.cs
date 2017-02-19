@@ -13,19 +13,21 @@ namespace CodeWarfares.Utils.Tests.PassingTests
     public class TrimPassingTestsCheckerTests
     {
         [Test]
-        public void GetPassingTests_SubmitionNull_ShouldThrow()
-        {
-            TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
-
-            Assert.Throws<NullReferenceException>(() => trimChecker.GetPassingTests(null, new Problem()));
-        }
-
-        [Test]
         public void GetPassingTests_ProblemNull_ShouldThrow()
         {
             TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
 
-            Assert.Throws<NullReferenceException>(() => trimChecker.GetPassingTests(new Submition(), null));
+            var err = Assert.Throws<NullReferenceException>(() => trimChecker.IsPassingTest(null, new TestCompleted()));
+            Assert.AreEqual("problem cannot be null", err.Message);
+        }
+
+        [Test]
+        public void GetPassingTests_TestCompletedNull_ShouldThrow()
+        {
+            TrimPassingTestsChecker trimChecker = new TrimPassingTestsChecker();
+
+            var err = Assert.Throws<NullReferenceException>(() => trimChecker.IsPassingTest(null, new TestCompleted()));
+            Assert.AreEqual("problem cannot be null", err.Message);
         }
 
         [Test]

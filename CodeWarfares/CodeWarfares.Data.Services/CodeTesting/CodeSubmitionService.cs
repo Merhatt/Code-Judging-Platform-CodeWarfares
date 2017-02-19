@@ -26,23 +26,23 @@ namespace CodeWarfares.Data.Services.CodeTesting
         {
             if (submitions == null)
             {
-                throw new ArgumentNullException("Submitions cannot be null");
+                throw new NullReferenceException("Submitions cannot be null");
             }
             else if (codeTestingService == null)
             {
-                throw new ArgumentNullException("codeTestingService cannot be null");
+                throw new NullReferenceException("codeTestingService cannot be null");
             }
             else if (submitionFactory == null)
             {
-                throw new ArgumentNullException("submitionFactory cannot be null");
+                throw new NullReferenceException("submitionFactory cannot be null");
             }
             else if (testCompletedFactory == null)
             {
-                throw new ArgumentNullException("testCompletedFactory cannot be null");
+                throw new NullReferenceException("testCompletedFactory cannot be null");
             }
             else if (userServices == null)
             {
-                throw new ArgumentNullException("userServices cannot be null");
+                throw new NullReferenceException("userServices cannot be null");
             }
 
             this.codeTestingService = codeTestingService;
@@ -56,7 +56,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
         {
             if (submition == null)
             {
-                throw new ArgumentNullException("submition to add cannot be null");
+                throw new NullReferenceException("submition to add cannot be null");
             }
 
             this.submitions.Add(submition);
@@ -67,15 +67,15 @@ namespace CodeWarfares.Data.Services.CodeTesting
         {
             if (user == null)
             {
-                throw new ArgumentNullException("user cannot be null");
+                throw new NullReferenceException("user cannot be null");
             }
             else if (problem == null)
             {
-                throw new ArgumentNullException("problem cannot be null");
+                throw new NullReferenceException("problem cannot be null");
             }
             else if (source == null)
             {
-                throw new ArgumentNullException("source cannot be null");
+                throw new NullReferenceException("source cannot be null");
             }
 
             Submition submition = this.submitionFactory.Create();

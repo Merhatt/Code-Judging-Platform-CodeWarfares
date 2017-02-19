@@ -56,10 +56,13 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         {
             var jsonConverterMock = new Mock<IJsonConverter>();
             var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
 
-            var codeTestingService = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object);
+            var codeTestingService = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
 
-            Assert.Throws<ArgumentNullException>(() => codeTestingService.TestCode(null, ContestLaungagesTypes.CSharp, new string[] { "asd" }));
+            var err = Assert.Throws<NullReferenceException>(() => codeTestingService.TestCode(null, ContestLaungagesTypes.CSharp, "asd"));
+
+            Assert.AreEqual("Source cannot be null", err.Message);
         }
 
         [Test]
@@ -67,10 +70,13 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         {
             var jsonConverterMock = new Mock<IJsonConverter>();
             var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
 
-            var codeTestingService = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object);
+            var codeTestingService = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
 
-            Assert.Throws<ArgumentNullException>(() => codeTestingService.TestCode("scriptz", ContestLaungagesTypes.CSharp, null));
+            var err = Assert.Throws<NullReferenceException>(() => codeTestingService.TestCode("scriptz", ContestLaungagesTypes.CSharp, null));
+
+            Assert.AreEqual("Test case cannot be null", err.Message);
         }
 
         [Test]
@@ -78,29 +84,31 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         {
             var jsonConverterMock = new Mock<IJsonConverter>();
             var httpProviderMock = new Mock<IHttpProvider>();
+            var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
 
-            ResponseModel model = new ResponseModel();
+            var testingServices = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object, passingTestCheckerMock.Object);
 
-            model.Model = new SubmitionModel();
+            string json = "json";
+            string source = "Hello World";
+            string testCase = "Test";
+
+            httpProviderMock.Setup(x => x.HttpPostJson(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<IDictionary<string, string>>())).Returns(json);
+
+            var model = new ResponseModel();
+            model.Id = "123512";
 
             jsonConverterMock.Setup(x => x.JsonToModel<ResponseModel>(It.IsAny<string>())).Returns(model);
 
-            string json = "{json:true}";
+            string resultId = testingServices.TestCode(source, ContestLaungagesTypes.CSharp, testCase);
 
-            httpProviderMock.Setup(m => m.HttpPostJson(It.IsAny<string>(), It.IsAny<string>())).Returns(json);
+            var data = new Dictionary<string, string>();
 
-            var codeTestingService = new CodeTestingServices(httpProviderMock.Object, jsonConverterMock.Object);
+            data.Add("language", ((int)ContestLaungagesTypes.CSharp).ToString());
+            data.Add("sourceCode", source);
+            data.Add("input", testCase);
 
-            string[] testCases = { "Hello", "World" };
-
-            string apiKey = "hackerrank|2120084-1183|9cb5e5e3e0c716149975b167a39e70bc8c3361e5";
-            string apiUrl = "http://api.hackerrank.com/checker/submission.json";
-            string queryParameters = string.Format("source={0}&lang={1}&testcases=[\"Hello\",\"World\"]&api_key={2}", "throw new Lol())", (int)ContestLaungagesTypes.CSharp, apiKey);
-
-            SubmitionModel res = codeTestingService.TestCode("throw new Lol())", ContestLaungagesTypes.CSharp, testCases);
-
-            Assert.AreSame(model.Model, res);
-            httpProviderMock.Verify(x => x.HttpPostJson(apiUrl, queryParameters), Times.Once());
+            Assert.AreEqual(model.Id, resultId);
+            httpProviderMock.Verify(x => x.HttpPostJson("http://api.compilers.sphere-engine.com/api/v3/submissions", "access_token=ad6cce356775b67e6ed8c9b1fae44027", data), Times.Once());
             jsonConverterMock.Verify(x => x.JsonToModel<ResponseModel>(json), Times.Once());
         }
     }
