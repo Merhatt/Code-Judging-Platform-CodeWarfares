@@ -82,6 +82,13 @@
                 </div>
             </div>
         </div>
+        <div class="hideSkiplink">
+            <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" SkipLinkText=""
+                EnableViewState="False" IncludeStyleBlock="False" Orientation="Horizontal"
+                DataSourceID="SiteMapDataSource" StaticDisplayLevels="2">
+            </asp:Menu>
+            <asp:SiteMapPath ID="SiteMapPathBreadcrump" runat="server" />
+        </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
@@ -91,5 +98,6 @@
             </footer>
         </div>
     </form>
+    <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
 </body>
 </html>

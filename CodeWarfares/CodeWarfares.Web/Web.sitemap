@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="/Default.aspx" title="Coding Warfares"  description="Начална страница на приложението">
+    <siteMapNode url="/Codings/Competitions.aspx" title="Състезания"  description="Всички състезания">
+      <siteMapNode url="/Codings/CompetitionsCategory.aspx" title="Категории"  description="Всички задачи в категория" />
+      <siteMapNode url="/Codings/Leaderboard.aspx" title="Класация"  description="Всички точки" />
+    </siteMapNode>
+    <siteMapNode url="/Account/Login.aspx" title="Логин"  description="Логин" />
+    <siteMapNode url="/Account/Register.aspx" title="Регистрация"  description="Регистрация" />
+  </siteMapNode>
+</siteMap>
