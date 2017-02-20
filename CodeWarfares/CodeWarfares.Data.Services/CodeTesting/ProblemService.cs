@@ -16,7 +16,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
         {
             if (problems == null)
             {
-                throw new ArgumentNullException("problems cannot be null");
+                throw new NullReferenceException("problems cannot be null");
             }
 
             this.problems = problems;
@@ -91,16 +91,21 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
         public IEnumerable<Submition> GetLeaderboard(Problem problem)
         {
+            if (problem == null)
+            {
+                throw new NullReferenceException("problem cannot be null");
+            }
+
             IList<User> users = problem.Users.ToList();
 
             ICollection<Submition> leaderboard = new List<Submition>();
 
-            foreach (var user in users)
+            foreach (User user in users)
             {
-                var userSubmitions = user.Submition.Where(s => s.ProblemId == problem.Id &&
+                IEnumerable<Submition> userSubmitions = user.Submition.Where(s => s.ProblemId == problem.Id &&
                                 s.Finished);
 
-                if (userSubmitions == null)
+                if (userSubmitions == null || userSubmitions.Count() == 0)
                 {
                     continue;
                 }

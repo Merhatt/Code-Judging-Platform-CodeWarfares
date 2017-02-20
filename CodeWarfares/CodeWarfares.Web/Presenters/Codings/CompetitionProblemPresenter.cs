@@ -21,6 +21,21 @@ namespace CodeWarfares.Web.Presenters.Codings
 
         public CompetitionProblemPresenter(ICompetitionProblemView view, IProblemService problemService, ICodeSubmitionService codeSubmitionService, IUserServices userServices) : base(view)
         {
+            if (problemService == null)
+            {
+                throw new NullReferenceException("problemService cannot be null");
+            }
+
+            if (codeSubmitionService == null)
+            {
+                throw new NullReferenceException("codeSubmitionService cannot be null");
+            }
+
+            if (userServices == null)
+            {
+                throw new NullReferenceException("userServices cannot be null");
+            }
+
             this.laungages = new Dictionary<string, ContestLaungagesTypes>();
             this.laungages.Add("C#", ContestLaungagesTypes.CSharp);
             this.laungages.Add("C++", ContestLaungagesTypes.CPP);
@@ -81,6 +96,16 @@ namespace CodeWarfares.Web.Presenters.Codings
 
         private IEnumerable<Submition> GetSubmitions(User user, Problem problem)
         {
+            if (user == null)
+            {
+                throw new NullReferenceException("user cannot be null");
+            }
+
+            if (problem == null)
+            {
+                throw new NullReferenceException("problem cannot be null");
+            }
+
             return this.codeSubmitionService.GetAllUserSubmition(user, problem);
         }
     }

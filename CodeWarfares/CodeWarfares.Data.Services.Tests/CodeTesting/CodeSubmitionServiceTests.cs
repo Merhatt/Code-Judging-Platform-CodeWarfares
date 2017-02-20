@@ -5,15 +5,12 @@ using CodeWarfares.Data.Services.CodeTesting;
 using CodeWarfares.Data.Services.Contracts.Account;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using CodeWarfares.Data.Services.Enums;
-using CodeWarfares.Utils.JsonModels;
 using CodeWarfares.Utils.PassingTests;
 using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Services.Tests.CodeTesting
 {
@@ -229,6 +226,106 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Assert.AreEqual(1, submition.CompletedTests.Count);
             Assert.AreEqual(id, submition.CompletedTests.First().SendId);
             Assert.AreEqual(test1.CorrectAnswer, submition.CompletedTests.First().ExpectedResult);
+        }
+
+        [Test]
+        public void GetAllUserSubmition_UserNull_ShouldThrow()
+        {
+            var repositoryMock = new Mock<IRepository<Submition>>();
+            var codeTestingServicesMock = new Mock<ICodeTestingServices>();
+            var submitionFactoryMock = new Mock<ISubmitionFactory>();
+            var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
+            var userServicesMock = new Mock<IUserServices>();
+
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, userServicesMock.Object);
+
+            User user = new User();
+            Problem problem = new Problem();
+
+            var err = Assert.Throws<NullReferenceException>(() => codeSubmitionService.GetAllUserSubmition(null, problem));
+
+            Assert.AreEqual("user cannot be null", err.Message);
+        }
+
+        [Test]
+        public void GetAllUserSubmition_ProblemNull_ShouldThrow()
+        {
+            var repositoryMock = new Mock<IRepository<Submition>>();
+            var codeTestingServicesMock = new Mock<ICodeTestingServices>();
+            var submitionFactoryMock = new Mock<ISubmitionFactory>();
+            var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
+            var userServicesMock = new Mock<IUserServices>();
+
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, userServicesMock.Object);
+
+            User user = new User();
+            Problem problem = new Problem();
+
+            var err = Assert.Throws<NullReferenceException>(() => codeSubmitionService.GetAllUserSubmition(user, null));
+
+            Assert.AreEqual("problem cannot be null", err.Message);
+        }
+
+        [Test]
+        public void GetAllUserSubmition_UserSubmitionsNull_ShouldReturnEmptyCollection()
+        {
+            var repositoryMock = new Mock<IRepository<Submition>>();
+            var codeTestingServicesMock = new Mock<ICodeTestingServices>();
+            var submitionFactoryMock = new Mock<ISubmitionFactory>();
+            var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
+            var userServicesMock = new Mock<IUserServices>();
+
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, userServicesMock.Object);
+
+            User user = new User();
+            Problem problem = new Problem();
+
+            user.Submition = null;
+
+            IEnumerable<Submition> res = codeSubmitionService.GetAllUserSubmition(user, problem);
+
+            Assert.AreEqual(0, res.Count());
+        }
+
+        [Test]
+        public void GetAllUserSubmition_UserSubmitionsNotNull_ShouldReturnCollection()
+        {
+            var repositoryMock = new Mock<IRepository<Submition>>();
+            var codeTestingServicesMock = new Mock<ICodeTestingServices>();
+            var submitionFactoryMock = new Mock<ISubmitionFactory>();
+            var testCompleteFactoryMock = new Mock<ITestCompletedFactory>();
+            var userServicesMock = new Mock<IUserServices>();
+
+            var codeSubmitionService = new CodeSubmitionService(repositoryMock.Object, codeTestingServicesMock.Object, submitionFactoryMock.Object, testCompleteFactoryMock.Object, userServicesMock.Object);
+
+            User user = new User();
+            Problem problem = new Problem();
+
+            problem.Id = 2;
+
+            Submition sub1 = new Submition();
+            sub1.ProblemId = 2;
+
+            Submition sub2 = new Submition();
+            sub2.ProblemId = 2;
+
+            Submition sub3 = new Submition();
+            sub3.ProblemId = 3;
+
+            user.Submition.Add(sub1);
+            user.Submition.Add(sub2);
+            user.Submition.Add(sub3);
+
+            codeTestingServicesMock.Setup(x => x.GetAreAllTestsCompleted(It.IsAny<Problem>(), It.IsAny<Submition>())).Returns(true);
+
+            IEnumerable<Submition> res = codeSubmitionService.GetAllUserSubmition(user, problem);
+
+            Assert.AreEqual(2, res.Count());
+            Assert.IsTrue(sub1.Finished);
+            Assert.IsTrue(sub2.Finished);
+            Assert.IsFalse(sub3.Finished);
+
+            repositoryMock.Verify(x => x.SaveChanges(), Times.Exactly(2));
         }
     }
 }

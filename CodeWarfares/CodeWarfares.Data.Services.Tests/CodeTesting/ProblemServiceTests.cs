@@ -18,7 +18,8 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         [Test]
         public void Constructor_NullProblems_ShouldThrow()
         {
-            Assert.Throws<ArgumentNullException>(() => new ProblemService(null));
+            var err = Assert.Throws<NullReferenceException>(() => new ProblemService(null));
+            Assert.AreEqual("problems cannot be null", err.Message);
         }
 
         [Test]
@@ -274,6 +275,53 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
 
             Assert.AreEqual(1, problemsRes.Count);
             Assert.AreSame(problem, problemsRes[0]);
+        }
+
+        [Test]
+        public void GetLeaderboard_NullProblem_ShouldThrow()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            var err = Assert.Throws<NullReferenceException>(() => problemService.GetLeaderboard(null));
+
+            Assert.AreEqual("problem cannot be null", err.Message);
+        }
+
+        [Test]
+        public void GetLeaderboard_ShouldGetLeaderboard()
+        {
+            var problemsMock = new Mock<IRepository<Problem>>();
+
+            var problemService = new ProblemService(problemsMock.Object);
+
+            Problem problem = new Problem();
+            problem.Id = 2;
+
+            User user1 = new User();
+            Submition user1Sub1 = new Submition();
+            user1Sub1.ProblemId = 2;
+            user1Sub1.CompletedPercentage = 12;
+            user1Sub1.Finished = true;
+
+            Submition user1Sub2 = new Submition();
+            user1Sub2.ProblemId = 2;
+            user1Sub2.CompletedPercentage = 50;
+            user1Sub2.Finished = true;
+
+            User user2 = new User();
+
+            user1.Submition.Add(user1Sub1);
+            user1.Submition.Add(user1Sub2);
+
+            problem.Users.Add(user1);
+            problem.Users.Add(user2);
+
+            IEnumerable<Submition> res = problemService.GetLeaderboard(problem);
+
+            Assert.AreEqual(1, res.Count());
+            Assert.AreSame(user1Sub2, res.First());
         }
     }
 }
