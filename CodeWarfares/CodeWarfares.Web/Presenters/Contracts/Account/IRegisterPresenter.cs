@@ -9,6 +9,5 @@ namespace CodeWarfares.Web.Presenters.Contracts.Account
 {
     public interface IRegisterPresenter
     {
-        void Register(object sender, RegisterEventArgs e);
     }
 }

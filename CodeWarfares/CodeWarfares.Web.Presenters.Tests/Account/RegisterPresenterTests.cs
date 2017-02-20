@@ -34,8 +34,19 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
         public void Constructor_ShouldThrowArgumentNullException()
         {
             IRegisterView view = null;
+            var userFactoryMock = new Mock<IUserFactory>();
 
-            Assert.Throws<NullReferenceException>(() => new RegisterPresenter(view, null));
+            Assert.Throws<NullReferenceException>(() => new RegisterPresenter(view, userFactoryMock.Object));
+        }
+
+        [Test]
+        public void Constructor_UserFactoryNull_ShouldThrowArgumentNullException()
+        {
+            var view = new Mock<IRegisterView>();
+            var userFactoryMock = new Mock<IUserFactory>();
+
+            var err = Assert.Throws<NullReferenceException>(() => new RegisterPresenter(view.Object, null));
+            Assert.AreEqual("userFactory cannot be null", err.Message);
         }
 
         [Test]
@@ -73,7 +84,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
 
-            registerPresenter.Register("asd", args);
+            mockedIRegisterView.Raise(x => x.RegisterEvent += null, args);
 
             Assert.AreEqual(username, recivedUsername);
             Assert.AreEqual(email, recivedEmail);
@@ -117,7 +128,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
 
-            registerPresenter.Register("asd", args);
+            mockedIRegisterView.Raise(x => x.RegisterEvent += null, args);
 
             mockedUserManager.Verify(x => x.CreateUser(mockedUser.Object, password), Times.Once());
         }
@@ -162,7 +173,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
 
-            registerPresenter.Register("asd", args);
+            mockedIRegisterView.Raise(x => x.RegisterEvent += null, args);
 
             mockedSignInManager.Verify(x => x.SignIn(It.IsAny<string>(), password, false, false), Times.Once);
             Assert.IsTrue(model.Success);
@@ -208,7 +219,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             RegisterEventArgs args = new RegisterEventArgs(mockedUserManager.Object, mockedSignInManager.Object, username, email, password);
 
-            registerPresenter.Register("asd", args);
+            mockedIRegisterView.Raise(x => x.RegisterEvent += null, args);
 
             Assert.AreEqual("Cannot register", model.ErrorText);
         }

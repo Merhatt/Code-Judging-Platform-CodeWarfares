@@ -18,7 +18,7 @@ namespace CodeWarfares.Web.Presenters.Account
             view.MyInit += this.Initialization;
         }
 
-        public void Initialization(object sender, OpenAuthProvidersInitEventArgs e)
+        private void Initialization(object sender, OpenAuthProvidersInitEventArgs e)
         {
             if (e.IsPostBack == false || e.Provider == null)
             {

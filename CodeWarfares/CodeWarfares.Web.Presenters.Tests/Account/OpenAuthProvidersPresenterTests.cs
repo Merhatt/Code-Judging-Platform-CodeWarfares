@@ -29,7 +29,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             bool isResolveCalled = false;
             var args = new OpenAuthProvidersInitEventArgs(false, "", "", "", (asd) => { isResolveCalled = true; return ""; });
 
-            presenter.Initialization("Sender", args);
+            viewMock.Raise(x => x.MyInit += null, args);
 
             Assert.IsFalse(isResolveCalled);
         }
@@ -47,7 +47,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
             bool isResolveCalled = false;
             var args = new OpenAuthProvidersInitEventArgs(true, "provider", "providerNameKey", "returnUrl", (asd) => { isResolveCalled = true; return asd; });
 
-            presenter.Initialization("Sender", args);
+            viewMock.Raise(x => x.MyInit += null, args);
 
             Assert.IsTrue(isResolveCalled);
             Assert.AreEqual(String.Format(CultureInfo.InvariantCulture, "~/Account/RegisterExternalLogin?{0}={1}&returnUrl={2}", args.ProviderNameKey, args.Provider, args.ReturnUrl), presenter.View.Model.RedirectUrl);

@@ -8,6 +8,5 @@ namespace CodeWarfares.Web.Presenters.Contracts.Codings
 {
     public interface ICompetitionsPresenter
     {
-        void Initialize(object sender, EventArgs e);
     }
 }

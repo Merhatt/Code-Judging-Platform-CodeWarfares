@@ -18,11 +18,16 @@ namespace CodeWarfares.Web.Presenters.Account
 
         public RegisterPresenter(IRegisterView view, IUserFactory userFactory) : base(view)
         {
+            if (userFactory == null)
+            {
+                throw new NullReferenceException("userFactory cannot be null");
+            }
+
             this.userFactory = userFactory;
             view.RegisterEvent += Register;
         }
 
-        public void Register(object sender, RegisterEventArgs e)
+        private void Register(object sender, RegisterEventArgs e)
         {
             IApplicationUserManager userManager = e.UserManager;
             IApplicationSignInManager signInManager = e.SignInManager;

@@ -22,7 +22,9 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
         {
             var viewMock = new Mock<ICompetitionsView>();
 
-            Assert.Throws<ArgumentNullException>(() => new CompetitionsPresenter(viewMock.Object, null));
+            var err = Assert.Throws<NullReferenceException>(() => new CompetitionsPresenter(viewMock.Object, null));
+
+            Assert.AreEqual("problemService cannot be null", err.Message);
         }
 
         [Test]
@@ -46,7 +48,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
 
             var presenter = new CompetitionsPresenter(viewMock.Object, problemServiceMock.Object);
 
-            presenter.Initialize("sender", new EventArgs());
+            viewMock.Raise(x => x.MyInit += null, new EventArgs());
 
             problemServiceMock.Verify(x => x.GetNewestTopFromCategory(4, DifficultyType.Easy), Times.Once());
             Assert.AreEqual(2, model.EasyProblems.ToList().Count);
@@ -75,7 +77,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
 
             var presenter = new CompetitionsPresenter(viewMock.Object, problemServiceMock.Object);
 
-            presenter.Initialize("sender", new EventArgs());
+            viewMock.Raise(x => x.MyInit += null, new EventArgs());
 
             problemServiceMock.Verify(x => x.GetNewestTopFromCategory(4, DifficultyType.Medium), Times.Once());
             Assert.AreEqual(2, model.MediumProblems.ToList().Count);
@@ -104,7 +106,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
 
             var presenter = new CompetitionsPresenter(viewMock.Object, problemServiceMock.Object);
 
-            presenter.Initialize("sender", new EventArgs());
+            viewMock.Raise(x => x.MyInit += null, new EventArgs());
 
             problemServiceMock.Verify(x => x.GetNewestTopFromCategory(4, DifficultyType.Hard), Times.Once());
             Assert.AreEqual(2, model.HardProblems.ToList().Count);
@@ -133,7 +135,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
 
             var presenter = new CompetitionsPresenter(viewMock.Object, problemServiceMock.Object);
 
-            presenter.Initialize("sender", new EventArgs());
+            viewMock.Raise(x => x.MyInit += null, new EventArgs());
 
             problemServiceMock.Verify(x => x.GetNewestTopFromCategory(4, DifficultyType.VeryHard), Times.Once());
             Assert.AreEqual(2, model.VeryHardProblems.ToList().Count);

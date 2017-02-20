@@ -19,7 +19,7 @@ namespace CodeWarfares.Web.Presenters.Codings
         {
             if (problemService == null)
             {
-                throw new ArgumentNullException("problemService cannot be null");
+                throw new NullReferenceException("problemService cannot be null");
             }
 
             this.problemService = problemService;
@@ -27,7 +27,7 @@ namespace CodeWarfares.Web.Presenters.Codings
             view.MyInit += Initialize;
         }
 
-        public void Initialize(object sender, EventArgs e)
+        private void Initialize(object sender, EventArgs e)
         {
             this.View.Model.EasyProblems = this.problemService.GetNewestTopFromCategory(ProblemCount, DifficultyType.Easy).ToList();
             this.View.Model.MediumProblems = this.problemService.GetNewestTopFromCategory(ProblemCount, DifficultyType.Medium).ToList();

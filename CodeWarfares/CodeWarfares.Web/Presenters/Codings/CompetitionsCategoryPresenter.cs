@@ -17,7 +17,7 @@ namespace CodeWarfares.Web.Presenters.Codings
         {
             if (problemService == null)
             {
-                throw new ArgumentNullException("problemService cannot be null");
+                throw new NullReferenceException("problemService cannot be null");
             }
 
             this.problemService = problemService;
@@ -25,7 +25,7 @@ namespace CodeWarfares.Web.Presenters.Codings
             view.MyInit += Initialize;
         }
 
-        public void Initialize(object sender, CompetitionsCategoryEventArgs e)
+        private void Initialize(object sender, CompetitionsCategoryEventArgs e)
         {
             DifficultyType diffuculty;
 

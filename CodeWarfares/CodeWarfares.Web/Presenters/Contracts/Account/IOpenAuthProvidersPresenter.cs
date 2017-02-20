@@ -9,6 +9,5 @@ namespace CodeWarfares.Web.Presenters.Contracts.Account
 {
     public interface IOpenAuthProvidersPresenter
     {
-        void Initialization(object sender, OpenAuthProvidersInitEventArgs e);
     }
 }

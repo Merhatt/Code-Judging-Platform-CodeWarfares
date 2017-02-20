@@ -23,7 +23,9 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
         {
             var viewMock = new Mock<ICompetitionsCategoryView>();
 
-            Assert.Throws<ArgumentNullException>(() => new CompetitionsCategoryPresenter(viewMock.Object, null));
+            var err = Assert.Throws<NullReferenceException>(() => new CompetitionsCategoryPresenter(viewMock.Object, null));
+
+            Assert.AreEqual("problemService cannot be null", err.Message);
         }
 
         [Test]
@@ -49,7 +51,8 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             string difficulty = "Easy";
 
             var args = new CompetitionsCategoryEventArgs(difficulty);
-            presenter.Initialize("sender", args);
+
+            viewMock.Raise(x => x.MyInit += null, args);
 
             Assert.AreEqual(2, model.Problems.Count());
             Assert.AreEqual("Лесни Задачи", model.CategoryTitle);
@@ -79,7 +82,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             string difficulty = "Medium";
 
             var args = new CompetitionsCategoryEventArgs(difficulty);
-            presenter.Initialize("sender", args);
+            viewMock.Raise(x => x.MyInit += null, args);
 
             Assert.AreEqual(2, model.Problems.Count());
             Assert.AreEqual("Средни Задачи", model.CategoryTitle);
@@ -109,7 +112,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             string difficulty = "Hard";
 
             var args = new CompetitionsCategoryEventArgs(difficulty);
-            presenter.Initialize("sender", args);
+            viewMock.Raise(x => x.MyInit += null, args);
 
             Assert.AreEqual(2, model.Problems.Count());
             Assert.AreEqual("Трудни Задачи", model.CategoryTitle);
@@ -139,7 +142,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             string difficulty = "VeryHard";
 
             var args = new CompetitionsCategoryEventArgs(difficulty);
-            presenter.Initialize("sender", args);
+            viewMock.Raise(x => x.MyInit += null, args);
 
             Assert.AreEqual(2, model.Problems.Count());
             Assert.AreEqual("Много Трудни Задачи", model.CategoryTitle);
