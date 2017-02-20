@@ -31,7 +31,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
         {
             ILoginView view = null;
 
-            Assert.Throws<NullReferenceException>(() =>  new LoginPresenter(view) );
+            Assert.Throws<NullReferenceException>(() => new LoginPresenter(view));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             var loginPresenter = new LoginPresenter(mockedILoginView.Object);
 
-            loginPresenter.Initialize("sender", null);
+            mockedILoginView.Raise(x => x.MyInit += null, new EventArgs());
 
             Assert.AreEqual("Register", model.RegisterNavigateUrl);
         }
@@ -70,8 +70,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             var loginPresenter = new LoginPresenter(mockedILoginView.Object);
 
-            loginPresenter.SignIn("sender", args);
-
+            mockedILoginView.Raise(x => x.SignInEvent += null, args);
 
             mockedSignInManager.Verify(x => x.SignIn(username, password, isPersistent, false), Times.Once);
             Assert.IsTrue(model.IsSignedIn);
@@ -98,8 +97,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Account
 
             var loginPresenter = new LoginPresenter(mockedILoginView.Object);
 
-            loginPresenter.SignIn("asd", args);
-
+            mockedILoginView.Raise(x => x.SignInEvent += null, args);
 
             mockedSignInManager.Verify(x => x.SignIn(username, password, isPersistent, false), Times.Once);
 

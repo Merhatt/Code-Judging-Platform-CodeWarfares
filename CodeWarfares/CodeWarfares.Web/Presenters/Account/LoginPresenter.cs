@@ -20,12 +20,12 @@ namespace CodeWarfares.Web.Presenters.Account
             view.SignInEvent += SignIn;
         }
 
-        public void Initialize(object obj, EventArgs e)
+        private void Initialize(object obj, EventArgs e)
         {
             this.View.Model.RegisterNavigateUrl = "Register";
         }
 
-        public void SignIn(object sender, SignInEventArgs e)
+        private void SignIn(object sender, SignInEventArgs e)
         {
             if (e.AreFieldsValid)
             {
