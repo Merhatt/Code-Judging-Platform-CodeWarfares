@@ -20,9 +20,22 @@ namespace CodeWarfares.Web.Codings
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = int.Parse(this.Request.QueryString["Id"]);
+            int id = 0;
+            bool canParse = int.TryParse(this.Request.QueryString["Id"], out id);
+
+            if (canParse == false)
+            {
+                this.Response.Redirect("/Errors/404");
+                return;
+            }
 
             this.MyInit?.Invoke(sender, new ProblemLeaderboardInitEventArgs(id));
+
+            if (this.Model.PageNotFound)
+            {
+                this.Response.Redirect("/Errors/404");
+                return;
+            }
 
             this.ProblemLeaderboardGridView.DataSource = this.Model.Leaderboard.ToList();
             this.ProblemLeaderboardGridView.DataBind();

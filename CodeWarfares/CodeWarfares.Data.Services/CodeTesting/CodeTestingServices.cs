@@ -110,8 +110,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
                     {
                         test.Result = model.StdOut;
                         test.Memory = model.Memory;
-                        test.IsCorrect = this.passingTestChecker.IsPassingTest(problem, test);
-                        test.Compiled = true;
+                        test.IsCorrect = this.passingTestChecker.IsPassingTest(problem, test);;
 
                         if (test.IsCorrect)
                         {

@@ -55,5 +55,33 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             problemServiceMock.Verify(x => x.GetLeaderboard(problem), Times.Once());
             Assert.AreSame(submitions, viewModel.Leaderboard);
         }
+
+        [Test]
+        public void Initialize_NullProblem_ShouldRedirect()
+        {
+            var viewMock = new Mock<IProblemLeaderboardView>();
+            var problemServiceMock = new Mock<IProblemService>();
+            var viewModel = new ProblemLeaderboardModel();
+
+            viewMock.SetupGet(x => x.Model).Returns(viewModel);
+
+            var presenter = new ProblemLeaderboardPresenter(viewMock.Object, problemServiceMock.Object);
+
+            var args = new ProblemLeaderboardInitEventArgs(5);
+
+            Problem problem = null;
+
+            problemServiceMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(problem);
+
+            var submitions = new List<Submition>();
+
+            problemServiceMock.Setup(x => x.GetLeaderboard(It.IsAny<Problem>())).Returns(submitions);
+
+            viewMock.Raise(x => x.MyInit += null, args);
+
+            problemServiceMock.Verify(x => x.GetById(5), Times.Once());
+            problemServiceMock.Verify(x => x.GetLeaderboard(It.IsAny<Problem>()), Times.Never());
+            Assert.IsTrue(viewModel.PageNotFound);
+        }
     }
 }

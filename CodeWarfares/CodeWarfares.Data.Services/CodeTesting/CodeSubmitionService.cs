@@ -4,13 +4,9 @@ using CodeWarfares.Data.Models.Factories;
 using CodeWarfares.Data.Services.Contracts.Account;
 using CodeWarfares.Data.Services.Contracts.CodeTesting;
 using CodeWarfares.Data.Services.Enums;
-using CodeWarfares.Utils.JsonModels;
-using CodeWarfares.Utils.PassingTests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Services.CodeTesting
 {

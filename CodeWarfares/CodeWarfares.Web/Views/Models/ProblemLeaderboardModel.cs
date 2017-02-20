@@ -8,5 +8,7 @@ namespace CodeWarfares.Web.Views.Models
         public IEnumerable<Submition> Leaderboard { get; set; }
 
         public Problem ProblemNow { get; set; }
+
+        public bool PageNotFound { get; set; }
     }
 }

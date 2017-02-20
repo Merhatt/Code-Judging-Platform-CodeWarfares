@@ -31,6 +31,12 @@ namespace CodeWarfares.Web.Presenters.Codings
         {
             Problem problem = this.problemService.GetById(e.Id);
 
+            if (problem == null)
+            {
+                this.View.Model.PageNotFound = true;
+                return;
+            }
+
             this.View.Model.ProblemNow = problem;
 
             this.View.Model.Leaderboard = this.problemService.GetLeaderboard(problem);
