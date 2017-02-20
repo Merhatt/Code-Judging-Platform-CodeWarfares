@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Leaderboard.aspx.cs" Inherits="CodeWarfares.Web.Codings.Leaderboard" %>
-<%@ OutputCache Duration="30" VaryByParam="None" %>
+<%@ OutputCache Duration="5" VaryByParam="None" %>
 <asp:Content ID="PageBody" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="ProblemName" runat="server" class="leaderboard-problemname"></asp:Label>
     <asp:GridView ID="ProblemLeaderboardGridView" runat="server" AutoGenerateColumns="False"

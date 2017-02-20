@@ -20,9 +20,22 @@ namespace CodeWarfares.Web.Codings
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = int.Parse(this.Request.QueryString["Id"]);
+            int id = 0;
+            bool canParse = int.TryParse(this.Request.QueryString["Id"], out id);
+
+            if (canParse == false)
+            {
+                Response.Redirect("/Errors/404");
+                return;
+            }
 
             MyInitEvent.Invoke(this, new CompetitionProblemEventArgs(id, this.User.Identity.Name));
+
+            if (this.Model.NotFoundPage)
+            {
+                Response.Redirect("/Errors/404");
+                return;
+            }
 
             this.PageTitle.InnerText = this.Model.ProblemTitle;
 
@@ -66,10 +79,23 @@ namespace CodeWarfares.Web.Codings
 
         protected void PartialPostBackSynchronization_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(this.Request.QueryString["Id"]);
+            int id = 0;
+            bool canParse = int.TryParse(this.Request.QueryString["Id"], out id);
+
+            if (canParse == false)
+            {
+                Response.Redirect("/Errors/404");
+                return;
+            }
 
             this.SetSubmitionsEventArgs.Invoke(this, new CompetitionProblemEventArgs(id, this.User.Identity.Name));
-            
+
+            if (this.Model.NotFoundPage)
+            {
+                Response.Redirect("/Errors/404");
+                return;
+            }
+
             this.SubmitionsGridView.DataSource = this.Model.UserSubmitions.ToList();
             this.SubmitionsGridView.DataBind();
         }

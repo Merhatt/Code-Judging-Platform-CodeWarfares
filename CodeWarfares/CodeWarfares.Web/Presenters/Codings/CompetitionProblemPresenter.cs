@@ -38,8 +38,50 @@ namespace CodeWarfares.Web.Presenters.Codings
 
             this.laungages = new Dictionary<string, ContestLaungagesTypes>();
             this.laungages.Add("C#", ContestLaungagesTypes.CSharp);
-            this.laungages.Add("C++", ContestLaungagesTypes.CPP);
             this.laungages.Add("C", ContestLaungagesTypes.C);
+            this.laungages.Add("C++ 14", ContestLaungagesTypes.CPP14);
+            this.laungages.Add("C++ 4.3.2", ContestLaungagesTypes.CPPGcc432);
+            this.laungages.Add("C++ 4.9.2", ContestLaungagesTypes.CPPGcc492);
+            this.laungages.Add("C99", ContestLaungagesTypes.C99);
+            this.laungages.Add("CLIPS", ContestLaungagesTypes.CLIPS);
+            this.laungages.Add("Clojure", ContestLaungagesTypes.Clojure);
+            this.laungages.Add("COBOL", ContestLaungagesTypes.Cobol);
+            this.laungages.Add("D", ContestLaungagesTypes.D);
+            this.laungages.Add("Erlang", ContestLaungagesTypes.Erlang);
+            this.laungages.Add("F#", ContestLaungagesTypes.FSharp);
+            this.laungages.Add("Factor", ContestLaungagesTypes.Factor);
+            this.laungages.Add("Forth", ContestLaungagesTypes.Forth);
+            this.laungages.Add("Fortran", ContestLaungagesTypes.Fortran);
+            this.laungages.Add("Go", ContestLaungagesTypes.Go);
+            this.laungages.Add("Groovy", ContestLaungagesTypes.Groovy);
+            this.laungages.Add("Haskell", ContestLaungagesTypes.Haskel);
+            this.laungages.Add("Icon", ContestLaungagesTypes.Icon);
+            this.laungages.Add("Intercal", ContestLaungagesTypes.Intercal);
+            this.laungages.Add("Java", ContestLaungagesTypes.Java);
+            this.laungages.Add("JavaScript", ContestLaungagesTypes.Javascript);
+            this.laungages.Add("Lua", ContestLaungagesTypes.Lua);
+            this.laungages.Add("Nemerle", ContestLaungagesTypes.Nemerle);
+            this.laungages.Add("Nice", ContestLaungagesTypes.Nice);
+            this.laungages.Add("Nimrod", ContestLaungagesTypes.Nimrod);
+            this.laungages.Add("Node.js", ContestLaungagesTypes.NodeJs);
+            this.laungages.Add("Objective-C", ContestLaungagesTypes.ObjectiveC);
+            this.laungages.Add("Ocaml", ContestLaungagesTypes.Ocaml);
+            this.laungages.Add("Octave", ContestLaungagesTypes.Octave);
+            this.laungages.Add("Oz", ContestLaungagesTypes.Oz);
+            this.laungages.Add("PARIGP", ContestLaungagesTypes.PariGp);
+            this.laungages.Add("Pascal", ContestLaungagesTypes.Pascal);
+            this.laungages.Add("Perl", ContestLaungagesTypes.Perl);
+            this.laungages.Add("PHP", ContestLaungagesTypes.PHP);
+            this.laungages.Add("Pike", ContestLaungagesTypes.Pike);
+            this.laungages.Add("Prolog", ContestLaungagesTypes.Prolog);
+            this.laungages.Add("Python", ContestLaungagesTypes.Python);
+            this.laungages.Add("R", ContestLaungagesTypes.R);
+            this.laungages.Add("Ruby", ContestLaungagesTypes.Ruby);
+            this.laungages.Add("Scala", ContestLaungagesTypes.Scala);
+            this.laungages.Add("Scheme", ContestLaungagesTypes.Scheme);
+            this.laungages.Add("Smalltalk", ContestLaungagesTypes.SmallTalk);
+            this.laungages.Add("VB.NET", ContestLaungagesTypes.VBNET);
+            this.laungages.Add("Whitespace", ContestLaungagesTypes.WhiteSpace);
 
             view.MyInitEvent += Initialization;
             view.GetDescriptionEvent += GetDescription;
@@ -56,6 +98,11 @@ namespace CodeWarfares.Web.Presenters.Codings
             User user = this.userServices.GetByUsername(e.Username);
 
             Problem problemNow = this.problemService.GetById(e.ProblemId);
+
+            if (problemNow == null)
+            {
+                this.View.Model.NotFoundPage = true;
+            }
 
             this.View.Model.UserSubmitions = GetSubmitions(user, problemNow);
         }
@@ -77,6 +124,13 @@ namespace CodeWarfares.Web.Presenters.Codings
         private void Initialization(object sender, CompetitionProblemEventArgs e)
         {
             Problem problemNow = this.problemService.GetById(e.ProblemId);
+
+            if (problemNow == null)
+            {
+                this.View.Model.NotFoundPage = true;
+                return;
+            }
+
             this.View.Model.ProblemTitle = problemNow.Name;
             this.View.Model.Problem = problemNow;
 

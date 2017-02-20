@@ -16,6 +16,8 @@ namespace CodeWarfares.Web.Views.Models
 
         public Problem Problem { get; set; }
 
+        public bool NotFoundPage { get; set; }
+
         public IEnumerable<Submition> UserSubmitions { get; set; }
     }
 }

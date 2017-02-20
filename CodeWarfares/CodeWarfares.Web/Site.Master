@@ -47,6 +47,7 @@
                     </button>
                     <a class="navbar-brand navbar-link white-link" runat="server" href="~/">Code Warfares</a>
                     <a class="navbar-brand navbar-link white-link" runat="server" href="~/Codings/Competitions.aspx">Задачи</a>
+                    <a class="navbar-brand navbar-link white-link" runat="server" href="~/Codings/Leaderboard.aspx">Класация</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
@@ -63,17 +64,17 @@
                                         <li><a runat="server" class="white-link" href="~/Admin/ProblemUpload">Качи Задача</a></li>
                                         <li><a runat="server" class="white-link" href="~/" title="Manage your account">Здравей, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                         <li>
-                                            <asp:LoginStatus runat="server" class="white-link" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                            <asp:LoginStatus runat="server" class="white-link" LogoutAction="Redirect" LogoutText="Излез" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                         </li>
                                     </ul>
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>
                         <LoggedInTemplate>
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav navbar-right navbar-link">
                                 <li><a runat="server" class="white-link" href="~/" title="Manage your account">Здравей, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                 <li>
-                                    <asp:LoginStatus runat="server" class="white-link" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                    <asp:LoginStatus runat="server" class="white-link" LogoutAction="Redirect" LogoutText="Излез" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
                         </LoggedInTemplate>

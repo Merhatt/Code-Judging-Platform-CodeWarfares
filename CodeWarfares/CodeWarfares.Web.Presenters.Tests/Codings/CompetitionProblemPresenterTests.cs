@@ -98,6 +98,8 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
 
             Problem problem = null;
 
+            viewMock.SetupGet(x => x.Model).Returns(new CompetitionProblemViewModel());
+
             userServiceMock.Setup(x => x.GetByUsername(It.IsAny<string>())).Returns(user);
             problemServiceMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(problem);
 
@@ -262,6 +264,46 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
 
             userServiceMock.Verify(x => x.GetByUsername(username), Times.Once());
             codeSubmitionServiceMock.Verify(x => x.GetAllUserSubmition(user, problem), Times.Once());
+        }
+
+        [Test]
+        public void Initialization_NullProblem()
+        {
+            var viewMock = new Mock<ICompetitionProblemView>();
+            var problemServiceMock = new Mock<IProblemService>();
+            var codeSubmitionServiceMock = new Mock<ICodeSubmitionService>();
+            var userServiceMock = new Mock<IUserServices>();
+
+            var competitionProblemPresenter = new CompetitionProblemPresenter(viewMock.Object, problemServiceMock.Object, codeSubmitionServiceMock.Object, userServiceMock.Object);
+
+            int problemId = 2;
+            string username = "Gosho";
+
+            var args = new CompetitionProblemEventArgs(problemId, username);
+
+            User user = new User();
+
+            var model = new CompetitionProblemViewModel();
+
+            Problem problem = null;
+
+            model.Problem = problem;
+
+            viewMock.SetupGet(x => x.Model).Returns(model);
+
+            userServiceMock.Setup(x => x.GetByUsername(It.IsAny<string>())).Returns(user);
+            problemServiceMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(problem);
+
+            var submitions = new List<Submition>();
+            submitions.Add(new Submition());
+
+            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions);
+
+            viewMock.Raise(x => x.MyInitEvent += null, args);
+
+            userServiceMock.Verify(x => x.GetByUsername(username), Times.Never());
+            codeSubmitionServiceMock.Verify(x => x.GetAllUserSubmition(user, problem), Times.Never());
+            Assert.IsTrue(model.NotFoundPage);
         }
     }
 }
