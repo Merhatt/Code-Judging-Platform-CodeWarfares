@@ -117,15 +117,19 @@ namespace CodeWarfares.Data.Models.Tests
         }
 
         [Test]
-        public void User_ShouldGetAndSet()
+        public void ShouldGetAndSetAll()
         {
             var submition = new Submition();
 
             var pr = new User();
 
             submition.Author = pr;
+            submition.LaungageId = 5;
+            submition.CompletedTests = new List<TestCompleted>();
 
             Assert.AreSame(pr, submition.Author);
+            Assert.AreEqual(5, submition.LaungageId);
+            Assert.AreEqual(0, submition.CompletedTests.Count);
         }
     }
 }

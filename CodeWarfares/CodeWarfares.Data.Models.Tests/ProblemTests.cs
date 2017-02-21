@@ -86,5 +86,21 @@ namespace CodeWarfares.Data.Models.Tests
 
             Assert.AreSame(subm, problem.Tests.First());
         }
+
+        [Test]
+        public void ShouldGetAndSetAll()
+        {
+            var problem = new Problem();
+
+            problem.CoverImageUrl = "asd";
+            problem.Submitions = new List<Submition>() { new Submition() };
+            problem.Tests = new List<Test>() { new Test() };
+            problem.Users = new List<User>() { new User() };
+
+            Assert.AreEqual("asd", problem.CoverImageUrl);
+            Assert.AreEqual(1, problem.Submitions.Count);
+            Assert.AreEqual(1, problem.Tests.Count);
+            Assert.AreEqual(1, problem.Users.Count);
+        }
     }
 }
