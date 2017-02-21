@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProblemUpload.aspx.cs" Inherits="CodeWarfares.Web.Admin.ProblemUpload" %>
 
+<%@ Register Src="../CustomControls/ErrorDisplay.ascx" TagName="ErrorDisplay" TagPrefix="uc1" %>
+
 <asp:Content ID="AdminPageContainer" ContentPlaceHolderID="MainContent" runat="server">
     <div class="form-group admin-page">
-        <div class="error-text-outer">
-            <asp:Label runat="server" class="error-text" ID="ErrorText"></asp:Label>
-        </div>
+        <uc1:ErrorDisplay id="ErrorDisplay" runat="server" />
         <div class="admin-el">
             <label class="btn btn-warning btn-file">
                 Избери Условие

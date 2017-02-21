@@ -51,8 +51,8 @@ namespace CodeWarfares.Web.Admin
 
                     if (testCount <= 0 || testCount > 5)
                     {
-                        this.ErrorText.Visible = true;
-                        this.ErrorText.Text = "Тестовете трябва да са между 1 и 5";
+                        this.ErrorDisplay.Visible = true;
+                        this.ErrorDisplay.ErrorTextValue = "Тестовете трябва да са между 1 и 5";
                         return;
                     }
 
@@ -103,8 +103,8 @@ namespace CodeWarfares.Web.Admin
                     }
                     catch (Exception ex)
                     {
-                        this.ErrorText.Visible = true;
-                        this.ErrorText.Text = "Изберете файл с формати .docx";
+                        this.ErrorDisplay.Visible = true;
+                        this.ErrorDisplay.ErrorTextValue = "Изберете файл с формати .docx";
                     }
                 }
                 else
@@ -112,13 +112,13 @@ namespace CodeWarfares.Web.Admin
                     if (this.Model.IsErrorActive)
                     {
                         this.Model.IsErrorActive = false;
-                        this.ErrorText.Visible = true;
-                        this.ErrorText.Text = this.Model.ErrorText;
+                        this.ErrorDisplay.Visible = true;
+                        this.ErrorDisplay.ErrorTextValue = this.Model.ErrorText;
                     }
                     else
                     {
-                        this.ErrorText.Visible = true;
-                        this.ErrorText.Text = "Изберете файл с формат .docx";
+                        this.ErrorDisplay.Visible = true;
+                        this.ErrorDisplay.ErrorTextValue = "Изберете файл с формат .docx";
                     }
                 }
             }
@@ -158,8 +158,8 @@ namespace CodeWarfares.Web.Admin
 
             if ((count <= 0 || count > 5) && IsPostBack)
             {
-                this.ErrorText.Visible = true;
-                this.ErrorText.Text = "Тестовете трябва да са между 1 и 5";
+                this.ErrorDisplay.Visible = true;
+                this.ErrorDisplay.ErrorTextValue = "Тестовете трябва да са между 1 и 5";
                 return;
             }
 

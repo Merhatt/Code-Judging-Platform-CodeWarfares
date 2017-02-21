@@ -215,6 +215,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CustomControls\ErrorDisplay.ascx" />
     <Content Include="Errors\404.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -348,6 +349,13 @@
     </Compile>
     <Compile Include="Codings\ProblemLeaderboard.aspx.designer.cs">
       <DependentUpon>ProblemLeaderboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ErrorDisplay.ascx.cs">
+      <DependentUpon>ErrorDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ErrorDisplay.ascx.designer.cs">
+      <DependentUpon>ErrorDisplay.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
