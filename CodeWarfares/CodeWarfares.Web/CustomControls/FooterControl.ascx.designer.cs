@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeWarfares.Web {
+namespace CodeWarfares.Web.CustomControls {
     
     
-    public partial class _Default {
+    public partial class FooterControl {
         
         /// <summary>
-        /// MainPagePictures1 control.
+        /// WebsiteName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CodeWarfares.Web.CustomControls.MainPagePictures MainPagePictures1;
+        protected global::System.Web.UI.WebControls.Label WebsiteName;
     }
 }

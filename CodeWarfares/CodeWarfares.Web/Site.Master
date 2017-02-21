@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="CodeWarfares.Web.SiteMaster" %>
 
+<%@ Register Src="CustomControls/FooterControl.ascx" TagName="FooterControl" TagPrefix="uc1" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -87,17 +88,14 @@
                 EnableViewState="False" IncludeStyleBlock="False" Orientation="Horizontal"
                 DataSourceID="SiteMapDataSource" StaticDisplayLevels="2">
             </asp:Menu>
-            <asp:SiteMapPath ID="SiteMapPathBreadcrump" runat="server" />
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Code Warfares</p>
-            </footer>
+            <uc1:FooterControl ID="FooterControl" WebsiteNameValue="Code Warfares" runat="server"/>
         </div>
+        <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
     </form>
-    <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
 </body>
 </html>

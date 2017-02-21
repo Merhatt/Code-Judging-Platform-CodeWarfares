@@ -216,6 +216,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CustomControls\ErrorDisplay.ascx" />
+    <Content Include="CustomControls\FooterControl.ascx" />
+    <Content Include="CustomControls\MainPagePictures.ascx" />
     <Content Include="Errors\404.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -356,6 +358,20 @@
     </Compile>
     <Compile Include="CustomControls\ErrorDisplay.ascx.designer.cs">
       <DependentUpon>ErrorDisplay.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\FooterControl.ascx.cs">
+      <DependentUpon>FooterControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\FooterControl.ascx.designer.cs">
+      <DependentUpon>FooterControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\MainPagePictures.ascx.cs">
+      <DependentUpon>MainPagePictures.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MainPagePictures.ascx.designer.cs">
+      <DependentUpon>MainPagePictures.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

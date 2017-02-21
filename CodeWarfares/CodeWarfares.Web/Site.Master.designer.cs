@@ -22,15 +22,6 @@ namespace CodeWarfares.Web {
         protected global::System.Web.UI.WebControls.Menu NavigationMenu;
         
         /// <summary>
-        /// SiteMapPathBreadcrump control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SiteMapPath SiteMapPathBreadcrump;
-        
-        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace CodeWarfares.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        
+        /// <summary>
+        /// FooterControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::CodeWarfares.Web.CustomControls.FooterControl FooterControl;
         
         /// <summary>
         /// SiteMapDataSource control.
