@@ -24,7 +24,7 @@ namespace CodeWarfares.Data.Services.Account
             this.usersRepository = users;
         }
 
-        public IQueryable<User> GetAll()
+        public IEnumerable<User> GetAll()
         {
             return this.usersRepository.All();
         }

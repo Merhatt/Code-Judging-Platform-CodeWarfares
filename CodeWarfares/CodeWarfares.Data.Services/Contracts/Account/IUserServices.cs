@@ -13,7 +13,7 @@ namespace CodeWarfares.Data.Services.Contracts.Account
 
         void AddProblemToUser(string userId, Problem problem);
 
-        IQueryable<User> GetAll();
+        IEnumerable<User> GetAll();
 
         IEnumerable<User> GetAllUsersWithPoints();
 

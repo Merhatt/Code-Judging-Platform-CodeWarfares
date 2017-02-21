@@ -13,13 +13,13 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
 
         void DeleteById(int id);
 
-        IQueryable<Problem> GetAll();
+        IEnumerable<Problem> GetAll();
 
         Problem GetById(int id);
 
-        IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type);
+        IEnumerable<Problem> GetNewestTopFromCategory(int count, DifficultyType type);
 
-        IQueryable<Problem> GetAllOrderedByType(DifficultyType type);
+        IEnumerable<Problem> GetAllOrderedByType(DifficultyType type);
 
         IEnumerable<Submition> GetLeaderboard(Problem problem);
     }

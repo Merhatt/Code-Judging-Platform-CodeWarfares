@@ -22,12 +22,12 @@ namespace CodeWarfares.Data.Services.CodeTesting
             this.problems = problems;
         }
 
-        public IQueryable<Problem> GetAll()
+        public IEnumerable<Problem> GetAll()
         {
             return this.problems.All();
         }
 
-        public IQueryable<Problem> GetAllOrderedByType(DifficultyType type)
+        public IEnumerable<Problem> GetAllOrderedByType(DifficultyType type)
         {
             var problemsAll = this.problems.All();
 
@@ -46,7 +46,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             return problemsAll.OrderBy(x => x.CreationTime);
         }
 
-        public IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)
+        public IEnumerable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)
         {
             if (count < 0)
             {
