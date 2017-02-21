@@ -216,9 +216,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CustomControls\ErrorDisplay.ascx" />
+    <Content Include="CustomControls\ErrorPage.ascx" />
     <Content Include="CustomControls\FooterControl.ascx" />
     <Content Include="CustomControls\MainPagePictures.ascx" />
+    <Content Include="Errors\400.aspx" />
     <Content Include="Errors\404.aspx" />
+    <Content Include="Errors\500.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -359,6 +362,13 @@
     <Compile Include="CustomControls\ErrorDisplay.ascx.designer.cs">
       <DependentUpon>ErrorDisplay.ascx</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\ErrorPage.ascx.cs">
+      <DependentUpon>ErrorPage.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ErrorPage.ascx.designer.cs">
+      <DependentUpon>ErrorPage.ascx</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\FooterControl.ascx.cs">
       <DependentUpon>FooterControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -380,12 +390,26 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Errors\400.aspx.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Errors\400.aspx.designer.cs">
+      <DependentUpon>400.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Errors\404.aspx.cs">
       <DependentUpon>404.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Errors\404.aspx.designer.cs">
       <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Errors\500.aspx.cs">
+      <DependentUpon>500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Errors\500.aspx.designer.cs">
+      <DependentUpon>500.aspx</DependentUpon>
     </Compile>
     <Compile Include="EventArguments\CompetitionProblemInitEventArgs.cs" />
     <Compile Include="EventArguments\CompetitionsCategoryEventArgs.cs" />

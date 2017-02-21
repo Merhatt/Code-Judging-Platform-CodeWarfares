@@ -179,19 +179,19 @@ input[type="select"] {
     width: 100%;
 }
 
-    .history-table th, .history-table td {
-        text-align: left;
-        padding: 8px;
-    }
+.history-table th, .history-table td {
+    text-align: left;
+    padding: 8px;
+}
 
-    .history-table tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
+.history-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
-    .history-table th {
-        background-color: #4CAF50;
-        color: white;
-    }
+.history-table th {
+    background-color: #4CAF50;
+    color: white;
+}
 
 .synchronize {
     margin-bottom: 10px;
@@ -254,27 +254,23 @@ input[type="select"] {
     margin-bottom: 20px;
 }
 
-div.hideSkiplink
-{
-    background-color:#3a4f63;
-    width:100%;
+div.hideSkiplink {
+    background-color: #3a4f63;
+    width: 100%;
 }
 
-div.menu
-{
+div.menu {
     padding: 4px 0px 4px 8px;
 }
 
-div.menu ul
-{
+div.menu ul {
     list-style: none;
     margin: 0px;
     padding: 0px;
     width: auto;
 }
 
-div.menu ul li a, div.menu ul li a:visited
-{
+div.menu ul li a, div.menu ul li a:visited {
     background-color: #465c71;
     border: 1px #4e667d solid;
     color: #dde4ec;
@@ -285,15 +281,13 @@ div.menu ul li a, div.menu ul li a:visited
     white-space: nowrap;
 }
 
-div.menu ul li a:hover
-{
+div.menu ul li a:hover {
     background-color: #bfcbd6;
     color: #465c71;
     text-decoration: none;
 }
 
-div.menu ul li a:active
-{
+div.menu ul li a:active {
     background-color: #465c71;
     color: #cfdbe6;
     text-decoration: none;
