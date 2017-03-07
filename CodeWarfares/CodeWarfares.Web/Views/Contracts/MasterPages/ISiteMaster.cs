@@ -9,6 +9,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.MasterPages
 {
+    /// <summary>
+    /// Site Master page View
+    /// </summary>
     public interface ISiteMaster : IView<SiteMasterModel>
     {
         event EventHandler<MasterPageInitEventArgs> MyInit;

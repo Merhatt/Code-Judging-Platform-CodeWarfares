@@ -7,6 +7,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Presenters.Codings
 {
+    /// <summary>
+    /// Presenter for Leaderboard Page
+    /// </summary>
     public class LeaderboardPresenter : Presenter<ILeaderboardView>, ILeaderboardPresenter
     {
         private IUserServices userServices;

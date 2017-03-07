@@ -11,6 +11,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Presenters.Account
 {
+    /// <summary>
+    /// Presenter for Open Auth Pages
+    /// </summary>
     public class OpenAuthProvidersPresenter : Presenter<IOpenAuthProvidersView>, IOpenAuthProvidersPresenter
     {
         public OpenAuthProvidersPresenter(IOpenAuthProvidersView view) : base(view)

@@ -5,6 +5,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Coding
 {
+    /// <summary>
+    /// Competition problem page view
+    /// </summary>
     public interface ICompetitionProblemView : IView<CompetitionProblemViewModel>
     {
         event EventHandler<CompetitionProblemEventArgs> MyInitEvent;

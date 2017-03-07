@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Contracts
 {
+    /// <summary>
+    /// Database Context
+    /// </summary>
     public interface ICodeWarfaresDbContext : IDisposable
     {
         int SaveChanges();

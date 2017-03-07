@@ -9,6 +9,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Account
 {
+    /// <summary>
+    /// Auth Provider View
+    /// </summary>
     public interface IOpenAuthProvidersView : IView<OpenAuthProvidersModel>
     {
         event EventHandler<OpenAuthProvidersInitEventArgs> MyInit;

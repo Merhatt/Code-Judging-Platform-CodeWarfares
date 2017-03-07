@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Contracts
 {
+    /// <summary>
+    /// Unit of work
+    /// </summary>
     public interface IUnitOfWork
     {
         void Commit();

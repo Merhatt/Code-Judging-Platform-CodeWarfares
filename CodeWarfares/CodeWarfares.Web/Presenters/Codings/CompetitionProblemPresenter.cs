@@ -12,6 +12,9 @@ using CodeWarfares.Data.Models.Enums;
 
 namespace CodeWarfares.Web.Presenters.Codings
 {
+    /// <summary>
+    /// Presenter for Competitin Problem Page
+    /// </summary>
     public class CompetitionProblemPresenter : Presenter<ICompetitionProblemView>, ICompetitionProblemPresenter
     {
         private IDictionary<string, ContestLaungagesTypes> laungages;

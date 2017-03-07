@@ -162,6 +162,7 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         [Test]
         public void GetAreAllTestsCompleted_Status0_Result15_TestCorrect_SubmitionFinishedFalse()
         {
+            // Arrange
             var jsonConverterMock = new Mock<IJsonConverter>();
             var httpProviderMock = new Mock<IHttpProvider>();
             var passingTestCheckerMock = new Mock<IPassingTestsChecker>();
@@ -199,9 +200,11 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             passingTestCheckerMock.Setup(x => x.IsPassingTest(It.IsAny<Problem>(), It.IsAny<TestCompleted>())).Returns(true);
 
             jsonConverterMock.Setup(x => x.JsonToModel<SubmitionModel>(It.IsAny<string>())).Returns(model);
-
+            
+            // Act
             bool res = testingServices.GetAreAllTestsCompleted(problem, submition);
-
+            
+            // Assert
             httpProviderMock.Verify(x => x.HttpGetJson("https://c3b70bc3.compilers.sphere-engine.com/api/v3/submissions/asdasd?access_token=ad6cce356775b67e6ed8c9b1fae44027&withOutput=true&withStderr=true&withCmpinfo=true"), Times.Once());
             jsonConverterMock.Verify(x => x.JsonToModel<SubmitionModel>(json), Times.Once());
             passingTestCheckerMock.Verify(x => x.IsPassingTest(problem, completedTest2), Times.Once());

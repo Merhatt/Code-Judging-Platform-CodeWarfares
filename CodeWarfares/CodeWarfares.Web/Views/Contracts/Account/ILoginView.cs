@@ -9,6 +9,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Account
 {
+    /// <summary>
+    /// View for the login page
+    /// </summary>
     public interface ILoginView : IView<LoginViewModel>
     {
         event EventHandler MyInit;

@@ -12,6 +12,9 @@ using CodeWarfares.Web.EventArguments;
 
 namespace CodeWarfares.Web.Presenters.Account
 {
+    /// <summary>
+    /// Presenter for Login Page
+    /// </summary>
     public class LoginPresenter : Presenter<ILoginView>, ILoginPresenter
     {
         public LoginPresenter(ILoginView view) : base(view)

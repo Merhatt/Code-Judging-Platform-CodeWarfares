@@ -8,6 +8,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Coding
 {
+    /// <summary>
+    /// Problem Leaderboard View
+    /// </summary>
     public interface IProblemLeaderboardView : IView<ProblemLeaderboardModel>
     {
         event EventHandler<ProblemLeaderboardInitEventArgs> MyInit;

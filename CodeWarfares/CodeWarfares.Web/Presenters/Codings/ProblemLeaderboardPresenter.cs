@@ -11,6 +11,9 @@ using CodeWarfares.Data.Models;
 
 namespace CodeWarfares.Web.Presenters.Codings
 {
+    /// <summary>
+    /// Presemter for Problem Leaderboard page
+    /// </summary>
     public class ProblemLeaderboardPresenter : Presenter<IProblemLeaderboardView>, IProblemLeaderboardPresenter
     {
         private IProblemService problemService;

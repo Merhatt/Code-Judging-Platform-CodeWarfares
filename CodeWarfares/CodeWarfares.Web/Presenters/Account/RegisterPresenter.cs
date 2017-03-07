@@ -12,6 +12,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Presenters.Account
 {
+    /// <summary>
+    /// Presenter for Register Page
+    /// </summary>
     public class RegisterPresenter : Presenter<IRegisterView>, IRegisterPresenter
     {
         private IUserFactory userFactory;

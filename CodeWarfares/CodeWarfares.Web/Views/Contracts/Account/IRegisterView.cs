@@ -10,6 +10,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Account
 {
+    /// <summary>
+    /// View For Register
+    /// </summary>
     public interface IRegisterView : IView<RegisterViewModel>
     {
         event EventHandler<RegisterEventArgs> RegisterEvent;

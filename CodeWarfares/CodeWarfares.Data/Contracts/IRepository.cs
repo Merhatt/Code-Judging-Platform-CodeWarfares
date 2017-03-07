@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CodeWarfares.Data.Contracts
 {
+    /// <summary>
+    /// Repository pattern
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IRepository<T> : IDisposable where T : class
     {
         IQueryable<T> All();

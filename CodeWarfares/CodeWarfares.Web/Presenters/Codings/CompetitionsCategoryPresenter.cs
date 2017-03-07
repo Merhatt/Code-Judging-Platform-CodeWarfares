@@ -9,6 +9,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Presenters.Codings
 {
+    /// <summary>
+    /// Presenter for Competitions Category page
+    /// </summary>
     public class CompetitionsCategoryPresenter : Presenter<ICompetitionsCategoryView>, ICompetitionsCategoryPresenter
     {
         private IProblemService problemService;

@@ -9,6 +9,9 @@ using WebFormsMvp;
 
 namespace CodeWarfares.Web.Views.Contracts.Admin
 {
+    /// <summary>
+    /// Problem Upload Page View 
+    /// </summary>
     public interface IProblemUploadView : IView<ProblemUploadModel>
     {
         event EventHandler<ProblemUploadClickEventArgs> ProblemUploadEvent;

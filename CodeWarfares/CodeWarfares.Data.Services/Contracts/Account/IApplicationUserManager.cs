@@ -12,6 +12,12 @@ namespace CodeWarfares.Data.Services.Contracts.Account
 {
     public interface IApplicationUserManager
     {
+        /// <summary>
+        /// Creates user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         bool CreateUser(IUser user, string password);
     }
 }
