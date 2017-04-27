@@ -22,14 +22,14 @@ namespace CodeWarfares.Data.Services.CodeTesting
             this.problems = problems;
         }
 
-        public IEnumerable<Problem> GetAll()
+        public IQueryable<Problem> GetAll()
         {
             return this.problems.All();
         }
 
-        public IEnumerable<Problem> GetAllOrderedByType(DifficultyType type)
+        public IQueryable<Problem> GetAllOrderedByType(DifficultyType type)
         {
-            var problemsAll = this.problems.All();
+            IQueryable<Problem> problemsAll = this.problems.All();
 
             if (problemsAll == null || problemsAll.Count() == 0)
             {
@@ -46,14 +46,16 @@ namespace CodeWarfares.Data.Services.CodeTesting
             return problemsAll.OrderBy(x => x.CreationTime);
         }
 
-        public IEnumerable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)
+        public IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type)
         {
             if (count < 0)
             {
                 throw new ArgumentException("count cannot be less than 0!");
             }
 
-            return this.problems.All().Where(x => x.Difficulty == type).OrderBy(x => x.CreationTime).Take(count);
+            return this.problems.All().Where(x => x.Difficulty == type)
+                .OrderBy(x => x.CreationTime)
+                .Take(count);
         }
 
         public Problem GetById(int id)

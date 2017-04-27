@@ -38,6 +38,7 @@ namespace CodeWarfares.Web.Presenters.Account
             user.UserName = e.Username;
             user.Email = e.Email;
             bool isCreated = userManager.CreateUser(user, e.Password);
+
             if (isCreated)
             {
                 signInManager.SignIn(user.UserName, e.Password, false);

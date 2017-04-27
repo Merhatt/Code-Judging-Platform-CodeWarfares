@@ -83,19 +83,12 @@
                 </div>
             </div>
         </div>
-        <div class="hideSkiplink">
-            <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" SkipLinkText=""
-                EnableViewState="False" IncludeStyleBlock="False" Orientation="Horizontal"
-                DataSourceID="SiteMapDataSource" StaticDisplayLevels="2">
-            </asp:Menu>
-        </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
             <uc1:FooterControl ID="FooterControl" WebsiteNameValue="Code Warfares" runat="server"/>
         </div>
-        <asp:SiteMapDataSource ID="SiteMapDataSource" runat="server" />
     </form>
 </body>
 </html>

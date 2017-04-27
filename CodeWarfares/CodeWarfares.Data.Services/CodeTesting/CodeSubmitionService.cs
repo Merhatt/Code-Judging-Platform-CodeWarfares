@@ -104,7 +104,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             this.submitions.SaveChanges();
         }
 
-        public IEnumerable<Submition> GetAllUserSubmition(User user, Problem problem)
+        public IQueryable<Submition> GetAllUserSubmition(User user, Problem problem)
         {
             if (user == null)
             {
@@ -116,7 +116,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
                 throw new NullReferenceException("problem cannot be null");
             }
 
-            List<Submition> userSubmitions = new List<Submition>();
+            IQueryable<Submition> userSubmitions = new List<Submition>().AsQueryable();
 
             if (user.Submition == null)
             {
@@ -124,7 +124,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             }
 
             userSubmitions = user.Submition.Where(x => x.ProblemId == problem.Id)
-                  .OrderByDescending(x => x.SubmitionTime).ToList();
+                  .OrderByDescending(x => x.SubmitionTime).AsQueryable();
 
             foreach (var item in userSubmitions)
             {

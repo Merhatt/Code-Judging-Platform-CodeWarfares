@@ -23,6 +23,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<ICompetitionProblemView>().To<CompetitionProblem>();
             this.Kernel.Bind<IProblemUploadView>().To<ProblemUpload>();
             this.Kernel.Bind<ILeaderboardView>().To<Leaderboard>();
+            this.Kernel.Bind<IProblemEditView>().To<ProblemEdit>();
         }
     }
 }

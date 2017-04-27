@@ -94,14 +94,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CompetitionsCategoryViewTests.cs" />
-    <Compile Include="NinjectTests\DateModelsNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\DbNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\FactoriesNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\MvpNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\PresentersNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\ServicesNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\UtilsNinjectModuleTests.cs" />
-    <Compile Include="NinjectTests\ViewsNinjectModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

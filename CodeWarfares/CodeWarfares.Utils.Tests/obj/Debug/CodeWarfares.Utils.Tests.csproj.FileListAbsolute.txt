@@ -18,3 +18,4 @@ C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\Code
 C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Utils.Tests\obj\Debug\CodeWarfares.Utils.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Utils.Tests\obj\Debug\CodeWarfares.Utils.Tests.dll
 C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Utils.Tests\obj\Debug\CodeWarfares.Utils.Tests.pdb
+C:\Users\Merhat\Desktop\WebFormsTeamwork\Code-Judging-Platform-CodeWarfares\CodeWarfares\CodeWarfares.Utils.Tests\bin\Debug\CodeWarfares.Data.Models.dll.config

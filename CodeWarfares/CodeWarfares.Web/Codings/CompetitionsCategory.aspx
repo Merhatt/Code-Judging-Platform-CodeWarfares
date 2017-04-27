@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CompetitionsCategory.aspx.cs" Inherits="CodeWarfares.Web.Codings.CompetitionsCategory" %>
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="task-group">
         <h3><%#: this.CategoryName %></h3>
@@ -7,7 +8,6 @@
             <LayoutTemplate>
                 <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
             </LayoutTemplate>
-
             <ItemTemplate>
                 <div class="task-description tasks-page">
                     <a href="/Codings/CompetitionProblem?Id=<%#: Item.Id %> ">
@@ -21,6 +21,18 @@
                             <img src="<%#: Item.CoverImageUrl %>" />
                         </div>
                     </a>
+                    <% 
+                        if (this.User.IsInRole("Administrator"))
+                        {
+                    %>
+                    <ul class="ul-normal">
+                        <li>
+                            <a href="/Admin/ProblemEdit?Id=<%#: Item.Id %> " class="link-button btn btn-primary">Редактирай</a>
+                        </li>
+                    </ul>
+                    <%
+                        }
+                    %>
                 </div>
             </ItemTemplate>
         </asp:ListView>

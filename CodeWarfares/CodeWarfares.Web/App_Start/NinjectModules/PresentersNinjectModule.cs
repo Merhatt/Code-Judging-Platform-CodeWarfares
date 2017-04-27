@@ -4,6 +4,7 @@ using CodeWarfares.Web.Presenters.Admin;
 using CodeWarfares.Web.Presenters.Codings;
 using CodeWarfares.Web.Presenters.Contracts;
 using CodeWarfares.Web.Presenters.Contracts.Account;
+using CodeWarfares.Web.Presenters.Contracts.Admin;
 using CodeWarfares.Web.Presenters.Contracts.Codings;
 using CodeWarfares.Web.Presenters.Contracts.MasterPages;
 using CodeWarfares.Web.Presenters.MasterPages;
@@ -28,6 +29,7 @@ namespace CodeWarfares.Web.App_Start.NinjectModules
             this.Kernel.Bind<ICompetitionProblemPresenter>().To<CompetitionProblemPresenter>();
             this.Kernel.Bind<IProblemUploadPresenter>().To<ProblemUploadPresenter>();
             this.Kernel.Bind<ILeaderboardPresenter>().To<LeaderboardPresenter>();
+            this.Kernel.Bind<IProblemEditPresenter>().To<ProblemEditPresenter>();
         }
     }
 }
