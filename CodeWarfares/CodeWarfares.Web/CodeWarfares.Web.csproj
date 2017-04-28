@@ -427,6 +427,7 @@
     <Compile Include="EventArguments\MasterPageInitEventArgs.cs" />
     <Compile Include="EventArguments\MasterPageValidateTokenEventArgs.cs" />
     <Compile Include="EventArguments\OpenAuthProvidersInitEventArgs.cs" />
+    <Compile Include="EventArguments\ProblemEditInitEventArgs.cs" />
     <Compile Include="EventArguments\ProblemLeaderboardInitEventArgs.cs" />
     <Compile Include="EventArguments\ProblemUploadClickEventArgs.cs" />
     <Compile Include="EventArguments\RegisterEventArgs.cs" />

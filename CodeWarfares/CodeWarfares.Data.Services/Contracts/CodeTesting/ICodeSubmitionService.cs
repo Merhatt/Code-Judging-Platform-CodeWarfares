@@ -1,6 +1,7 @@
 ﻿using CodeWarfares.Data.Models;
 using CodeWarfares.Data.Services.Enums;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeWarfares.Data.Services.Contracts.CodeTesting
 {
@@ -24,6 +25,6 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         /// <param name="user"></param>
         /// <param name="problem"></param>
         /// <returns></returns>
-        IEnumerable<Submition> GetAllUserSubmition(User user, Problem problem);
+        IQueryable<Submition> GetAllUserSubmition(User user, Problem problem);
     }
 }

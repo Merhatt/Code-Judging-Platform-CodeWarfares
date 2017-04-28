@@ -119,5 +119,33 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
             return leaderboard.OrderByDescending(x => x.CompletedPercentage);
         }
+
+        public void EditProblem(int problemId, string name, string coverImg, long maxMemory, long maxTime, int xp, int testsCount, DifficultyType dificulty, IEnumerable<Test> tests)
+        {
+            Problem problemToEdit = this.problems.GetById(problemId);
+            problemToEdit.Name = name;
+            problemToEdit.CoverImageUrl = coverImg;
+            problemToEdit.MaxMemory = maxMemory;
+            problemToEdit.MaxTime = maxTime;
+            problemToEdit.Xp = xp;
+            problemToEdit.TestsCount = testsCount;
+            problemToEdit.Difficulty = dificulty;
+
+            problemToEdit.Tests.Clear();
+
+            while (problemToEdit.Tests.Count > 0)
+            {
+                problemToEdit.Tests.Remove(problemToEdit.Tests.First());
+            }
+
+            foreach (var test in tests)
+            {
+                problemToEdit.Tests.Add(test);
+            }
+
+            this.problems.Update(problemToEdit);
+
+            this.problems.SaveChanges();
+        }
     }
 }

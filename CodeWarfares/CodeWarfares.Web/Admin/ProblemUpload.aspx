@@ -41,18 +41,18 @@
             <asp:TextBox CssClass="form-control ctr" runat="server" ID="TestsCount" TextMode="Number" AutoPostBack="true" OnTextChanged="TestsCount_TextChanged"></asp:TextBox>
             <div>
                 <asp:Panel CssClass="vhod-panel-all" ID="VhodPanel" runat="server" GroupingText="Вход">
-                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod1" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod2" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod3" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod4" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod5" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod1" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod2" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod3" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod4" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="vhod-panel form-control" ID="Vhod5" runat="server" TextMode="MultiLine"></asp:TextBox>
                 </asp:Panel>
                 <asp:Panel CssClass="izhod-panel-all" ID="IzhodPanel" runat="server" GroupingText="Очакван Изход">
-                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod1" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod2" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod3" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod4" runat="server"></asp:TextBox>
-                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod5" runat="server"></asp:TextBox>
+                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod1" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod2" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod3" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod4" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    <asp:TextBox CssClass="izhod-panel form-control" ID="Izhod5" runat="server" TextMode="MultiLine"></asp:TextBox>
                 </asp:Panel>
                 <div class="clear"></div>
             </div>

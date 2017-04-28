@@ -14,7 +14,7 @@ using CodeWarfares.Data.Models.Enums;
 namespace CodeWarfares.Web.Presenters.Admin
 {
     /// <summary>
-    /// Presenter for Problem Uplad Page
+    /// Presenter for Problem Upload Page
     /// </summary>
     public class ProblemUploadPresenter : Presenter<IProblemUploadView>, IProblemUploadPresenter
     {

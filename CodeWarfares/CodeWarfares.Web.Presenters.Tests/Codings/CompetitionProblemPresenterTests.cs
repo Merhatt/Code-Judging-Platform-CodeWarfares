@@ -132,8 +132,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             userServiceMock.Setup(x => x.GetByUsername(It.IsAny<string>())).Returns(user);
             problemServiceMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(problem);
 
-            var submitions = new List<Submition>();
-            submitions.Add(new Submition());
+            var submitions = new List<Submition>() { new Submition() }.AsQueryable();
 
             codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions);
 
@@ -178,7 +177,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             var submitions = new List<Submition>();
             submitions.Add(new Submition());
 
-            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions);
+            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions.AsQueryable());
 
             viewMock.Raise(x => x.SendTaskEvent += null, args);
 
@@ -216,7 +215,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             var submitions = new List<Submition>();
             submitions.Add(new Submition());
 
-            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions);
+            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions.AsQueryable());
 
             viewMock.Raise(x => x.GetDescriptionEvent += null, args);
 
@@ -258,7 +257,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             var submitions = new List<Submition>();
             submitions.Add(new Submition());
 
-            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions);
+            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions.AsQueryable());
 
             viewMock.Raise(x => x.MyInitEvent += null, args);
 
@@ -297,7 +296,7 @@ namespace CodeWarfares.Web.Presenters.Tests.Codings
             var submitions = new List<Submition>();
             submitions.Add(new Submition());
 
-            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions);
+            codeSubmitionServiceMock.Setup(x => x.GetAllUserSubmition(It.IsAny<User>(), It.IsAny<Problem>())).Returns(submitions.AsQueryable());
 
             viewMock.Raise(x => x.MyInitEvent += null, args);
 

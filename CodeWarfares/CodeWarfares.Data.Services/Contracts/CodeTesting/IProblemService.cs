@@ -30,7 +30,7 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         /// Gets all problems
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Problem> GetAll();
+        IQueryable<Problem> GetAll();
 
         /// <summary>
         /// Gets problem by id
@@ -45,14 +45,14 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         /// <param name="count"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        IEnumerable<Problem> GetNewestTopFromCategory(int count, DifficultyType type);
+        IQueryable<Problem> GetNewestTopFromCategory(int count, DifficultyType type);
 
         /// <summary>
         /// Gets all problem ordered by type
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        IEnumerable<Problem> GetAllOrderedByType(DifficultyType type);
+        IQueryable<Problem> GetAllOrderedByType(DifficultyType type);
 
         /// <summary>
         /// Gets leaderboard for problem
@@ -60,5 +60,7 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         /// <param name="problem"></param>
         /// <returns></returns>
         IEnumerable<Submition> GetLeaderboard(Problem problem);
+
+        void EditProblem(int problemId, string name, string coverImg, long maxMemory, long maxTime, int xp, int testsCount, DifficultyType dificulty, IEnumerable<Test> tests);
     }
 }

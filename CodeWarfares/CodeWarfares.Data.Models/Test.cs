@@ -11,8 +11,7 @@ namespace CodeWarfares.Data.Models
 
         public string CorrectAnswer { get; set; }
 
-        [Required]
-        public int ProblemId { get; set; }
+        public int? ProblemId { get; set; }
 
         [ForeignKey("ProblemId")]
         public virtual Problem Problem { get; set; }
