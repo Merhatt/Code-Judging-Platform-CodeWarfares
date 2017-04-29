@@ -19,6 +19,7 @@ namespace CodeWarfares.Web.Admin
     {
         public event EventHandler<ProblemEditInitEventArgs> InitProblem;
         public event EventHandler<ProblemUploadClickEventArgs> EditProblem;
+        public event EventHandler<ProblemEditInitEventArgs> DeleteProblem;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,20 +42,23 @@ namespace CodeWarfares.Web.Admin
                 return;
             }
 
-            this.ProblemTitle.Text = this.Model.ProblemNow.Name;
-            this.ImgUrl.Text = this.Model.ProblemNow.CoverImageUrl;
-            this.MaxTime.Text = this.Model.ProblemNow.MaxTime.ToString();
-            this.MaxMemory.Text = this.Model.ProblemNow.MaxMemory.ToString();
-            this.Points.Text = this.Model.ProblemNow.Xp.ToString();
+            if (!IsPostBack)
+            {
+                this.ProblemTitle.Text = this.Model.ProblemNow.Name;
+                this.ImgUrl.Text = this.Model.ProblemNow.CoverImageUrl;
+                this.MaxTime.Text = this.Model.ProblemNow.MaxTime.ToString();
+                this.MaxMemory.Text = this.Model.ProblemNow.MaxMemory.ToString();
+                this.Points.Text = this.Model.ProblemNow.Xp.ToString();
 
-            this.DropdownDifficulty.DataSource = this.Model.Difficulties.ToList();
-            this.DropdownDifficulty.SelectedIndex = this.Model.SelectedDificultyIndex;
-            this.DropdownDifficulty.DataBind();
+                this.DropdownDifficulty.DataSource = this.Model.Difficulties.ToList();
+                this.DropdownDifficulty.SelectedIndex = this.Model.SelectedDificultyIndex;
+                this.DropdownDifficulty.DataBind();
 
-            int testsCount = this.Model.ProblemNow.Tests.Count;
+                int testsCount = this.Model.ProblemNow.Tests.Count;
 
-            this.TestsCount.Text = testsCount.ToString();
-            ShowTextBoxes(testsCount, this.Model.ProblemNow.Tests.ToList());
+                this.TestsCount.Text = testsCount.ToString();
+                ShowTextBoxes(testsCount, this.Model.ProblemNow.Tests.ToList());
+            }
         }
 
         protected void TestsCount_TextChanged(object sender, EventArgs e)
@@ -63,7 +67,86 @@ namespace CodeWarfares.Web.Admin
 
             int.TryParse(this.TestsCount.Text, out textBoxes);
 
-            ShowTextBoxes(textBoxes, this.Model.ProblemNow.Tests.ToList());
+            ShowTextBoxes(textBoxes);
+        }
+
+        private void ShowTextBoxes(int count)
+        {
+            Vhod1.Visible = false;
+            Vhod2.Visible = false;
+            Vhod3.Visible = false;
+            Vhod4.Visible = false;
+            Vhod5.Visible = false;
+
+            Izhod1.Visible = false;
+            Izhod2.Visible = false;
+            Izhod3.Visible = false;
+            Izhod4.Visible = false;
+            Izhod5.Visible = false;
+
+            this.IzhodPanel.Visible = true;
+            this.VhodPanel.Visible = true;
+
+            if (count <= 0 || count > 5)
+            {
+                this.IzhodPanel.Visible = false;
+                this.VhodPanel.Visible = false;
+            }
+
+            if ((count <= 0 || count > 5) && IsPostBack)
+            {
+                this.ErrorDisplay.Visible = true;
+                this.ErrorDisplay.ErrorTextValue = "Тестовете трябва да са между 1 и 5";
+                return;
+            }
+
+            if (count >= 1)
+            {
+                Vhod1.Visible = true;
+                Izhod1.Visible = true;
+            }
+
+            if (count >= 2)
+            {
+                Vhod2.Visible = true;
+                Izhod2.Visible = true;
+            }
+
+            if (count >= 3)
+            {
+                Vhod3.Visible = true;
+                Izhod3.Visible = true;
+            }
+
+            if (count >= 4)
+            {
+                Vhod4.Visible = true;
+                Izhod4.Visible = true;
+            }
+
+            if (count >= 5)
+            {
+                Vhod5.Visible = true;
+                Izhod5.Visible = true;
+            }
+        }
+
+        protected void DeleteButton_Click(object sender, EventArgs e)
+        {
+            int id = 0;
+            bool canParse = int.TryParse(this.Request.QueryString["Id"], out id);
+
+            if (canParse == false)
+            {
+                this.Response.Redirect("/Errors/404");
+                return;
+            }
+
+            ProblemEditInitEventArgs args = new ProblemEditInitEventArgs(id);
+
+            this.DeleteProblem?.Invoke(this, args);
+
+            this.Response.Redirect("/Codings/Competitions");
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)

@@ -52,13 +52,7 @@ namespace CodeWarfares.Data.Repositories
 
         public virtual void Update(T entity)
         {
-            DbEntityEntry entry = this.Context.Entry(entity);
-            if (entry.State == EntityState.Detached)
-            {
-                this.DbSet.Attach(entity);
-            }
-
-            entry.State = EntityState.Modified;
+            this.Context.Entry(entity).State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)

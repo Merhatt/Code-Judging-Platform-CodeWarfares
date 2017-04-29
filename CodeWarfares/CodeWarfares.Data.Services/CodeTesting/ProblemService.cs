@@ -11,15 +11,22 @@ namespace CodeWarfares.Data.Services.CodeTesting
     public class ProblemService : IProblemService
     {
         private IRepository<Problem> problems;
+        private IRepository<Test> testsRepository;
 
-        public ProblemService(IRepository<Problem> problems)
+        public ProblemService(IRepository<Problem> problems, IRepository<Test> tests)
         {
             if (problems == null)
             {
                 throw new NullReferenceException("problems cannot be null");
             }
 
+            if (tests == null)
+            {
+                throw new NullReferenceException("tests cannot be null");
+            }
+
             this.problems = problems;
+            this.testsRepository = tests;
         }
 
         public IQueryable<Problem> GetAll()
@@ -123,6 +130,12 @@ namespace CodeWarfares.Data.Services.CodeTesting
         public void EditProblem(int problemId, string name, string coverImg, long maxMemory, long maxTime, int xp, int testsCount, DifficultyType dificulty, IEnumerable<Test> tests)
         {
             Problem problemToEdit = this.problems.GetById(problemId);
+
+            if (problemToEdit == null)
+            {
+                return;
+            }
+
             problemToEdit.Name = name;
             problemToEdit.CoverImageUrl = coverImg;
             problemToEdit.MaxMemory = maxMemory;
@@ -131,11 +144,10 @@ namespace CodeWarfares.Data.Services.CodeTesting
             problemToEdit.TestsCount = testsCount;
             problemToEdit.Difficulty = dificulty;
 
-            problemToEdit.Tests.Clear();
-
             while (problemToEdit.Tests.Count > 0)
             {
-                problemToEdit.Tests.Remove(problemToEdit.Tests.First());
+                Test testToRemove = problemToEdit.Tests.First();
+                this.testsRepository.Delete(testToRemove);
             }
 
             foreach (var test in tests)
@@ -144,6 +156,26 @@ namespace CodeWarfares.Data.Services.CodeTesting
             }
 
             this.problems.Update(problemToEdit);
+
+            this.problems.SaveChanges();
+        }
+
+        public void DeleteProblem(int problemId)
+        {
+            Problem problemToDelete = this.problems.GetById(problemId);
+
+            if (problemToDelete == null)
+            {
+                return;
+            }
+
+            while (problemToDelete.Tests.Count > 0)
+            {
+                Test testToRemove = problemToDelete.Tests.First();
+                this.testsRepository.Delete(testToRemove);
+            }
+
+            this.problems.Delete(problemToDelete);
 
             this.problems.SaveChanges();
         }

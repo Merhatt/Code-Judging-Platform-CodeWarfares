@@ -44,7 +44,7 @@
                         <asp:BoundField DataField="CompileMessage" HeaderText="Компилационно Съобщение"/>
                         <asp:TemplateField HeaderText="Точки">
                             <ItemTemplate>
-                                <div class="progress-text"><%# Eval("CompletedPercentage") %>/100</div>
+                                <div class="progress-text"><%# string.Format("{0:f0}", Eval("CompletedPercentage")) %>/100</div>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Прогрес">

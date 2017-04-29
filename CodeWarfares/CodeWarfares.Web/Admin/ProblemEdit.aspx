@@ -58,6 +58,7 @@
             </div>
         </div>
         <asp:Button runat="server" ID="UploadButton" Text="Запази Промените" OnClick="UploadButton_Click" CssClass="btn btn-success" />
+        <asp:Button runat="server" ID="DeleteButton" Text="Изтрий" OnClick="DeleteButton_Click" CssClass="btn btn-danger" />
     </div>
 </asp:Content>
 

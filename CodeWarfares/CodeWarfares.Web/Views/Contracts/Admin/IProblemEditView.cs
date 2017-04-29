@@ -13,5 +13,7 @@ namespace CodeWarfares.Web.Views.Contracts.Admin
         event EventHandler<ProblemEditInitEventArgs> InitProblem;
 
         event EventHandler<ProblemUploadClickEventArgs> EditProblem;
+
+        event EventHandler<ProblemEditInitEventArgs> DeleteProblem;
     }
 }

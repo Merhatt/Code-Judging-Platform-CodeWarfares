@@ -62,5 +62,7 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         IEnumerable<Submition> GetLeaderboard(Problem problem);
 
         void EditProblem(int problemId, string name, string coverImg, long maxMemory, long maxTime, int xp, int testsCount, DifficultyType dificulty, IEnumerable<Test> tests);
+
+        void DeleteProblem(int problemId);
     }
 }

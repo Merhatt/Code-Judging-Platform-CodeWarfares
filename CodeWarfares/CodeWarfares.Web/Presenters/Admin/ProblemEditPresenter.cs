@@ -34,6 +34,12 @@ namespace CodeWarfares.Web.Presenters.Admin
 
             view.InitProblem += InitProblem;
             view.EditProblem += EditProblem;
+            view.DeleteProblem += DeleteProblem;
+        }
+
+        private void DeleteProblem(object sender, ProblemEditInitEventArgs e)
+        {
+            this.problemService.DeleteProblem(e.Id);
         }
 
         private void EditProblem(object sender, ProblemUploadClickEventArgs e)
