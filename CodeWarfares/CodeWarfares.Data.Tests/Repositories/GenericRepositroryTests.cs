@@ -58,19 +58,6 @@ namespace CodeWarfares.Data.Tests.Repositories
         }
 
         [Test]
-        public void SaveChanges_ShouldCall()
-        {
-            var dbMock = new Mock<ICodeWarfaresDbContext>();
-
-
-            var repository = new GenericRepository<TestModelMock>(dbMock.Object);
-
-            repository.SaveChanges();
-
-            dbMock.Verify(x => x.SaveChanges(), Times.Once());
-        }
-
-        [Test]
         public void Dispose_ShouldCall()
         {
             var dbMock = new Mock<ICodeWarfaresDbContext>();

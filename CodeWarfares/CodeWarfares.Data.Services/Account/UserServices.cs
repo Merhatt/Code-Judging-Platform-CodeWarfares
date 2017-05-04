@@ -13,15 +13,22 @@ namespace CodeWarfares.Data.Services.Account
     public class UserServices : IUserServices
     {
         private IRepository<User> usersRepository;
+        private IUnitOfWork unitOfWork;
 
-        public UserServices(IRepository<User> users)
+        public UserServices(IRepository<User> users, IUnitOfWork unitOfWork)
         {
             if (users == null)
             {
                 throw new NullReferenceException("Users cannot be null");
             }
 
+            if (unitOfWork == null)
+            {
+                throw new NullReferenceException("unitOfWork cannot be null");
+            }
+
             this.usersRepository = users;
+            this.unitOfWork = unitOfWork;
         }
 
         public IEnumerable<User> GetAll()
@@ -42,7 +49,7 @@ namespace CodeWarfares.Data.Services.Account
             }
 
             user.Roles.Add(role);
-            this.usersRepository.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public void AddSubmitionToUser(string userId, Submition submition)
@@ -58,7 +65,7 @@ namespace CodeWarfares.Data.Services.Account
             }
 
             this.usersRepository.GetById(userId).Submition.Add(submition);
-            this.usersRepository.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public void AddProblemToUser(string userId, Problem problem)
@@ -81,7 +88,7 @@ namespace CodeWarfares.Data.Services.Account
                 user.Problems.Add(problem);
             }
 
-            this.usersRepository.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public User GetByUsername(string username)
@@ -108,7 +115,7 @@ namespace CodeWarfares.Data.Services.Account
                 }
             }
 
-            this.usersRepository.SaveChanges();
+            this.unitOfWork.Commit();
 
             return allUsers;
         }

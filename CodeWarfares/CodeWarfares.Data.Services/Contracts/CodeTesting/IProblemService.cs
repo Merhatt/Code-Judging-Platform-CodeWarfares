@@ -21,12 +21,6 @@ namespace CodeWarfares.Data.Services.Contracts.CodeTesting
         void Create(Problem problem);
 
         /// <summary>
-        /// Deletes problem by id
-        /// </summary>
-        /// <param name="id"></param>
-        void DeleteById(int id);
-
-        /// <summary>
         /// Gets all problems
         /// </summary>
         /// <returns></returns>

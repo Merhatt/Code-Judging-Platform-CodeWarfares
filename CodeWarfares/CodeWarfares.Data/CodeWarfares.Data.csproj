@@ -68,6 +68,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="UnitsOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -80,7 +81,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UnitsOfWork\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702152204125_InitialCreate.resx">

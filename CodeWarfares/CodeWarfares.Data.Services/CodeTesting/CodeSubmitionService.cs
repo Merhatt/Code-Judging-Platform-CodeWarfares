@@ -17,8 +17,13 @@ namespace CodeWarfares.Data.Services.CodeTesting
         private IRepository<Submition> submitions;
         private ITestCompletedFactory testCompletedFactory;
         private IUserServices userServices;
+        private IUnitOfWork unitOfWork;
 
-        public CodeSubmitionService(IRepository<Submition> submitions, ICodeTestingServices codeTestingService, ISubmitionFactory submitionFactory, ITestCompletedFactory testCompletedFactory, IUserServices userServices)
+        public CodeSubmitionService(IRepository<Submition> submitions, 
+            ICodeTestingServices codeTestingService, 
+            ISubmitionFactory submitionFactory, 
+            ITestCompletedFactory testCompletedFactory, IUserServices userServices,
+            IUnitOfWork unitOfWork)
         {
             if (submitions == null)
             {
@@ -40,12 +45,17 @@ namespace CodeWarfares.Data.Services.CodeTesting
             {
                 throw new NullReferenceException("userServices cannot be null");
             }
+            else if (unitOfWork == null)
+            {
+                throw new NullReferenceException("unitOfWork cannot be null");
+            }
 
             this.codeTestingService = codeTestingService;
             this.submitionFactory = submitionFactory;
             this.submitions = submitions;
             this.testCompletedFactory = testCompletedFactory;
             this.userServices = userServices;
+            this.unitOfWork = unitOfWork;
         }
 
         public void Create(Submition submition)
@@ -56,7 +66,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             }
 
             this.submitions.Add(submition);
-            this.submitions.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public void SendSubmition(User user, Problem problem, string source, ContestLaungagesTypes laungage)
@@ -101,7 +111,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
             submition.CanCompile = true;
 
-            this.submitions.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public IQueryable<Submition> GetAllUserSubmition(User user, Problem problem)
@@ -131,7 +141,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
                 if (item.Finished == false)
                 {
                     item.Finished = this.codeTestingService.GetAreAllTestsCompleted(problem, item);
-                    this.submitions.SaveChanges();
+                    this.unitOfWork.Commit();
                 }
             }
 

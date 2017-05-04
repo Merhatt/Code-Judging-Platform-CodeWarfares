@@ -26,7 +26,5 @@ namespace CodeWarfares.Data.Contracts
         void Delete<TId>(TId id);
 
         void Detach(T entity);
-
-        int SaveChanges();
     }
 }

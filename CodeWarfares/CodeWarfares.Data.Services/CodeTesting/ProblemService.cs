@@ -12,8 +12,9 @@ namespace CodeWarfares.Data.Services.CodeTesting
     {
         private IRepository<Problem> problems;
         private IRepository<Test> testsRepository;
+        private IUnitOfWork unitOfWork;
 
-        public ProblemService(IRepository<Problem> problems, IRepository<Test> tests)
+        public ProblemService(IRepository<Problem> problems, IRepository<Test> tests, IUnitOfWork unitOfWork)
         {
             if (problems == null)
             {
@@ -25,8 +26,14 @@ namespace CodeWarfares.Data.Services.CodeTesting
                 throw new NullReferenceException("tests cannot be null");
             }
 
+            if (unitOfWork == null)
+            {
+                throw new NullReferenceException("unitOfWork cannot be null");
+            }
+
             this.problems = problems;
             this.testsRepository = tests;
+            this.unitOfWork = unitOfWork;
         }
 
         public IQueryable<Problem> GetAll()
@@ -78,13 +85,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             }
 
             this.problems.Add(problem);
-            this.problems.SaveChanges();
-        }
-
-        public void DeleteById(int id)
-        {
-            this.problems.Delete(id);
-            this.problems.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public void AddSubmitionToProblem(int problemId, Submition submition)
@@ -95,7 +96,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
             }
 
             this.problems.GetById(problemId).Submitions.Add(submition);
-            this.problems.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public IEnumerable<Submition> GetLeaderboard(Problem problem)
@@ -157,7 +158,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
             this.problems.Update(problemToEdit);
 
-            this.problems.SaveChanges();
+            this.unitOfWork.Commit();
         }
 
         public void DeleteProblem(int problemId)
@@ -177,7 +178,7 @@ namespace CodeWarfares.Data.Services.CodeTesting
 
             this.problems.Delete(problemToDelete);
 
-            this.problems.SaveChanges();
+            this.unitOfWork.Commit();
         }
     }
 }

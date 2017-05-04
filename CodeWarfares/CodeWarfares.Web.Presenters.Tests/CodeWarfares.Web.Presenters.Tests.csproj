@@ -74,6 +74,7 @@
     <Compile Include="Account\LoginPresenterTests.cs" />
     <Compile Include="Account\OpenAuthProvidersPresenterTests.cs" />
     <Compile Include="Account\RegisterPresenterTests.cs" />
+    <Compile Include="Admin\ProblemEditPresenterTests.cs" />
     <Compile Include="Admin\ProblemUploadPresenterTests.cs" />
     <Compile Include="Codings\CompetitionProblemPresenterTests.cs" />
     <Compile Include="Codings\CompetitionsCategoryPresenterTests.cs" />

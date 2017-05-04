@@ -18,7 +18,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         [Test]
         public void Constructor_NullProblems_ShouldThrow()
         {
-            var err = Assert.Throws<NullReferenceException>(() => new ProblemService(null));
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
+            var err = Assert.Throws<NullReferenceException>(() => new ProblemService(null, testsMock.Object, unitOfWorkMock.Object));
             Assert.AreEqual("problems cannot be null", err.Message);
         }
 
@@ -27,10 +29,12 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         {
             var problemsMock = new Mock<IRepository<Problem>>();
             var queriableMock = new Mock<IQueryable<Problem>>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
 
             problemsMock.Setup(x => x.All()).Returns(queriableMock.Object);
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var result = problemService.GetAll();
 
@@ -44,6 +48,7 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Problem problem = new Problem();
             problem.CreationTime = DateTime.Now;
             problem.Difficulty = DifficultyType.Easy;
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
             Problem problem2 = new Problem();
             problem2.CreationTime = DateTime.Now;
@@ -52,8 +57,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             IQueryable<Problem> problems = null;
 
             problemsMock.Setup(x => x.All()).Returns(problems);
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Easy).ToList();
 
@@ -71,12 +77,14 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Problem problem2 = new Problem();
             problem2.CreationTime = DateTime.Now;
             problem2.Difficulty = DifficultyType.Hard;
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
             IQueryable<Problem> problems = new List<Problem>().AsQueryable();
 
             problemsMock.Setup(x => x.All()).Returns(problems);
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Easy).ToList();
 
@@ -94,6 +102,8 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Problem problem2 = new Problem();
             problem2.CreationTime = DateTime.Now;
             problem2.Difficulty = DifficultyType.Hard;
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
 
             var problems = new List<Problem>()
             {
@@ -103,7 +113,7 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
 
             problemsMock.Setup(x => x.All()).Returns(problems.AsQueryable());
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Medium).ToList();
 
@@ -117,10 +127,12 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Problem problem = new Problem();
             problem.CreationTime = DateTime.Now;
             problem.Difficulty = DifficultyType.Easy;
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
             Problem problem2 = new Problem();
             problem2.CreationTime = DateTime.Now;
             problem2.Difficulty = DifficultyType.Hard;
+            var testsMock = new Mock<IRepository<Test>>();
 
             var problems = new List<Problem>()
             {
@@ -130,7 +142,7 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
 
             problemsMock.Setup(x => x.All()).Returns(problems.AsQueryable());
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var problemsRes = problemService.GetAllOrderedByType(DifficultyType.Easy).ToList();
 
@@ -144,10 +156,12 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var problemsMock = new Mock<IRepository<Problem>>();
 
             Problem problem = new Problem();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
 
             problemsMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(problem);
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var result = problemService.GetById(2);
 
@@ -159,11 +173,13 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         {
             var problemsMock = new Mock<IRepository<Problem>>();
 
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             Problem problem = new Problem();
 
             problemsMock.Setup(x => x.Add(It.IsAny<Problem>()));
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => problemService.Create(null));
         }
@@ -174,32 +190,71 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var problemsMock = new Mock<IRepository<Problem>>();
 
             Problem problem = new Problem();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
 
             problemsMock.Setup(x => x.Add(It.IsAny<Problem>()));
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             problemService.Create(problem);
 
             problemsMock.Verify(x => x.Add(problem), Times.Once());
-            problemsMock.Verify(x => x.SaveChanges(), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
         }
 
         [Test]
-        public void DeleteById_ValdProblem_ShouldCreate()
+        public void DeleteProblem_InvalidId_ShouldReturn()
         {
+            //Arrange
             var problemsMock = new Mock<IRepository<Problem>>();
 
-            Problem problem = new Problem();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            
+            var testsMock = new Mock<IRepository<Test>>();
 
-            problemsMock.Setup(x => x.Add(It.IsAny<Problem>()));
+            Problem problemToDelete = null;
 
-            var problemService = new ProblemService(problemsMock.Object);
+            problemsMock.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(problemToDelete);
 
-            problemService.DeleteById(2);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
-            problemsMock.Verify(x => x.Delete(2), Times.Once());
-            problemsMock.Verify(x => x.SaveChanges(), Times.Once());
+            //Act
+            problemService.DeleteProblem(2);
+
+            //Assert
+            problemsMock.Verify(x => x.GetById(2), Times.Once());
+            problemsMock.Verify(x => x.Delete(It.IsAny<Problem>()), Times.Never());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Never());
+        }
+
+        [Test]
+        public void DeleteProblem_ValidId_ShouldRemove()
+        {
+            //Arrange
+            var problemsMock = new Mock<IRepository<Problem>>();
+
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+
+            var testsMock = new Mock<IRepository<Test>>();
+
+            Problem problemToDelete = new Problem()
+            {
+            };
+
+            problemsMock.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(problemToDelete);
+
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
+
+            //Act
+            problemService.DeleteProblem(2);
+
+            //Assert
+            problemsMock.Verify(x => x.GetById(2), Times.Once());
+            problemsMock.Verify(x => x.Delete(problemToDelete), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
         }
 
         [Test]
@@ -208,10 +263,12 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var problemsMock = new Mock<IRepository<Problem>>();
 
             Problem problem = new Problem();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
             problemsMock.Setup(x => x.Add(It.IsAny<Problem>()));
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             Assert.Throws<ArgumentNullException>(() => problemService.AddSubmitionToProblem(2, null));
         }
@@ -222,19 +279,21 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var problemsMock = new Mock<IRepository<Problem>>();
 
             Problem problem = new Problem();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
             problemsMock.Setup(x => x.GetById(It.IsAny<int>())).Returns(problem);
 
             problemsMock.Setup(x => x.Add(It.IsAny<Problem>()));
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var submition = new Submition();
 
             problemService.AddSubmitionToProblem(2, submition);
 
             Assert.AreSame(submition, problem.Submitions.First());
-            problemsMock.Verify(x => x.SaveChanges(), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
         }
 
         [Test]
@@ -243,8 +302,10 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             var problemsMock = new Mock<IRepository<Problem>>();
 
             Problem problem = new Problem();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             Assert.Throws<ArgumentException>(() => problemService.GetNewestTopFromCategory(-1, DifficultyType.Easy));
         }
@@ -260,6 +321,7 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             Problem problem2 = new Problem();
             problem2.CreationTime = DateTime.Now;
             problem2.Difficulty = DifficultyType.Hard;
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
             var problems = new List<Problem>()
             {
@@ -268,8 +330,9 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
             };
 
             problemsMock.Setup(x => x.All()).Returns(problems.AsQueryable());
+            var testsMock = new Mock<IRepository<Test>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var problemsRes = problemService.GetNewestTopFromCategory(5, DifficultyType.Easy).ToList();
 
@@ -282,7 +345,10 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         {
             var problemsMock = new Mock<IRepository<Problem>>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
+
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => problemService.GetLeaderboard(null));
 
@@ -293,8 +359,10 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
         public void GetLeaderboard_ShouldGetLeaderboard()
         {
             var problemsMock = new Mock<IRepository<Problem>>();
+            var testsMock = new Mock<IRepository<Test>>();
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
 
-            var problemService = new ProblemService(problemsMock.Object);
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
 
             Problem problem = new Problem();
             problem.Id = 2;
@@ -322,6 +390,81 @@ namespace CodeWarfares.Data.Services.Tests.CodeTesting
 
             Assert.AreEqual(1, res.Count());
             Assert.AreSame(user1Sub2, res.First());
+        }
+
+        [Test]
+        public void EditProblem_NullProblem_ShouldReturn()
+        {
+            //Arrange
+            var problemsMock = new Mock<IRepository<Problem>>();
+
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
+
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
+
+            Problem problem = null;
+
+            int problemId = 2;
+            string name = "asd";
+            string coverImg = "aasfsd";
+            long maxMemory = 123125;
+            long maxTime = 51251;
+            int xp = 132;
+            int testsCount = 1;
+            DifficultyType type = DifficultyType.Easy;
+
+            problemsMock.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(problem);
+
+            List<Test> tests = new List<Test>()
+            {
+                new Test()
+            };
+
+            //Act
+            problemService.EditProblem(problemId, name, coverImg, maxMemory, maxTime, xp, testsCount, type, tests);
+
+            //Assert
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Never());
+        }
+
+        [Test]
+        public void EditProblem_ShouldEdit()
+        {
+            //Arrange
+            var problemsMock = new Mock<IRepository<Problem>>();
+
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+            var testsMock = new Mock<IRepository<Test>>();
+
+            var problemService = new ProblemService(problemsMock.Object, testsMock.Object, unitOfWorkMock.Object);
+
+            Problem problem = new Problem();
+
+            problemsMock.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(problem);             
+
+            int problemId = 2;
+            string name = "asd";
+            string coverImg = "aasfsd";
+            long maxMemory = 123125;
+            long maxTime = 51251;
+            int xp = 132;
+            int testsCount = 1;
+            DifficultyType type = DifficultyType.Easy;
+
+            List<Test> tests = new List<Test>()
+            {
+                new Test()
+            };
+
+            //Act
+            problemService.EditProblem(problemId, name, coverImg, maxMemory, maxTime, xp, testsCount, type, tests);
+
+            //Assert
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
+            problemsMock.Verify(x => x.Update(problem), Times.Once());
         }
     }
 }

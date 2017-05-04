@@ -86,11 +86,6 @@ namespace CodeWarfares.Data.Repositories
             entry.State = EntityState.Detached;
         }
 
-        public int SaveChanges()
-        {
-            return this.Context.SaveChanges();
-        }
-
         public void Dispose()
         {
             this.Context.Dispose();

@@ -51,9 +51,8 @@ namespace CodeWarfares.Web.Admin
                 this.Points.Text = this.Model.ProblemNow.Xp.ToString();
 
                 this.DropdownDifficulty.DataSource = this.Model.Difficulties.ToList();
-                this.DropdownDifficulty.SelectedIndex = this.Model.SelectedDificultyIndex;
                 this.DropdownDifficulty.DataBind();
-
+                this.DropdownDifficulty.SelectedIndex = this.Model.SelectedDificultyIndex;
                 int testsCount = this.Model.ProblemNow.Tests.Count;
 
                 this.TestsCount.Text = testsCount.ToString();

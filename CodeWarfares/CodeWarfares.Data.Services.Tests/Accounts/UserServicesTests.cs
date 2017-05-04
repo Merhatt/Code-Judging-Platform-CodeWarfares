@@ -18,7 +18,9 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void Constructor_NullRepository_ShouldThrow()
         {
-            var err = Assert.Throws<NullReferenceException>(() => new UserServices(null));
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
+
+            var err = Assert.Throws<NullReferenceException>(() => new UserServices(null, unitOfWorkMock.Object));
 
             Assert.AreEqual("Users cannot be null", err.Message);
         }
@@ -26,13 +28,14 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void GetAll_ShouldCall()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var qMock = new Mock<IQueryable<User>>();
 
             repoMock.Setup(x => x.All()).Returns(qMock.Object);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var res = services.GetAll();
 
@@ -42,6 +45,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AssignRole_NullUser_ShouldThrow()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var qMock = new Mock<IQueryable<User>>();
@@ -50,7 +54,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.All()).Returns(qMock.Object);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => services.AssignRole(null, new IdentityUserRole()));
 
@@ -60,6 +64,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AssignRole_NullRole_ShouldThrow()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var qMock = new Mock<IQueryable<User>>();
@@ -68,7 +73,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.All()).Returns(qMock.Object);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => services.AssignRole(user, null));
 
@@ -78,6 +83,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AssignRole_ShouldCall()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var qMock = new Mock<IQueryable<User>>();
@@ -86,19 +92,20 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.All()).Returns(qMock.Object);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var role = new IdentityUserRole();
 
             services.AssignRole(user, role);
 
             Assert.AreSame(role, user.Roles.First());
-            repoMock.Verify(x => x.SaveChanges(), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
         }
 
         [Test]
         public void AddSubmitionToUser_NullUserId_ShouldThrow()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -109,7 +116,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => services.AddSubmitionToUser(null, new Submition()));
 
@@ -119,6 +126,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AddSubmitionToUser_NullSubmition_ShouldThrow()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -129,7 +137,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => services.AddSubmitionToUser(userId, null));
 
@@ -139,6 +147,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AddSubmitionToUser_ShouldCall()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -149,17 +158,18 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             services.AddSubmitionToUser(userId, submition);
 
             Assert.AreSame(user.Submition.First(), submition);
-            repoMock.Verify(x => x.SaveChanges(), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
         }
 
         [Test]
         public void AddProblemToUser_NullUserId_ShouldThrow()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -170,7 +180,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => services.AddProblemToUser(null, new Problem()));
 
@@ -180,6 +190,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public  void AddProblemToUser_NullProblem_ShouldThrow()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -190,7 +201,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var err = Assert.Throws<NullReferenceException>(() => services.AddProblemToUser(userId, null));
 
@@ -200,6 +211,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AddProblemToUser_ProblemDontExists_ShouldAdd()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -212,7 +224,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             services.AddProblemToUser(userId, problem);
 
@@ -222,6 +234,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void AddProblemToUser_ProblemExists_ShouldNotAdd()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -236,7 +249,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.GetById(userId)).Returns(user);
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             services.AddProblemToUser(userId, problem);
 
@@ -246,6 +259,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void GetByUsername_ShouldGetByUsername()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -259,7 +273,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.All()).Returns(new List<User>() { user, user2, user3 }.AsQueryable());
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var userReturned = services.GetByUsername("kolyo");
 
@@ -269,6 +283,7 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
         [Test]
         public void GetAllUsersWithPoints_ShouldGetWithPoints()
         {
+            var unitOfWorkMock = new Mock<IUnitOfWork>();
             var repoMock = new Mock<IRepository<User>>();
 
             var user = new User();
@@ -300,11 +315,11 @@ namespace CodeWarfares.Data.Services.Tests.Accounts
 
             repoMock.Setup(x => x.All()).Returns(new List<User>() { user }.AsQueryable());
 
-            var services = new UserServices(repoMock.Object);
+            var services = new UserServices(repoMock.Object, unitOfWorkMock.Object);
 
             var users = services.GetAllUsersWithPoints();
 
-            repoMock.Verify(x => x.SaveChanges(), Times.Once());
+            unitOfWorkMock.Verify(x => x.Commit(), Times.Once());
             Assert.AreEqual(200, user.TotalPoints);
             Assert.AreSame(user, users.First());
         }
