@@ -7,7 +7,7 @@
 ### Tech
 Code Warfares uses a number of technologies to work properly:
 
-* ASP.NET MVC
+* ASP.NET Web Forms
 * Entity Framework
 * JQuery
 
